@@ -1,0 +1,588 @@
+﻿CODICE;SOTTOCATEGORIA;CATEGORIA;OPERAZIONE;QUANTITA;FREQ_DESCRIZIONE;NORMATIVA;COLONNA_C;COLONNA_D;NOTE
+01;Via A. Doria 52;ANTINCENDIO;Estintori;54;Semestrale;UNI 9994-1;45.1;C4;REALE
+01;Via A. Doria 52;ANTINCENDIO;Porte Tagliafuoco / REI;90;Semestrale;DM 10/03/98;45.1;C4;REALE
+01;Via A. Doria 52;ANTINCENDIO;Idranti / Naspi;21;Semestrale;UNI 10779;45.1;C4;REALE
+01;Via A. Doria 52;ANTINCENDIO;Rilevazione Fumi;4055 m2;Semestrale;UNI 11224;45.1;C4;REALE
+01;Via A. Doria 52;ANTINCENDIO;Illum. Emergenza;1374 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+01;Via A. Doria 52;ELETTRICI;Quadri e Distribuzione;4075 m2;Annuale;CEI 64-8;45.2;C5;REALE
+01;Via A. Doria 52;ELETTRICI;Locali Uso Medico (G1/G2);43;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+01;Via A. Doria 52;ELETTRICI;Impianto Terra / Scariche;4075 m2;Biennale;DPR 462/01;45.2;C5;REALE
+01;Via A. Doria 52;ELEVATORI;Elevatori (1-5 piani);1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+01;Via A. Doria 52;ELEVATORI;Elevatori (6-10 piani);3;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+01;Via A. Doria 52;MECCANICI;Caldaie (36-350 kW);2;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Gruppi Frigo / Chiller;1;Mensile / Trimestrale;Reg. (UE) 517;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;UTA (Trattamento Aria);1;Trimestrale;Linee Guida;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Addolcitori;1;Settimanale/Mensile;DM 25/12;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Produttori Biossido Cloro;1;Settimanale;Linee Guida;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Pompe Sollevamento;1;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Distribuzione impianti idronici e sottocentrali;4075 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Condizionatori tipo split/VRV/carrellabili;4;Annuale;Linee Guida;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Distribuzione idrico sanitaria;4075 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Centrali idriche (Vasche);1;Mensile;D.Lgs 31/01;1.2;B.01;REALE
+01;Via A. Doria 52;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+01;Via A. Doria 52;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+01;Via A. Doria 52;EDILE;Porte automatiche e portoni sezionali;2;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+02;Via Don Orione 2;ANTINCENDIO;Estintori;35;Semestrale;UNI 9994-1;45.1;C4;REALE
+02;Via Don Orione 2;ANTINCENDIO;Porte Tagliafuoco / REI;36;Semestrale;DM 10/03/98;45.1;C4;REALE
+02;Via Don Orione 2;ANTINCENDIO;Idranti / Naspi;22;Semestrale;UNI 10779;45.1;C4;REALE
+02;Via Don Orione 2;ANTINCENDIO;Rilevazione Fumi;2882 m2;Semestrale;UNI 11224;45.1;C4;REALE
+02;Via Don Orione 2;ANTINCENDIO;Illum. Emergenza;1133 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+02;Via Don Orione 2;ELETTRICI;Quadri e Distribuzione;2967 m2;Annuale;CEI 64-8;45.2;C5;REALE
+02;Via Don Orione 2;ELETTRICI;Locali Uso Medico (G1/G2);23;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+02;Via Don Orione 2;ELETTRICI;Impianto Terra / Scariche;2967 m2;Biennale;DPR 462/01;45.2;C5;REALE
+02;Via Don Orione 2;ELEVATORI;Elevatori (1-5 piani);2;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+02;Via Don Orione 2;ELEVATORI;Servoscala;1;Semestrale;DPR 162/99;72.1;F1.01;REALE
+02;Via Don Orione 2;MECCANICI;Caldaie (36-350 kW);4;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Gruppi Frigo / Chiller;2;Mensile / Trimestrale;Reg. (UE) 517;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;UTA (Trattamento Aria);2;Trimestrale;Linee Guida;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Addolcitori;1;Settimanale/Mensile;DM 25/12;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Produttori Biossido Cloro;1;Settimanale;Linee Guida;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Pompe Sollevamento;1;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Distribuzione impianti idronici e sottocentrali;2967 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Distribuzione idrico sanitaria;2967 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+02;Via Don Orione 2;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+02;Via Don Orione 2;EDILE;Porte automatiche e portoni sezionali;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+03;Via Farini 9;ANTINCENDIO;Estintori;65;Semestrale;UNI 9994-1;45.1;C4;REALE
+03;Via Farini 9;ANTINCENDIO;Porte Tagliafuoco / REI;59;Semestrale;DM 10/03/98;45.1;C4;REALE
+03;Via Farini 9;ANTINCENDIO;Idranti / Naspi;18;Semestrale;UNI 10779;45.1;C4;REALE
+03;Via Farini 9;ANTINCENDIO;Rilevazione Fumi;5580 m2;Semestrale;UNI 11224;45.1;C4;REALE
+03;Via Farini 9;ANTINCENDIO;Illum. Emergenza;1399 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+03;Via Farini 9;ELETTRICI;Quadri e Distribuzione;5958 m2;Annuale;CEI 64-8;45.2;C5;REALE
+03;Via Farini 9;ELETTRICI;Locali Uso Medico (G1/G2);32;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+03;Via Farini 9;ELETTRICI;Impianto Terra / Scariche;5958 m2;Biennale;DPR 462/01;45.2;C5;REALE
+03;Via Farini 9;ELEVATORI;Elevatori (1-5 piani);3;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+03;Via Farini 9;ELEVATORI;Elevatori (6-10 piani);1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+03;Via Farini 9;MECCANICI;Caldaie (>350 kW);2;Settimanale;DPR 74/13;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Gruppi Frigo / Chiller;1;Mensile / Trimestrale;Reg. (UE) 517;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;UTA (Trattamento Aria);1;Trimestrale;Linee Guida;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Addolcitori;1;Settimanale/Mensile;DM 25/12;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Produttori Biossido Cloro;1;Settimanale;Linee Guida;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Distribuzione impianti idronici e sottocentrali;5958 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Condizionatori tipo split/VRV/carrellabili;11;Annuale;Linee Guida;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Distribuzione idrico sanitaria;5958 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Centrali idriche (Vasche);1;Mensile;D.Lgs 31/01;1.2;B.01;REALE
+03;Via Farini 9;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+03;Via Farini 9;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Estintori;58;Semestrale;UNI 9994-1;45.1;C4;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Porte Tagliafuoco / REI;43;Semestrale;DM 10/03/98;45.1;C4;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Idranti / Naspi;26;Semestrale;UNI 10779;45.1;C4;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Rilevazione Fumi;4068 m2;Semestrale;UNI 11224;45.1;C4;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Illum. Emergenza;1470 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+04;Via Rugabella 4/6;ANTINCENDIO;Centrale Pressurizzazione;1;Settimanale / Mensile;UNI EN 12845;45.1;C4;REALE
+04;Via Rugabella 4/6;ELETTRICI;Quadri e Distribuzione;4088 m2;Annuale;CEI 64-8;45.2;C5;REALE
+04;Via Rugabella 4/6;ELETTRICI;Locali Uso Medico (G1/G2);22;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+04;Via Rugabella 4/6;ELETTRICI;Impianto Terra / Scariche;4088 m2;Biennale;DPR 462/01;45.2;C5;REALE
+04;Via Rugabella 4/6;ELETTRICI;Rifasatori;1;Semestrale;Norme CEI;45.2;C5;REALE
+04;Via Rugabella 4/6;ELEVATORI;Elevatori (6-10 piani);2;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Caldaie (36-350 kW);4;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Gruppi Frigo / Chiller;1;Mensile / Trimestrale;Reg. (UE) 517;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;UTA (Trattamento Aria);3;Trimestrale;Linee Guida;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Addolcitori;2;Settimanale/Mensile;DM 25/12;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Produttori Biossido Cloro;1;Settimanale;Linee Guida;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Pompe Sollevamento;2;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Distribuzione impianti idronici e sottocentrali;4088 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Ventilconvettori;10;Annuale;Linee Guida;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Condizionatori tipo split/VRV/carrellabili;5;Annuale;Linee Guida;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Distribuzione idrico sanitaria;4088 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Centrali idriche (Vasche);1;Mensile;D.Lgs 31/01;1.2;B.01;REALE
+04;Via Rugabella 4/6;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+04;Via Rugabella 4/6;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+05;Via A. Sassi 4;ANTINCENDIO;Estintori;7;Semestrale;UNI 9994-1;45.1;C4;REALE
+05;Via A. Sassi 4;ANTINCENDIO;Porte Tagliafuoco / REI;2;Semestrale;DM 10/03/98;45.1;C4;REALE
+05;Via A. Sassi 4;ANTINCENDIO;Rilevazione Fumi;520 m2;Semestrale;UNI 11224;45.1;C4;REALE
+05;Via A. Sassi 4;ANTINCENDIO;Illum. Emergenza;158 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+05;Via A. Sassi 4;ELETTRICI;Quadri e Distribuzione;523 m2;Annuale;CEI 64-8;45.2;C5;REALE
+05;Via A. Sassi 4;ELETTRICI;Locali Uso Medico (G1/G2);8;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+05;Via A. Sassi 4;ELETTRICI;Impianto Terra / Scariche;523 m2;Biennale;DPR 462/01;45.2;C5;REALE
+05;Via A. Sassi 4;ELEVATORI;Elevatori (1-5 piani);2;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+05;Via A. Sassi 4;MECCANICI;Caldaie (36-350 kW);1;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Produttori Biossido Cloro;1;Settimanale;Linee Guida;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Pompe Sollevamento;1;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Distribuzione impianti idronici e sottocentrali;523 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Condizionatori tipo split/VRV/carrellabili;6;Annuale;Linee Guida;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Distribuzione idrico sanitaria;523 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+05;Via A. Sassi 4;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+05;Via A. Sassi 4;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ANTINCENDIO;Estintori;40;Semestrale;UNI 9994-1;45.1;C4;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ANTINCENDIO;Rilevazione Fumi;4650 m2;Semestrale;UNI 11224;45.1;C4;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ANTINCENDIO;Illum. Emergenza;4650 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ELETTRICI;Quadri e Distribuzione;4650 m2;Annuale;CEI 64-8;45.2;C5;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ELETTRICI;Locali Uso Medico (G1/G2);34;Annuale/Semestrale;CEI 64-8/7-710;45.2;C5;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ELETTRICI;Impianto Terra / Scariche;4650 m2;Biennale;DPR 462/01;45.2;C5;REALE
+06;^Via Sassi 4 P.ssa Jolanda;ELEVATORI;Elevatori (1-5 piani);3;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Pompe Sollevamento;2;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Distribuzione impianti idronici e sottocentrali;4650 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Condizionatori tipo split/VRV/carrellabili;1;Annuale;Linee Guida;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Distribuzione idrico sanitaria;4650 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;MECCANICI;Prove della legionella della rete idrico-sanitaria;10;Annuale;Linee Guida;1.2;B.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+06;^Via Sassi 4 P.ssa Jolanda;EDILE;Porte automatiche e portoni sezionali;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+07;V.le Jenner 44;ANTINCENDIO;Estintori;3;Semestrale;UNI 9994-1;45.1;C4;REALE
+07;V.le Jenner 44;ANTINCENDIO;Porte Tagliafuoco / REI;4;Semestrale;DM 10/03/98;45.1;C4;REALE
+07;V.le Jenner 44;ANTINCENDIO;Rilevazione Fumi;295 m2;Semestrale;UNI 11224;45.1;C4;REALE
+07;V.le Jenner 44;ANTINCENDIO;Illum. Emergenza;295 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+07;V.le Jenner 44;ELETTRICI;Quadri e Distribuzione;295 m2;Annuale;CEI 64-8;45.2;C5;REALE
+07;V.le Jenner 44;ELETTRICI;Impianto Terra / Scariche;295 m2;Biennale;DPR 462/01;45.2;C5;REALE
+07;V.le Jenner 44;ELEVATORI;Elevatori (1-5 piani);1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+07;V.le Jenner 44;MECCANICI;Caldaie (36-350 kW);1;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Addolcitori;1;Settimanale/Mensile;DM 25/12;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Distribuzione impianti idronici e sottocentrali;295 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Condizionatori tipo split/VRV/carrellabili;1;Annuale;Linee Guida;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Distribuzione idrico sanitaria;295 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+07;V.le Jenner 44;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+07;V.le Jenner 44;EDILE;Cancelli e sbarre motorizzati;1;Semestrale;D.Lgs 81/08;81.1;G1.01;REALE
+08;Via Livigno 3;ANTINCENDIO;Estintori;11;Semestrale;UNI 9994-1;45.1;C4;REALE
+08;Via Livigno 3;ANTINCENDIO;Rilevazione Fumi;446 m2;Semestrale;UNI 11224;45.1;C4;REALE
+08;Via Livigno 3;ANTINCENDIO;Illum. Emergenza;446 m2;Semestrale;UNI EN 1838;45.1;C4;REALE
+08;Via Livigno 3;ELETTRICI;Quadri e Distribuzione;446 m2;Annuale;CEI 64-8;45.2;C5;REALE
+08;Via Livigno 3;ELETTRICI;Impianto Terra / Scariche;446 m2;Biennale;DPR 462/01;45.2;C5;REALE
+08;Via Livigno 3;ELEVATORI;Elevatori (1-5 piani);1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+08;Via Livigno 3;MECCANICI;Caldaie (36-350 kW);3;Mensile/Trimestrale;DPR 74/13;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Pompe Sollevamento;1;Mensile;D.Lgs 81/08;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Distribuzione impianti idronici e sottocentrali;446 m2;Annuale;Norme Tecniche;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Condizionatori tipo split/VRV/carrellabili;1;Annuale;Linee Guida;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Canali di distribuzione; ripresa; serrande;Annuale;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Distribuzione idrico sanitaria;446 m2;Annuale;D.Lgs 31/01;1.2;B.01;REALE
+08;Via Livigno 3;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Annuale;Linee Guida;1.2;B.01;REALE
+XX;ANTINCENDIO;Estintori;2;Via Calvairate 1;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;7;Via Calvairate 1;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;Via Calvairate 1;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;106 m2;Via Calvairate 1;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;106 m2;Via Calvairate 1;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;Via Calvairate 1;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;106 m2;Via Calvairate 1;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);2;Via Calvairate 1;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;106 m2;Via Calvairate 1;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;Via Calvairate 1;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;Via Calvairate 1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;Via Calvairate 1;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;Via Calvairate 1;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;Via Calvairate 1;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;Via Calvairate 1;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;Via Calvairate 1;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);4;Via Calvairate 1;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;Via Calvairate 1;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;Via Calvairate 1;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;Via Calvairate 1;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;106 m2;Via Calvairate 1;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;Via Calvairate 1;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;Via Calvairate 1;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;106 m2;Via Calvairate 1;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;Via Calvairate 1;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Via Calvairate 1;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;Via Calvairate 1;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;Via Calvairate 1;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;1;Via Polesine 6;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;3;Via Polesine 6;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;Via Polesine 6;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;82 m2;Via Polesine 6;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;82 m2;Via Polesine 6;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;Via Polesine 6;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;82 m2;Via Polesine 6;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);1;Via Polesine 6;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;82 m2;Via Polesine 6;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;Via Polesine 6;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;Via Polesine 6;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;Via Polesine 6;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;Via Polesine 6;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;Via Polesine 6;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;Via Polesine 6;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;Via Polesine 6;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);2;Via Polesine 6;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;Via Polesine 6;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;Via Polesine 6;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;Via Polesine 6;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;82 m2;Via Polesine 6;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;Via Polesine 6;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;Via Polesine 6;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;82 m2;Via Polesine 6;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;Via Polesine 6;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;3;Via Polesine 6;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;Via Polesine 6;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;Via Polesine 6;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;6;Via Adriano;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;0;Via Adriano;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;Via Adriano;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;575 m2;Via Adriano;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;575 m2;Via Adriano;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;Via Adriano;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;575 m2;Via Adriano;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;Via Adriano;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;0;Via Adriano;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;Via Adriano;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;Via Adriano;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;Via Adriano;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;Via Adriano;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;Via Adriano;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;Via Adriano;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;Via Adriano;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;Via Adriano;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;Via Adriano;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;Via Adriano;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;Via Adriano;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;0;Via Adriano;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;Via Adriano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;Via Adriano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;0;Via Adriano;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;Via Adriano;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;0;Via Adriano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;Via Adriano;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;Via Adriano;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;6;POT Bollate;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;6;POT Bollate;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;1;POT Bollate;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;1831 m2;POT Bollate;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;1831 m2;POT Bollate;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;1;POT Bollate;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;1831 m2;POT Bollate;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);5;POT Bollate;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;1831 m2;POT Bollate;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;POT Bollate;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;POT Bollate;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;POT Bollate;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;POT Bollate;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;POT Bollate;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;POT Bollate;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;POT Bollate;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);26;POT Bollate;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;POT Bollate;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;POT Bollate;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;POT Bollate;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;1831 m2;POT Bollate;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;POT Bollate;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;POT Bollate;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;1831 m2;POT Bollate;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;POT Bollate;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;POT Bollate;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;POT Bollate;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;POT Bollate;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;21;Legnano;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;0;Legnano;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;Legnano;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;4855 m2;Legnano;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;4855 m2;Legnano;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;Legnano;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;4855 m2;Legnano;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;Legnano;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;0;Legnano;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;Legnano;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;Legnano;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;Legnano;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;Legnano;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;Legnano;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;Legnano;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;Legnano;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;Legnano;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;Legnano;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;Legnano;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;Legnano;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;0;Legnano;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;Legnano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;Legnano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;0;Legnano;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;Legnano;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;0;Legnano;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;Legnano;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;Legnano;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;40;viale Piceno 60;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;0;viale Piceno 60;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;1;viale Piceno 60;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;1095 m2;viale Piceno 60;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;1095 m2;viale Piceno 60;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;viale Piceno 60;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;1095 m2;viale Piceno 60;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;viale Piceno 60;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;1095 m2;viale Piceno 60;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;viale Piceno 60;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);2;viale Piceno 60;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;viale Piceno 60;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;viale Piceno 60;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;viale Piceno 60;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;viale Piceno 60;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;viale Piceno 60;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;viale Piceno 60;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;viale Piceno 60;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;viale Piceno 60;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;1;viale Piceno 60;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;1095 m2;viale Piceno 60;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;viale Piceno 60;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;viale Piceno 60;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;1095 m2;viale Piceno 60;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;viale Piceno 60;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;viale Piceno 60;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;viale Piceno 60;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;viale Piceno 60;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;7;via Clericetti 22;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;8;via Clericetti 22;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Clericetti 22;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;564 m2;via Clericetti 22;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;564 m2;via Clericetti 22;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Clericetti 22;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;564 m2;via Clericetti 22;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via Clericetti 22;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;564 m2;via Clericetti 22;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Clericetti 22;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Clericetti 22;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Clericetti 22;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Clericetti 22;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Clericetti 22;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Clericetti 22;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Clericetti 22;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Clericetti 22;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Clericetti 22;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Clericetti 22;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Clericetti 22;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;564 m2;via Clericetti 22;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Clericetti 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Clericetti 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;564 m2;via Clericetti 22;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Clericetti 22;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Clericetti 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Clericetti 22;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Clericetti 22;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;4;via Don Bosco 14;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;3;via Don Bosco 14;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Don Bosco 14;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;311 m2;via Don Bosco 14;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;311 m2;via Don Bosco 14;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Don Bosco 14;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;311 m2;via Don Bosco 14;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via Don Bosco 14;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;311 m2;via Don Bosco 14;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Don Bosco 14;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Don Bosco 14;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Don Bosco 14;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Don Bosco 14;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);1;via Don Bosco 14;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Don Bosco 14;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Don Bosco 14;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Don Bosco 14;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Don Bosco 14;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Don Bosco 14;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Don Bosco 14;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;311 m2;via Don Bosco 14;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Don Bosco 14;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Don Bosco 14;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;311 m2;via Don Bosco 14;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Don Bosco 14;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Don Bosco 14;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Don Bosco 14;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Don Bosco 14;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;9;via Fantoli 7 Poliamb.;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;11;via Fantoli 7 Poliamb.;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;2;via Fantoli 7 Poliamb.;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;1154 m2;via Fantoli 7 Poliamb.;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;1154 m2;via Fantoli 7 Poliamb.;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Fantoli 7 Poliamb.;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;1154 m2;via Fantoli 7 Poliamb.;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);11;via Fantoli 7 Poliamb.;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;1154 m2;via Fantoli 7 Poliamb.;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Fantoli 7 Poliamb.;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Fantoli 7 Poliamb.;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Fantoli 7 Poliamb.;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Fantoli 7 Poliamb.;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Fantoli 7 Poliamb.;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Fantoli 7 Poliamb.;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Fantoli 7 Poliamb.;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Fantoli 7 Poliamb.;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Fantoli 7 Poliamb.;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Fantoli 7 Poliamb.;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Fantoli 7 Poliamb.;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;1154 m2;via Fantoli 7 Poliamb.;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Fantoli 7 Poliamb.;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Fantoli 7 Poliamb.;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;1154 m2;via Fantoli 7 Poliamb.;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Fantoli 7 Poliamb.;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Fantoli 7 Poliamb.;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Fantoli 7 Poliamb.;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Fantoli 7 Poliamb.;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;2;via Monte Palombino 4;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;2;via Monte Palombino 4;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Monte Palombino 4;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;109 m2;via Monte Palombino 4;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;109 m2;via Monte Palombino 4;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Monte Palombino 4;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;109 m2;via Monte Palombino 4;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);3;via Monte Palombino 4;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;109 m2;via Monte Palombino 4;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Monte Palombino 4;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Monte Palombino 4;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Monte Palombino 4;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Monte Palombino 4;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Monte Palombino 4;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Monte Palombino 4;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Monte Palombino 4;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Monte Palombino 4;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Monte Palombino 4;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Monte Palombino 4;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Monte Palombino 4;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;109 m2;via Monte Palombino 4;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Monte Palombino 4;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Monte Palombino 4;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;109 m2;via Monte Palombino 4;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Monte Palombino 4;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Monte Palombino 4;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Monte Palombino 4;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Monte Palombino 4;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;7;via Quarenghi 21;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;8;via Quarenghi 21;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Quarenghi 21;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;641 m2;via Quarenghi 21;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;641 m2;via Quarenghi 21;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Quarenghi 21;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;641 m2;via Quarenghi 21;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);4;via Quarenghi 21;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;641 m2;via Quarenghi 21;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Quarenghi 21;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Quarenghi 21;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Quarenghi 21;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Quarenghi 21;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Quarenghi 21;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Quarenghi 21;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Quarenghi 21;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Quarenghi 21;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Quarenghi 21;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Quarenghi 21;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Quarenghi 21;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;641 m2;via Quarenghi 21;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Quarenghi 21;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Quarenghi 21;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;641 m2;via Quarenghi 21;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Quarenghi 21;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Quarenghi 21;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Quarenghi 21;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Quarenghi 21;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;0;via Aldini 72;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;0;via Aldini 72;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Aldini 72;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;5508 m2;via Aldini 72;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;5508 m2;via Aldini 72;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Aldini 72;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;5508 m2;via Aldini 72;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via Aldini 72;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;5508 m2;via Aldini 72;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Aldini 72;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Aldini 72;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Aldini 72;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Aldini 72;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Aldini 72;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Aldini 72;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Aldini 72;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Aldini 72;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Aldini 72;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Aldini 72;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Aldini 72;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;5508 m2;via Aldini 72;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Aldini 72;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Aldini 72;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;5508 m2;via Aldini 72;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Aldini 72;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Aldini 72;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Aldini 72;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Aldini 72;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;4;via Perini 22;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;0;via Perini 22;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Perini 22;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;184 m2;via Perini 22;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;184 m2;via Perini 22;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Perini 22;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;184 m2;via Perini 22;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via Perini 22;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;184 m2;via Perini 22;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Perini 22;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via Perini 22;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Perini 22;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Perini 22;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Perini 22;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Perini 22;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Perini 22;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Perini 22;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Perini 22;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Perini 22;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Perini 22;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;184 m2;via Perini 22;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Perini 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Perini 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;184 m2;via Perini 22;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Perini 22;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Perini 22;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Perini 22;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Perini 22;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;0;via Cilea 146A;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;6;via Cilea 146A;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;0;via Cilea 146A;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;405 m2;via Cilea 146A;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;405 m2;via Cilea 146A;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via Cilea 146A;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;405 m2;via Cilea 146A;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via Cilea 146A;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;405 m2;via Cilea 146A;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via Cilea 146A;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);1;via Cilea 146A;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via Cilea 146A;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via Cilea 146A;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via Cilea 146A;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via Cilea 146A;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via Cilea 146A;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via Cilea 146A;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via Cilea 146A;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via Cilea 146A;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via Cilea 146A;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;405 m2;via Cilea 146A;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via Cilea 146A;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via Cilea 146A;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;405 m2;via Cilea 146A;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via Cilea 146A;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via Cilea 146A;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via Cilea 146A;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via Cilea 146A;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;ANTINCENDIO;Estintori;0;via R. Sanzio 9;Semestrale;UNI 9994-1;TBD;TBD;REALE
+XX;ANTINCENDIO;Porte Tagliafuoco / REI;1;via R. Sanzio 9;Semestrale;DM 10/03/98;TBD;TBD;REALE
+XX;ANTINCENDIO;Idranti / Naspi;1;via R. Sanzio 9;Semestrale;UNI 10779;TBD;TBD;REALE
+XX;ANTINCENDIO;Rilevazione Fumi;303 m2;via R. Sanzio 9;Semestrale;UNI 11224;TBD;TBD;REALE
+XX;ANTINCENDIO;Illum. Emergenza;303 m2;via R. Sanzio 9;Semestrale;UNI EN 1838;TBD;TBD;REALE
+XX;ANTINCENDIO;Centrale Pressurizzazione;0;via R. Sanzio 9;Settimanale / Mensile;UNI EN 12845;TBD;TBD;REALE
+XX;ELETTRICI;Quadri e Distribuzione;303 m2;via R. Sanzio 9;Annuale;CEI 64-8;TBD;TBD;REALE
+XX;ELETTRICI;Locali Uso Medico (G1/G2);0;via R. Sanzio 9;Annuale/Semestrale;CEI 64-8/7-710;TBD;TBD;REALE
+XX;ELETTRICI;Impianto Terra / Scariche;303 m2;via R. Sanzio 9;Biennale;DPR 462/01;TBD;TBD;REALE
+XX;ELETTRICI;Rifasatori;0;via R. Sanzio 9;Semestrale;Norme CEI;TBD;TBD;REALE
+XX;ELEVATORI;Elevatori (1-5 piani);0;via R. Sanzio 9;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Elevatori (6-10 piani);0;via R. Sanzio 9;Mensile / Semestrale;DPR 162/99;72.1;F1.01;REALE
+XX;ELEVATORI;Servoscala;0;via R. Sanzio 9;Semestrale;DPR 162/99;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (36-350 kW);0;via R. Sanzio 9;Mensile/Trimestrale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Caldaie (>350 kW);0;via R. Sanzio 9;Settimanale;DPR 74/13;TBD;TBD;REALE
+XX;MECCANICI;Gruppi Frigo / Chiller;0;via R. Sanzio 9;Mensile / Trimestrale;Reg. (UE) 517;TBD;TBD;REALE
+XX;MECCANICI;UTA (Trattamento Aria);0;via R. Sanzio 9;Trimestrale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Addolcitori;0;via R. Sanzio 9;Settimanale/Mensile;DM 25/12;TBD;TBD;REALE
+XX;MECCANICI;Produttori Biossido Cloro;0;via R. Sanzio 9;Settimanale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Pompe Sollevamento;0;via R. Sanzio 9;Mensile;D.Lgs 81/08;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione impianti idronici e sottocentrali;303 m2;via R. Sanzio 9;Annuale;Norme Tecniche;TBD;TBD;REALE
+XX;MECCANICI;Ventilconvettori;0;via R. Sanzio 9;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Condizionatori tipo split/VRV/carrellabili;0;via R. Sanzio 9;Annuale;Linee Guida;TBD;TBD;REALE
+XX;MECCANICI;Canali di distribuzione; ripresa; serrande;0;Annuale;TBD;TBD;REALE
+XX;MECCANICI;Distribuzione idrico sanitaria;303 m2;via R. Sanzio 9;Annuale;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Centrali idriche (Vasche);0;via R. Sanzio 9;Mensile;D.Lgs 31/01;TBD;TBD;REALE
+XX;MECCANICI;Prove della legionella della rete idrico-sanitaria;2;via R. Sanzio 9;Annuale;Linee Guida;TBD;TBD;REALE
+XX;EDILE;Cancelli e sbarre motorizzati;0;via R. Sanzio 9;Semestrale;D.Lgs 81/08;TBD;TBD;REALE
+XX;EDILE;Porte automatiche e portoni sezionali;0;via R. Sanzio 9;Semestrale;D.Lgs 81/08;TBD;TBD;REALE

@@ -1,0 +1,8 @@
+name = "bm-premium-v2"
+compatibility_date = "2024-01-01"
+
+# Usa la cartella dist/ per Cloudflare Pages (dopo npm run build)
+pages_build_output_dir = "dist"
+
+[vars]
+APP_NAME = "BM Premium V2"

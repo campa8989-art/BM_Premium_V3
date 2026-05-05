@@ -1,0 +1,10 @@
+Sistema,Attività,Periodicità_Standard,Riferimento_Normativo
+HVAC,Manutenzione Ordinaria UTA/Chiller,Semestrale,Manuale Uso e Manutenzione
+HVAC,Sostituzione Filtri,Trimestrale,UNI EN 15780
+Elettrico,Manutenzione Quadri e UPS,Annuale,CEI 64-8; CEI 0-15
+Antincendio,Controllo Rivelazione e Centrali,Semestrale,UNI 11224
+Antincendio,Controllo Estintori e Idranti,Semestrale,UNI 9994; UNI 10779
+Idrico,Prevenzione Legionella (Campionamento),Mensile/Trimestrale,Linee Guida Ministero Salute
+Idrico,Manutenzione Autoclavi,Semestrale,Prassi Tecnica
+Elevatori,Manutenzione Periodica,Mensile/Bimensile,DPR 162/99
+Sedi,Verifica Integrità Edile,Annuale,Building Management

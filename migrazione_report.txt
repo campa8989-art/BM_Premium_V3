@@ -1,0 +1,61 @@
+﻿Report di Migrazione - 05/05/2026 00:24:28
+Sorgente: C:\Users\PC\OneDrive - MANUTENCOOP Facility Management S.p.A\BM ivan\BM-Gestione-Commessa\new version
+Destinazione: C:\Users\PC\OneDrive - MANUTENCOOP Facility Management S.p.A\BM ivan\BM-Gestione-Commessa\new version\BM_Project_V3
+--------------------------------------
+COPIATO: ai_module.js -> src/frontend/modules
+COPIATO: charts_module.js -> src/frontend/modules
+COPIATO: home_module.js -> src/frontend/modules
+COPIATO: map_module.js -> src/frontend/modules
+COPIATO: matrix_module.js -> src/frontend/modules
+COPIATO: reports_module.js -> src/frontend/modules
+COPIATO: verbali_sync_module.js -> src/frontend/modules
+COPIATO: workspace_module.js -> src/frontend/modules
+COPIATO: index.html -> src/frontend
+COPIATO: app_v2.js -> src/frontend
+COPIATO: v2_style.css -> src/frontend/css
+COPIATO: premium_effects.css -> src/frontend/css
+COPIATO: favicon.png -> src/frontend
+COPIATO: favicon.ico -> src/frontend
+COPIATO: Contenuto cartella assets -> src/frontend/assets
+COPIATO: server_verbali.js -> src/backend
+COPIATO: GeminiManager.cjs -> src/backend
+COPIATO: smart_sync_verbali.js -> src/backend
+COPIATO: check_env.cjs -> src/backend
+COPIATO: ai_insights_data.js -> data
+COPIATO: aria_full_data.js -> data
+COPIATO: data.js -> data
+COPIATO: workspace_data.js -> data
+COPIATO: data.js -> data
+COPIATO: package.json -> .
+COPIATO: package-lock.json -> .
+COPIATO: vite.config.js -> .
+COPIATO: .env -> .
+COPIATO: .env.example -> .
+COPIATO: wrangler.toml -> .
+COPIATO: bs-config.json -> .
+COPIATO: AVVIA_DASHBOARD.bat -> scripts_legacy
+COPIATO: AVVIA_SEMPLICE.bat -> scripts_legacy
+COPIATO: AVVIA_VITE.bat -> scripts_legacy
+COPIATO: AVVIA_VITE_BROWSER.bat -> scripts_legacy
+COPIATO: AVVIA_VITE_COMPLETO.bat -> scripts_legacy
+COPIATO: AVVIA_VITE_PC.bat -> scripts_legacy
+COPIATO: install_vite.bat -> scripts_legacy
+COPIATO: run_dev.bat -> scripts_legacy
+COPIATO: start_dev.bat -> scripts_legacy
+COPIATO: start_server.bat -> scripts_legacy
+COPIATO: temp_run.bat -> scripts_legacy
+COPIATO: launcher.vbs -> scripts_legacy
+COPIATO: SILENT_START.vbs -> scripts_legacy
+COPIATO: Start_Dashboard_V2_Silently.vbs -> scripts_legacy
+COPIATO: AVVIA_VITE_AUTO.ps1 -> scripts_legacy
+COPIATO: Dashboard_Launcher_V2.ps1 -> scripts_legacy
+COPIATO: fix_icon_final.ps1 -> scripts_legacy
+COPIATO: INSTALLA_SUL_DESKTOP.ps1 -> scripts_legacy
+COPIATO: install_vite.ps1 -> scripts_legacy
+COPIATO: install_xlsx.ps1 -> scripts_legacy
+COPIATO: refresh_icon.ps1 -> scripts_legacy
+COPIATO: START_BM_PREMIUM_V2.ps1 -> scripts_legacy
+COPIATO: START_VITE_DINAMICO.ps1 -> scripts_legacy
+COPIATO: update_icon.ps1 -> scripts_legacy
+COPIATO: update_shortcut_vbs.ps1 -> scripts_legacy
+
