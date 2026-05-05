@@ -31,6 +31,33 @@
     --neumo-soft: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* --- PREMIUM CUSTOM SCROLLBARS --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Firefox Support */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(30, 41, 59, 0.5) transparent;
+}
+
 body.light-theme {
     --bg-main: #f6fafe;
     --primary: #005dbb;
@@ -171,7 +198,8 @@ main.main-content .observatory-header {
     padding: 20px 0;
     transition: width 0.3s ease;
     z-index: 1000;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -201,6 +229,26 @@ main.main-content .observatory-header {
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.3s ease;
+}
+
+/* --- VIEW VIEWPORT --- */
+.view-viewport {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    padding: 0;
+    width: 100%;
+}
+
+.view-pane {
+    display: none;
+    width: 100%;
+    min-height: 100%;
+}
+
+.view-pane.active {
+    display: block;
 }
 
 .sidebar-v2:hover .brand-text {
