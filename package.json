@@ -13,7 +13,7 @@
     "predev": "node src/backend/check_env.cjs",
     "start": "powershell -ExecutionPolicy Bypass -File ./run.ps1",
     "dev": "start /b node src/backend/server_verbali.js & vite --port 3000",
-    "dev:vite": "vite --port 3000",
+    "dev:vite": "vite --port 3000 --host 127.0.0.1",
     "dev:verbali": "node src/backend/server_verbali.js",
     "build": "vite build",
     "preview": "vite preview",

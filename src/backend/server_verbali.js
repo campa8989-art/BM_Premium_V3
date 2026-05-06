@@ -70,6 +70,6 @@ app.post('/api/proxy-ai', async (req, res) => {
 });
 
 const PORT = 3001;
-app.listen(PORT, () => {
-    console.log(`📂 Verbali API ready on http://localhost:${PORT}`);
+app.listen(PORT, '127.0.0.1', () => {
+    console.log(`📂 Verbali API ready on http://127.0.0.1:${PORT}`);
 });
