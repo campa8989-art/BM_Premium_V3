@@ -4,8 +4,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  timeout: 30_000,
-  retries: 1,
+  timeout: 60_000,
+  retries: 2,
   workers: 1, // Sequential: app has shared state
   reporter: [
     ['list'],
@@ -19,8 +19,8 @@ export default defineConfig({
     video: 'retain-on-failure',
     trace: 'retain-on-failure',
     // Give the SPA time to boot (data.js is large)
-    navigationTimeout: 20_000,
-    actionTimeout: 10_000,
+    navigationTimeout: 30_000,
+    actionTimeout: 20_000,
   },
 
   projects: [

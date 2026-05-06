@@ -54,7 +54,7 @@ test.describe('Verbali Sync Module — Automated PDF Processing', () => {
         window.GEMINI_API_KEY = 'dummy-key';
     });
 
-    await page.route('https://generativelanguage.googleapis.com/**', async route => {
+    await page.route('**/api/proxy-ai', async route => {
         await route.fulfill({
             status: 200,
             contentType: 'application/json',
