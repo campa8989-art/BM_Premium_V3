@@ -48,7 +48,7 @@ Object.assign(BM_v2, {
         try {
             const systemPrompt = this.prepareAiContext();
             // Chiamata sicura tramite il Proxy locale (porta 3001)
-            const response = await fetch(`http://localhost:3001/api/proxy-ai`, {
+            const response = await fetch(`http://127.0.0.1:3001/api/proxy-ai`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -10,7 +10,7 @@ var BM_v2 = {
     state: {
         currentView: 'home',
         selectedSite: null,
-        isLocal: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+        isLocal: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '0.0.0.0',
         isDarkMode: true,
         currentWsPath: [], // Percorso corrente nell'archivio
         calDate: new Date(), // Inizializzatore per la Timeline Matrix

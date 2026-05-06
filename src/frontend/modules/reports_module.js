@@ -428,7 +428,7 @@ Object.assign(BM_v2, {
     },
 
     async callGeminiVision(base64Image, prompt) {
-        const endpoint = `http://localhost:3001/api/proxy-ai`;
+        const endpoint = `http://127.0.0.1:3001/api/proxy-ai`;
         
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -678,7 +678,7 @@ Object.assign(BM_v2, {
         3. Il campo "technical_summary" deve essere professionale e pronto per la relazione.
         4. Rispondi SOLO con il JSON puro.`;
 
-        const endpoint = `http://localhost:3001/api/proxy-ai`;
+        const endpoint = `http://127.0.0.1:3001/api/proxy-ai`;
         
         try {
             const response = await fetch(endpoint, {
