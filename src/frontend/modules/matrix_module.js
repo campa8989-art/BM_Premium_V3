@@ -178,9 +178,15 @@ Object.assign(BM_v2, {
 
     toggleAllMatrixFilters(type) {
         const list = this.state.filters[type];
-        const allEnabled = list.every(i => i.enabled);
-        list.forEach(i => i.enabled = !allEnabled);
+        if (!list || list.length === 0) return;
 
+        // Se almeno uno è disattivato, attiva TUTTI. Se sono TUTTI attivi, disattiva TUTTI.
+        const allEnabled = list.every(i => i.enabled);
+        const newState = !allEnabled;
+        
+        list.forEach(i => i.enabled = newState);
+
+        console.log(`Matrix - Toggling all ${type} to ${newState}`);
         this.populateMatrixFilters();
         this.renderPlanningMatrix();
     },
@@ -540,7 +546,18 @@ Object.assign(BM_v2, {
     },
 
     addTask() {
-        alert("Apertura modulo creazione Task (Matrix Style)...");
+        if (this.openAriaModal) {
+            this.openAriaModal("Configurazione Nuovo Task", `
+                <div style="padding: 20px; text-align: center;">
+                    <i class="fas fa-tools" style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3>Creazione Task Operativo</h3>
+                    <p>Il modulo di pianificazione dinamica è in sola lettura per questa sessione.</p>
+                    <button class="btn-v2-primary" onclick="BM_v2.closeAriaModal()" style="margin-top: 20px;">Ho Capito</button>
+                </div>
+            `);
+        } else {
+            alert("Apertura modulo creazione Task (Matrix Style)...");
+        }
     }
 });
 

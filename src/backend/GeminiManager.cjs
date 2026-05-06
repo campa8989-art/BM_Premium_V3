@@ -3,17 +3,18 @@ const path = require('path');
 const XLSX = require('xlsx');
 
 // --- Configurazione Percorsi Isolati V2 ---
-const ROOT_DIR = path.join(__dirname, '..');
-const MASTER_XLSX = path.join(ROOT_DIR, '01-Operation', '01_Operations_Standard', 'MASTER_DATABASE_UNIFICATO_2026.xlsx');
-const VERBALI_DIR = path.join(ROOT_DIR, '01-Operation', '05 - Servizi', 'VERBALI');
-const CONFIG_FILE = path.join(ROOT_DIR, 'GEMINI_CONFIG.json');
-const HISTORY_FILE = path.join(ROOT_DIR, 'BM_HISTORY.md');
+const PROJECT_ROOT = path.join(__dirname, '..', '..');
+const SRC_DIR = path.join(__dirname, '..');
+const MASTER_XLSX = path.join(SRC_DIR, '01-Operation', '01_Operations_Standard', 'MASTER_DATABASE_UNIFICATO_2026.xlsx');
+const VERBALI_DIR = path.join(SRC_DIR, '01-Operation', '05 - Servizi', 'VERBALI');
+const CONFIG_FILE = path.join(PROJECT_ROOT, 'GEMINI_CONFIG.json');
+const HISTORY_FILE = path.join(PROJECT_ROOT, 'BM_HISTORY.md');
 const INSIGHTS_FILE = path.join(__dirname, 'ai_insights_data.js'); // Output in V2
 const LOG_FILE = path.join(__dirname, 'smart_sync_audit_v2.log');
-const DATA_FILE = path.join(ROOT_DIR, 'data.js'); // Output in Root for both V1 and V2
+const DATA_FILE = path.join(PROJECT_ROOT, 'data.js'); // Output in Root for both V1 and V2
 const WORKSPACE_DATA_FILE = path.join(__dirname, 'workspace_data.js'); // Output in V2
 const AI_CONFIG_FILE = path.join(__dirname, 'ai_config.js'); // Output in V2
-const OPERATION_DIR = path.join(ROOT_DIR, '01-Operation');
+const OPERATION_DIR = path.join(SRC_DIR, '01-Operation');
 const ARIA_XLSX = path.join(OPERATION_DIR, '01_Operations_Standard', 'aria_sacco_final.xlsx');
 const ARIA_DATA_FILE = path.join(__dirname, 'aria_full_data.js'); // Output in V2
 
@@ -61,7 +62,7 @@ async function runManager() {
     logAudit("🚀 GEMINI PROJECT MANAGER: Avvio Ciclo di Gestione Automatica");
     
 // --- Caricamento Variabili d'Ambiente ---
-require('dotenv').config({ path: path.join(ROOT_DIR, '.env') });
+require('dotenv').config({ path: path.join(PROJECT_ROOT, '.env') });
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 if (!GEMINI_API_KEY) {

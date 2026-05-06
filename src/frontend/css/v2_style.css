@@ -93,7 +93,7 @@ body.light-theme {
         radial-gradient(circle at 20% 30%, rgba(0, 218, 243, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.05) 0%, transparent 40%);
     z-index: 0;
-    pointer-events: none;
+    pointer-events: none !important;
 }
 
 * {
@@ -129,6 +129,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     position: relative;
+    mix-blend-mode: normal !important;
 }
 
 /* --- OBSERVATORY HEADER V3 (CORE) --- */
@@ -141,7 +142,8 @@ main.main-content .observatory-header {
     backdrop-filter: var(--glass-blur) !important;
     border-bottom: 1px solid var(--border) !important;
     flex-shrink: 0 !important;
-    z-index: 100 !important;
+    z-index: 2000 !important;
+    position: relative !important;
     width: 100% !important;
     gap: 20px !important;
 }
@@ -197,7 +199,7 @@ main.main-content .observatory-header {
     flex-direction: column;
     padding: 20px 0;
     transition: width 0.3s ease;
-    z-index: 1000;
+    z-index: 2100;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
@@ -248,6 +250,7 @@ main.main-content .observatory-header {
     width: 100%;
     height: 100%;
     flex: 1;
+    position: relative;
 }
 
 .view-pane.active {
@@ -281,6 +284,7 @@ main.main-content .observatory-header {
     width: 100%;
     height: 100%;
     z-index: 1;
+    background: var(--bg-main) !important;
 }
 
 .map-overlay-panel {
@@ -293,12 +297,13 @@ main.main-content .observatory-header {
     backdrop-filter: var(--glass-blur);
     border: 1px solid var(--border);
     border-radius: var(--radius-premium);
-    z-index: 1000;
+    z-index: 2000;
     display: flex;
     flex-direction: column;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     transform: translateX(400px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: all;
     overflow: hidden;
 }
 
@@ -354,6 +359,84 @@ main.main-content .observatory-header {
     background: var(--primary);
     color: #000;
     border-color: var(--primary);
+}
+
+/* --- LEAFLET GRID FIX --- */
+#map-canvas {
+    background: #000 !important;
+}
+
+.leaflet-container {
+    background: #000 !important;
+}
+
+.leaflet-container img.leaflet-tile {
+    mix-blend-mode: normal !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Force hide any grid leaking from tile containers */
+.leaflet-tile-pane, .leaflet-objects-pane, .leaflet-overlay-pane {
+    mix-blend-mode: normal !important;
+}
+
+.leaflet-tile-container {
+    border: none !important;
+    outline: none !important;
+}
+
+/* --- PREMIUM MARKERS --- */
+.premium-marker-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.premium-marker {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.marker-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.8;
+    z-index: 1;
+    animation: marker-glow 2s infinite ease-out;
+}
+
+@keyframes marker-glow {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3.5);
+        opacity: 0;
+    }
+}
+
+.premium-marker.urgent {
+    background: #ff4d4d;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+}
+
+.premium-marker.primary {
+    background: var(--primary);
+    box-shadow: 0 0 15px rgba(0, 218, 243, 0.6);
 }
 
 .nav-item {
@@ -922,12 +1005,16 @@ body.light-theme .v2-row:hover {
     z-index: 999;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
+    display: none;
     transition: all 0.4s ease;
 }
 
 .drawer-backdrop.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+    display: block;
 }
 
 /* --- ARIA MODAL v2 (Centrale e Ingrandito) --- */
@@ -1263,6 +1350,7 @@ body.light-theme .close-modal:hover {
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.4s ease;
+    overflow-y: auto !important;
 }
 
 body.light-theme .matrix-sidebar {
@@ -1342,6 +1430,9 @@ body.light-theme .matrix-search-premium {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
 
@@ -1811,7 +1902,7 @@ body.light-theme .matrix-search input {
 /* --- GRID SYSTEM --- */
 .matrix-scroll-area {
     flex-grow: 1;
-    overflow: auto;
+    overflow: auto !important;
     padding: 0;
     border-radius: 20px;
     background: #0f172a;
@@ -3803,7 +3894,7 @@ body.light-theme .archive-row:hover {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     z-index: 20000;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     opacity: 0;
@@ -3812,8 +3903,9 @@ body.light-theme .archive-row:hover {
 }
 
 .aria-modal-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
+    display: flex !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 .aria-modal-container {

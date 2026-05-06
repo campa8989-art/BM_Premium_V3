@@ -31,6 +31,7 @@ BM Premium v2 dashboard for facility management, focused on AI-driven analysis o
 ## Available Commands
 
 ### Development
+- `npm start`: Unified startup for the entire ecosystem (Vite + Backend + AI Sync).
 - `npm run dev`: Start both Vite (port 3000) and Backend server.
 - `npm run dev:vite`: Start only the frontend dashboard.
 - `npm run dev:verbali`: Start only the technical analysis server.

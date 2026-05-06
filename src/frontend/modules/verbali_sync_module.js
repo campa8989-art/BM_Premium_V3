@@ -35,6 +35,7 @@ Object.assign(BM_v2, {
 
         const btn = document.createElement('button');
         btn.id = 'btn-verbali-sync';
+        btn.type = 'button';
         btn.className = 'header-action-btn';
         btn.innerHTML = '<i class="fas fa-file-medical"></i><span class="btn-label">Verbali</span>';
         btn.title = 'Sincronizza verbali (PDF)';
@@ -81,12 +82,6 @@ Object.assign(BM_v2, {
     },
 
     async processVerbali(files) {
-        const apiKey = window.GEMINI_API_KEY;
-        if (!apiKey) {
-            this.showNotification('❌ API Key non configurata', 'error');
-            return;
-        }
-
         // Get unique sites from data.js
         const siteNames = [...new Set(maintenanceData.map(r => r.Nome_Sito).filter(s => s))];
         const systemTypes = [...new Set(maintenanceData.map(r => r.Tipologia_Impianto).filter(t => t))];
@@ -102,7 +97,7 @@ Object.assign(BM_v2, {
                 const { data: base64, name } = await readRes.json();
 
                 // Analyze with AI
-                const result = await this.analyzeVerbaleWithAI(base64, apiKey, siteNames, systemTypes, file.folder);
+                const result = await this.analyzeVerbaleWithAI(base64, siteNames, systemTypes, file.folder);
 
                 if (result) {
                     // Update data.js
@@ -123,6 +118,9 @@ Object.assign(BM_v2, {
         // Save processed list
         localStorage.setItem('bm_verbali_processed', JSON.stringify(this.verbaliState.processedFiles));
 
+        this.verbaliState.pendingCount = 0;
+        this.updateVerbaliBadge();
+
         this.showNotification(`✨ Processati ${processed} verbali`, 'success');
         
         // Refresh UI
@@ -130,7 +128,7 @@ Object.assign(BM_v2, {
         this.updateGlobalStats();
     },
 
-    async analyzeVerbaleWithAI(base64, apiKey, siteNames, systemTypes, folderName) {
+    async analyzeVerbaleWithAI(base64, siteNames, systemTypes, folderName) {
         const prompt = `Analizza questo verbale di manutenzione tecnica.
         La cartella del file è: "${folderName}"
         
@@ -152,7 +150,7 @@ Object.assign(BM_v2, {
         3. Rispondi SOLO JSON`;
 
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+            const response = await fetch(`http://localhost:3001/api/proxy-ai`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -9,8 +9,8 @@ const path = require('path');
 function checkEnvironment() {
     console.log("\n--- 🔍 VERIFICA AMBIENTE BM V2 ---");
 
-    // 1. Verifica Cartella Dipendenze
-    const modulesPath = path.join(__dirname, 'node_modules');
+    // 1. Verifica Cartella Dipendenze (Root)
+    const modulesPath = path.join(__dirname, '..', '..', 'node_modules');
     if (!fs.existsSync(modulesPath)) {
         console.error("❌ ERRORE: Cartella 'node_modules' non trovata.");
         console.error("👉 Esegui 'npm install' prima di avviare.\n");
@@ -18,8 +18,8 @@ function checkEnvironment() {
     }
     console.log("✅ Dipendenze installate.");
 
-    // 2. Verifica File .env (Sicurezza)
-    const envPath = path.join(__dirname, '..', '.env');
+    // 2. Verifica File .env (Sicurezza - Root)
+    const envPath = path.join(__dirname, '..', '..', '.env');
     if (!fs.existsSync(envPath)) {
         console.error("❌ ERRORE: File '.env' mancante nella root del progetto.");
         console.error("👉 Crea il file .env con la tua GEMINI_API_KEY.\n");
@@ -27,7 +27,7 @@ function checkEnvironment() {
     }
     console.log("✅ File .env configurato.");
 
-    // 3. Verifica Percorsi Critici (OneDrive)
+    // 3. Verifica Percorsi Critici (OneDrive - In src/)
     const masterPath = path.join(__dirname, '..', '01-Operation', '01_Operations_Standard', 'MASTER_DATABASE_UNIFICATO_2026.xlsx');
     if (!fs.existsSync(masterPath)) {
         console.warn("⚠️ AVVISO: Il Master Database non è stato trovato nel percorso previsto.");

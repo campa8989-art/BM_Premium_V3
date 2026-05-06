@@ -77,7 +77,9 @@ Object.assign(BM_v2, {
         
         // Clear existing markers
         this.map.eachLayer(layer => {
-            if (layer instanceof L.CircleMarker) this.map.removeLayer(layer);
+            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+                this.map.removeLayer(layer);
+            }
         });
 
         const bounds = [];
@@ -86,21 +88,23 @@ Object.assign(BM_v2, {
 
         this.state.sites.forEach(site => {
             const coords = this.siteCoords[site.id];
-            if (!coords) return; 
+            if (!coords) return;
 
             bounds.push(coords);
-            const isMainHospital = ["22", "12", "13"].includes(site.id);
+            const isUrgent = site.urgentCount > 0;
+            const typeClass = isUrgent ? 'urgent' : 'primary';
 
-            const marker = L.circleMarker(coords, {
-                radius: isMainHospital ? 10 : 7,
-                fillColor: site.urgentCount > 0 ? urgentColor : primaryColor,
-                color: '#fff',
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 0.8
-            }).addTo(this.map);
+            const premiumIcon = L.divIcon({
+                className: 'premium-marker-wrapper',
+                html: `<div class="premium-marker ${typeClass}"><div class="marker-pulse"></div></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
 
-            marker.on('click', () => {
+            const marker = L.marker(coords, { icon: premiumIcon }).addTo(this.map);
+
+            marker.on('click', (e) => {
+                if (e.originalEvent) e.originalEvent.stopPropagation();
                 this.showMapSiteInfo(site.id);
             });
         });

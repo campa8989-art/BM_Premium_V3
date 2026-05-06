@@ -117,7 +117,7 @@ const saveReportsApi = {
 
 export default defineConfig({
   root: 'src/frontend',
-  envDir: '../', // .env è in src/
+  envDir: '../../', // .env e' nella root del progetto
   plugins: [
     {
       name: 'silence-source-map-warnings',

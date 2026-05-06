@@ -207,7 +207,7 @@ Object.assign(BM_v2, {
     },
 
     executeAiAutopilot(data) {
-        console.log("AI executing autopilot command:", data);
+        console.log("🚀 [AI Autopilot] Executing command:", data);
         
         // 1. Switch to Reports view if not already there
         if (this.state.currentView !== 'reports') {

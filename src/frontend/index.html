@@ -25,8 +25,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="css/v2_style.css?v=5">
-    <link rel="stylesheet" href="css/premium_effects.css?v=2">
+    <link rel="stylesheet" href="css/v2_style.css?v=11">
+    <link rel="stylesheet" href="css/premium_effects.css?v=11">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
@@ -388,7 +388,7 @@
                         <aside class="matrix-sidebar glass-panel">
                             <div class="panel-header">
                                 <h3><i class="fas fa-filter"></i> Filtri Presidio</h3>
-                                <button class="v2-info-btn" style="font-size: 8px;">ALL</button>
+                                <button id="btn-matrix-all-sites" class="v2-info-btn" style="font-size: 8px;">ALL</button>
                             </div>
 
                             <div class="filter-search-container">
@@ -403,9 +403,9 @@
 
                             <div class="filter-divider">Sistemi</div>
                             <div class="panel-header" style="margin-top: -10px; margin-bottom: 5px;">
-                                <button class="v2-info-btn" style="font-size: 8px;">TOGGLE ALL</button>
+                                <button id="btn-matrix-all-systems" class="v2-info-btn" style="font-size: 8px;">TOGGLE ALL</button>
                             </div>
-                            <div id="matrix-filter-systems" class="filter-check-group">
+                            <div id="matrix-filter-systems" class="filter-check-group custom-scrollbar">
                                 <!-- Populated dynamically by JS -->
                             </div>
 
@@ -422,7 +422,7 @@
                                     <div class="avatar" title="M. Rossi">MR</div>
                                     <div class="avatar" title="L. Costa">LC</div>
                                     <div class="avatar" title="A. Verdi">AV</div>
-                                    <div class="avatar add-staff"><i class="fas fa-plus"></i></div>
+                                    <div id="btn-matrix-add-staff" class="avatar add-staff"><i class="fas fa-plus"></i></div>
                                 </div>
                             </div>
                         </aside>
@@ -431,7 +431,7 @@
                         <div class="matrix-main">
                             <!-- Mobile Filter Toggle (Visible only on mobile) -->
                             <div class="mobile-only-flex" style="margin-bottom: 15px; display: none;">
-                                <button class="map-action-btn primary">
+                                <button id="btn-matrix-mobile-filter" class="map-action-btn primary">
                                     <i class="fas fa-filter"></i> Gestisci Filtri Presidio
                                 </button>
                             </div>
@@ -702,15 +702,15 @@
 
 
     <!-- BM Premium v2 Modules -->
-    <script src="app_v2.js"></script>
-    <script src="modules/home_module.js"></script>
-    <script src="modules/charts_module.js"></script>
-    <script src="modules/map_module.js"></script>
-    <script src="modules/workspace_module.js"></script>
-    <script src="modules/matrix_module.js"></script>
-    <script src="modules/reports_module.js"></script>
-    <script src="modules/ai_module.js"></script>
-    <script src="modules/verbali_sync_module.js"></script>
+    <script src="app_v2.js?v=11"></script>
+    <script src="modules/home_module.js?v=11"></script>
+    <script src="modules/charts_module.js?v=11"></script>
+    <script src="modules/map_module.js?v=11"></script>
+    <script src="modules/workspace_module.js?v=11"></script>
+    <script src="modules/matrix_module.js?v=11"></script>
+    <script src="modules/reports_module.js?v=11"></script>
+    <script src="modules/ai_module.js?v=11"></script>
+    <script src="modules/verbali_sync_module.js?v=11"></script>
 
 
     <!-- Events v2 (Integrated in app_v2.js) -->
@@ -726,7 +726,6 @@
                 <!-- Dinamicamente popolato -->
             </div>
         </div>
-    </div>
     </div>
 </body>
 

@@ -159,6 +159,7 @@ var BM_v2 = {
         const btn = document.getElementById('btn-live-sync');
         if (!btn) return;
 
+        btn.classList.add('btn-loading');
         const originalHtml = btn.innerHTML;
         btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Scansione Disco...`;
         btn.style.pointerEvents = 'none';
@@ -174,6 +175,7 @@ var BM_v2 = {
 
             btn.innerHTML = `<i class="fas fa-check" style="color: #4ade80;"></i> Database Aggiornato`;
             btn.style.borderColor = '#4ade80';
+            btn.classList.remove('btn-loading');
 
             setTimeout(() => {
                 window.location.reload();
@@ -183,6 +185,7 @@ var BM_v2 = {
             console.error("Errore Sincronizzazione Live:", error);
             btn.innerHTML = `<i class="fas fa-times" style="color: #ef4444;"></i> Errore OS`;
             btn.style.borderColor = '#ef4444';
+            btn.classList.remove('btn-loading');
 
             setTimeout(() => {
                 btn.innerHTML = originalHtml;
@@ -244,6 +247,7 @@ var BM_v2 = {
             },
             currentTitle: document.getElementById('view-title'),
             themeBtn: document.getElementById('theme-btn'),
+            syncBtn: document.getElementById('btn-live-sync'),
             drawer: document.getElementById('profile-drawer'),
             backdrop: document.getElementById('drawer-backdrop'),
             telemetry: {
@@ -275,9 +279,25 @@ var BM_v2 = {
         }
 
         // AI Command Center
-        const aiBtn = document.getElementById('btn-ai-center');
+        const aiBtn = document.getElementById('ai-trigger');
         if (aiBtn) {
             aiBtn.addEventListener('click', () => this.toggleAiCenter());
+        }
+        const closeAiBtn = document.querySelector('.close-ai');
+        if (closeAiBtn) {
+            closeAiBtn.addEventListener('click', () => this.toggleAiCenter());
+        }
+
+        const aiInput = document.getElementById('ai-input-field');
+        if (aiInput) {
+            aiInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') this.sendAiQuery();
+            });
+        }
+
+        const aiSendBtn = document.querySelector('.ai-send-btn');
+        if (aiSendBtn) {
+            aiSendBtn.addEventListener('click', () => this.sendAiQuery());
         }
 
         // Matrix Site Search
@@ -309,9 +329,28 @@ var BM_v2 = {
             });
         });
 
+        // --- NEW MATRIX BINDINGS ---
+        const matrixAllSites = document.getElementById('btn-matrix-all-sites');
+        if (matrixAllSites) matrixAllSites.addEventListener('click', () => this.toggleAllMatrixFilters && this.toggleAllMatrixFilters('sites'));
+
+        const matrixAllSystems = document.getElementById('btn-matrix-all-systems');
+        if (matrixAllSystems) matrixAllSystems.addEventListener('click', () => this.toggleAllMatrixFilters && this.toggleAllMatrixFilters('systems'));
+
+        const matrixAddStaff = document.getElementById('btn-matrix-add-staff');
+        if (matrixAddStaff) matrixAddStaff.addEventListener('click', () => this.addTask && this.addTask());
+
+        const matrixMobileFilter = document.getElementById('btn-matrix-mobile-filter');
+        if (matrixMobileFilter) matrixMobileFilter.addEventListener('click', () => this.toggleMobileMatrixFilters && this.toggleMobileMatrixFilters());
+
+
         // Backdrop click to close drawer
         if (this.dom.backdrop) {
             this.dom.backdrop.addEventListener('click', () => this.deselectSite());
+        }
+
+        // Live Sync Binding
+        if (this.dom.syncBtn) {
+            this.dom.syncBtn.addEventListener('click', () => this.triggerSync());
         }
     },
 
@@ -456,13 +495,7 @@ var BM_v2 = {
     },
 
     showAriaPanel(category) {
-        console.log('DEBUG showAriaPanel called with:', category, 'type:', typeof category);
-
-        // Check if category is empty
         if (!category || category.trim() === '') {
-            console.log('DEBUG: category is empty');
-
-            // Get current site from state to show all available tasks
             const currentSite = this.state.selectedSite;
             console.log('DEBUG: current site:', currentSite);
             console.log('DEBUG: available sites:', this.state.sites?.slice(0, 3));
@@ -493,11 +526,9 @@ var BM_v2 = {
         }
 
         if (typeof ARIA_FULL_DATA === 'undefined') {
-            console.error('DEBUG: ARIA_FULL_DATA is undefined! Loading script...');
             const script = document.createElement('script');
-            script.src = 'aria_full_data.js';
+            script.src = '/data/aria_full_data.js';
             script.onload = () => {
-                console.log('ARIA_FULL_DATA loaded');
                 this.showAriaPanel(category);
             };
             document.head.appendChild(script);
@@ -505,7 +536,6 @@ var BM_v2 = {
         }
 
         const rawCodes = category.split(/[-,\s]+/).map(c => c.trim()).filter(c => c.length > 0);
-        console.log('DEBUG rawCodes:', rawCodes);
 
         const modal = document.getElementById('aria-modal');
         const body = document.getElementById('aria-modal-body');

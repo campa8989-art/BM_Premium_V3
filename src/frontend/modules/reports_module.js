@@ -428,8 +428,7 @@ Object.assign(BM_v2, {
     },
 
     async callGeminiVision(base64Image, prompt) {
-        if (!window.GEMINI_API_KEY) throw new Error("Chiave API mancante.");
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${window.GEMINI_API_KEY}`;
+        const endpoint = `http://localhost:3001/api/proxy-ai`;
         
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -475,12 +474,116 @@ Object.assign(BM_v2, {
     },
 
     setupReportEvents() {
+        // Drag & Drop
         document.addEventListener('dragover', (e) => e.preventDefault());
         document.addEventListener('drop', (e) => {
             e.preventDefault();
             const zone = e.target.closest('.drop-zone');
             if (zone && e.dataTransfer.files.length) this.handleReportFile(e.dataTransfer.files[0], zone);
         });
+
+        // Click Listeners for Sidebar Buttons
+        const bindings = {
+            'btn-ai-import': () => this.triggerAIImport(),
+            'btn-ai-autofill': () => this.handleAIAutoFill(),
+            'btn-report-pdf': () => this.printReport(),
+            'btn-report-word': () => this.exportToWord(),
+            'btn-report-save': () => this.saveReportProject(),
+            'btn-report-archive': () => this.openSavedReportsList(),
+            'btn-report-reset': () => this.resetReport(),
+            'undo-btn': () => this.undoReportAction()
+        };
+
+        Object.entries(bindings).forEach(([id, fn]) => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('click', fn);
+        });
+
+        // File Inputs
+        const aiInput = document.getElementById('ai-import-input');
+        if (aiInput) aiInput.addEventListener('change', (e) => this.handleAIReportImport(e));
+
+        const loadInput = document.getElementById('load-project-input');
+        if (loadInput) loadInput.addEventListener('change', (e) => this.loadReportProject(e));
+    },
+
+    triggerAIImport() {
+        const input = document.getElementById('ai-import-input');
+        if (input) input.click();
+    },
+
+    async handleAIAutoFill() {
+        if (this.report.selectedCodes.size === 0) {
+            alert("⚠️ Seleziona almeno un impianto per l'Auto-Fill.");
+            return;
+        }
+
+        const btn = document.getElementById('btn-ai-autofill');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<i class='fas fa-magic fa-spin'></i> AI Filling...";
+        btn.disabled = true;
+
+        try {
+            this.saveReportToHistory();
+            const selectedItems = Array.from(this.report.selectedCodes).map(id => {
+                const def = this.findReportItemDefinition(id);
+                return { id, name: def.name };
+            });
+
+            const siteName = document.getElementById('presidio-select').value || "Sito Generico";
+
+            const prompt = `Agisci come Ingegnere Tecnico Senior. Genera una sintesi tecnica professionale (3-4 righe) per ciascuna delle seguenti attività manutentive svolte presso il sito "${siteName}".
+            Le attività sono:
+            ${selectedItems.map(i => `- ${i.name} (ID: ${i.id})`).join('\n')}
+
+            Regole:
+            1. Sii molto tecnico e preciso.
+            2. Simula una verifica andata a buon fine ma con piccoli dettagli di nota.
+            3. Restituisci un JSON con questa struttura: {"results": [{"id": "ID_ATTIVITA", "text": "TESTO_SINTESI"}]}
+            4. Rispondi SOLO col JSON.`;
+
+            // Use the proxy endpoint via callGeminiText (we need to define it or use fetch directly)
+            const response = await fetch(`http://localhost:3001/api/proxy-ai`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: { temperature: 0.7 }
+                })
+            });
+
+            if (!response.ok) throw new Error("Errore API AI");
+            const res = await response.json();
+            const text = res.candidates[0].content.parts[0].text;
+            const jsonMatch = text.match(/\{[\s\S]*\}/);
+            
+            if (jsonMatch) {
+                const data = JSON.parse(jsonMatch[0]);
+                data.results.forEach(res => {
+                    if (this.report.reportState[res.id]) {
+                        // Fill the first photo audit as a general comment if empty
+                        if (this.report.reportState[res.id].photos.length > 0) {
+                            this.report.reportState[res.id].photos[0].audit = res.text;
+                        }
+                    }
+                });
+                this.renderReportStructure();
+                
+                // Toast
+                const toast = document.createElement('div');
+                toast.className = 'save-toast visible';
+                toast.style.background = '#6741d9';
+                toast.innerHTML = `<i class="fas fa-magic"></i> AI Auto-Fill completato!`;
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 300); }, 2000);
+            }
+        } catch (err) {
+            console.error("AutoFill Error:", err);
+            alert("❌ Errore AI: " + err.message);
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     },
 
     saveReportToHistory() {
@@ -504,7 +607,7 @@ Object.assign(BM_v2, {
         if (!file) return;
 
         // Loading State
-        const btn = event.target.previousElementSibling;
+        const btn = document.getElementById('btn-ai-import');
         const originalText = btn.innerHTML;
         btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Analisi AI...";
         btn.disabled = true;
@@ -540,11 +643,6 @@ Object.assign(BM_v2, {
     },
 
     async analyzeOldReport(base64Data, mimeType) {
-        if (!window.GEMINI_API_KEY) {
-            alert("Configurazione API mancante (window.GEMINI_API_KEY non trovata).");
-            return null;
-        }
-
         // Normalize MIME type
         let safeMimeType = mimeType;
         if (safeMimeType.includes('pdf')) safeMimeType = 'application/pdf';
@@ -580,7 +678,7 @@ Object.assign(BM_v2, {
         3. Il campo "technical_summary" deve essere professionale e pronto per la relazione.
         4. Rispondi SOLO con il JSON puro.`;
 
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${window.GEMINI_API_KEY}`;
+        const endpoint = `http://localhost:3001/api/proxy-ai`;
         
         try {
             const response = await fetch(endpoint, {
@@ -854,11 +952,16 @@ Object.assign(BM_v2, {
             
             // Use existing ARIA modal if available
             if (typeof this.openAriaModal === 'function') {
-                this.openAriaModal(html);
+                this.openAriaModal(html, "Archivio Relazioni");
             } else if (document.getElementById('aria-modal')) {
-                // Direct access if not in the same module scope but element exists
-                document.getElementById('aria-modal-body').innerHTML = html;
-                document.getElementById('aria-modal').classList.add('visible');
+                // Fallback for manual opening
+                const modal = document.getElementById('aria-modal');
+                const body = document.getElementById('aria-modal-body');
+                const titleEl = document.getElementById('aria-modal-title');
+                
+                if (titleEl) titleEl.innerText = "Archivio Relazioni";
+                if (body) body.innerHTML = html;
+                modal.classList.add('visible');
             } else {
                 alert("Sistema modale non trovato.");
             }
@@ -936,6 +1039,17 @@ Object.assign(BM_v2, {
         
         titleEl.innerText = title;
         body.innerHTML = html;
+
+        const closeBtn = modal.querySelector('.aria-modal-close');
+        if (closeBtn) {
+            // Use a clean listener to avoid conflicts
+            closeBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                modal.classList.remove('visible');
+            };
+        }
+
         modal.classList.add('visible');
     },
 

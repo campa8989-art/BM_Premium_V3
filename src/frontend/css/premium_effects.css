@@ -47,6 +47,8 @@ body.light-theme {
     border-radius: 50%;
     opacity: 0.35;
     animation: aurora-drift 20s infinite alternate ease-in-out;
+    pointer-events: none !important;
+    z-index: -1;
 }
 
 .aurora-1 { width: 600px; height: 600px; background: var(--aurora-1); top: -150px; left: -150px; }
@@ -196,8 +198,14 @@ body {
 }
 
 /* --- SCROLLBAR REFINEMENT --- */
+/* --- SCROLLBAR REFINEMENT --- */
+.custom-scrollbar {
+    overflow: auto !important;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
+    width: 8px;
+    height: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -205,12 +213,15 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--border);
+    background: rgba(0, 218, 243, 0.3);
+    border: 2px solid transparent;
+    background-clip: content-box;
     border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
+    background-clip: content-box;
 }
 
 /* --- SMART MATRIX URGENCY STYLES --- */
