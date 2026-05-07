@@ -40,10 +40,7 @@ var BM_v2 = {
             console.log("✅ Modules Initialized. Switching to Home...");
 
             // Finalize start: Auto-switch to home
-            setTimeout(() => {
-                console.log("⚡ Triggering Auto-Switch to Home");
-                this.switchView('home');
-            }, 300);
+            this.switchView('home');
         } catch (e) {
             console.error("❌ CRITICAL ERROR DURING INIT:", e);
         }
