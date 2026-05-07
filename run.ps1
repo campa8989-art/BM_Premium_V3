@@ -30,24 +30,31 @@ Write-Host ""
 try {
     # --- 2. Verifica Prerequisiti ---
     Write-Host "[1/5] Verifica ambiente..." -ForegroundColor Yellow
-    & node src/backend/check_env.cjs
+    
+    $NodeExe = Join-Path $NodeTools "node.exe"
+    if (!(Test-Path $NodeExe)) { $NodeExe = "node" }
+    
+    # Usiamo virgolette per gestire spazi nel percorso
+    & $NodeExe "src/backend/check_env.cjs"
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     # --- 3. Pulizia Chirugica Porte ---
     Write-Host "[2/5] Reset canali di comunicazione (3000, 3001)..." -ForegroundColor Yellow
     $ports = @(3000, 3001)
     foreach ($port in $ports) {
-        $proc = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
-        if ($proc) {
-            Write-Host "      - Liberando porta $port..." -ForegroundColor Gray
-            Stop-Process -Id $proc.OwningProcess -Force -ErrorAction SilentlyContinue
+        $conns = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
+        if ($conns) {
+            foreach ($conn in $conns) {
+                Write-Host "      - Liberando porta $port (Processo: $($conn.OwningProcess))..." -ForegroundColor Gray
+                Stop-Process -Id $conn.OwningProcess -Force -ErrorAction SilentlyContinue
+            }
             Start-Sleep -Seconds 1
         }
     }
 
     # --- 4. Sincronizzazione AI Brain ---
     Write-Host "[3/5] Sincronizzazione AI Brain..." -ForegroundColor Yellow
-    & node src/backend/GeminiManager.cjs
+    & $NodeExe "src/backend/GeminiManager.cjs"
     if ($LASTEXITCODE -ne 0) {
         throw "Errore durante la sincronizzazione dati Gemini."
     }
@@ -56,20 +63,23 @@ try {
     Write-Host "[4/5] Avvio Server Backend e Frontend..." -ForegroundColor Yellow
     
     # Risoluzione percorsi assoluti per maggiore robustezza
-    $NodeExe = Join-Path $NodeTools "node.exe"
-    if (!(Test-Path $NodeExe)) { $NodeExe = "node" }
+    # (NodeExe già definito sopra)
     
     # Percorso Vite (usando separatori Windows per sicurezza)
     $ViteJs = Join-Path $ProjectRoot "node_modules\vite\bin\vite.js"
     
     # Avvio Backend (Server Verbali) in background (finestra nascosta)
-    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "src/backend/server_verbali.js" -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden
+    # Racchiudiamo il percorso tra virgolette per gestire gli spazi
+    $BackendPath = Join-Path $ProjectRoot "src/backend/server_verbali.js"
+    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "`"$BackendPath`"" -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden
     Write-Host "      - Backend API pronto su http://localhost:3001" -ForegroundColor Green
 
     # Avvio Frontend (Vite)
-    Write-Host "      - Avvio Vite Dashboard..." -ForegroundColor Gray
-    # Forziamo 127.0.0.1 per evitare conflitti IPv6 e usiamo percorsi relativi per gli argomenti
-    $frontendProc = Start-Process -FilePath $NodeExe -ArgumentList "node_modules\vite\bin\vite.js", "--port", "3000", "--host", "127.0.0.1" -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Normal
+    Write-Host "      - Avvio Vite Dashboard (In background)..." -ForegroundColor Gray
+    # Usiamo virgolette doppie per proteggere i percorsi con spazi
+    # WindowStyle Hidden per mantenere pulito il desktop
+    $ViteArgsString = "`"$ViteJs`" dev --port 3000 --host 0.0.0.0 --force"
+    $frontendProc = Start-Process -FilePath $NodeExe -ArgumentList $ViteArgsString -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden -RedirectStandardOutput "vite_output.log" -RedirectStandardError "vite_error.log"
 
     # --- 6. Apertura Browser ---
     Write-Host "[5/5] Apertura interfaccia..." -ForegroundColor Cyan
@@ -86,8 +96,8 @@ try {
         Start-Sleep -Seconds 1
     }
 
-    # Apertura browser (usiamo 127.0.0.1 esplicito)
-    Start-Process "http://127.0.0.1:3000/"
+    # Apertura browser (usiamo localhost per risoluzione automatica OS)
+    Start-Process "http://localhost:3000/"
     
     Write-Host ""
     Write-Host "DASHBOARD PRONTA!" -ForegroundColor Green

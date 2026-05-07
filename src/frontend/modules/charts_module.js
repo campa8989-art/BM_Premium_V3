@@ -180,13 +180,14 @@ Object.assign(BM_v2, {
                     datasets: [{
                         label: 'Incidenza Sistemi',
                         data: Object.values(systemCounts),
-                        backgroundColor: this.state.isDarkMode ? 'rgba(0, 218, 243, 0.15)' : 'rgba(0, 119, 182, 0.1)',
-                        borderColor: primaryColor,
-                        pointBackgroundColor: primaryColor,
+                        backgroundColor: 'rgba(0, 218, 243, 0.25)',
+                        borderColor: '#00daf3',
+                        pointBackgroundColor: '#00daf3',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: primaryColor,
-                        borderWidth: 2
+                        pointHoverBorderColor: '#00daf3',
+                        borderWidth: 2,
+                        pointRadius: 3
                     }]
                 },
                 options: {
@@ -194,22 +195,23 @@ Object.assign(BM_v2, {
                     maintainAspectRatio: false,
                     scales: {
                         r: {
-                            angleLines: { color: this.state.isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' },
-                            grid: { color: this.state.isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)' },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.15)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.15)' },
                             pointLabels: { 
-                                color: this.state.isDarkMode ? '#8b90a0' : '#636e72', 
+                                color: '#8b90a0', 
                                 font: { size: 10, family: 'Space Grotesk', weight: 'bold' } 
                             },
-                            ticks: { display: false }
+                            ticks: { display: false },
+                            suggestedMin: 0
                         }
                     },
                     plugins: { 
                         legend: { display: false },
                         tooltip: {
-                            backgroundColor: this.state.isDarkMode ? 'rgba(32, 31, 32, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+                            backgroundColor: 'rgba(13, 25, 48, 0.95)',
                             cornerRadius: 8,
                             padding: 10,
-                            titleFont: { family: 'Space Grotesk' },
+                            titleFont: { family: 'Space Grotesk', weight: 'bold' },
                             bodyFont: { family: 'Inter' }
                         }
                     }
@@ -331,16 +333,17 @@ Object.assign(BM_v2, {
             }).sort((a, b) => a.health - b.health);
 
             rankingContainer.innerHTML = sortedByHealth.map(s => {
+                const healthColor = s.health < 30 ? 'var(--urgent)' : (s.health < 70 ? '#ff9100' : '#00e676');
                 return `
-                <div class="ranking-item" onclick="BM_v2.focusSiteOnMap('${s.id}')" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border-glass); cursor: pointer; transition: background 0.3s;">
-                    <div style="flex: 1; overflow: hidden; padding-right: 15px;">
-                        <div class="ranking-site-name" style="font-weight: 600; color: var(--text-main); font-size: 13px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">${s.nome}</div>
-                        <div class="ranking-site-meta" style="font-size: 11px; color: var(--text-muted);">${s.id} • ${s.urgentCount} anomalie su ${s.total}</div>
+                <div class="ranking-item-v3" onclick="BM_v2.focusSiteOnMap('${s.id}')">
+                    <div class="ranking-site-info-v3">
+                        <div class="ranking-site-name-v3">${s.nome}</div>
+                        <div class="ranking-site-meta-v3">${s.id} • ${s.urgentCount} anomalie su ${s.total}</div>
                     </div>
-                    <div style="text-align: right; min-width: 80px;">
-                        <div style="font-size: 10px; color: ${s.health < 50 ? 'var(--urgent)' : 'var(--primary)'}; margin-bottom: 4px; font-weight: 700;">SALUTE: ${s.health}%</div>
-                        <div class="health-bar-wrapper" style="height: 4px; background: var(--border-glass); border-radius: 2px; overflow: hidden;">
-                            <div class="health-bar-fill" style="width: ${s.health}%; height: 100%; transition: width 1s ease; background: linear-gradient(90deg, ${s.health < 50 ? 'var(--urgent)' : 'rgba(0, 119, 182, 0.4)'} 0%, var(--primary) 100%);"></div>
+                    <div class="health-stat-v3">
+                        <div class="health-perc-v3" style="color: ${healthColor};">SALUTE: ${s.health}%</div>
+                        <div class="health-bar-v3">
+                            <div class="health-fill-v3" style="width: ${s.health}%; background: ${healthColor};"></div>
                         </div>
                     </div>
                 </div>`;
@@ -379,8 +382,8 @@ Object.assign(BM_v2, {
 
         if (events.length === 0) {
             feed.innerHTML = `
-            <div class="pulse-event" style="border-left-color: #22c55e;">
-                <div class="pulse-time">${new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}</div>
+            <div class="pulse-event-v3">
+                <div class="time">${new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}</div>
                 <div class="pulse-content">
                     <h5 style="color: #22c55e;">Telemetria Pulita</h5>
                     <p>Nessun alert. Tutti i presidi risultano in asse di conformità.</p>
@@ -396,10 +399,10 @@ Object.assign(BM_v2, {
         }).slice(0, 15);
 
         feed.innerHTML = streamBase.map((e, i) => `
-            <div class="pulse-event ${e.isOverdue ? 'critical' : ''}" style="animation-delay: ${i * 0.15}s">
-                <div class="pulse-time">${e.dateStr || 'MISSING'}</div>
+            <div class="pulse-event-v3 ${e.isOverdue ? 'critical' : ''}" style="animation-delay: ${i * 0.1}s">
+                <div class="time">${e.dateStr || '--:--'}</div>
                 <div class="pulse-content">
-                    <h5>${e.site} — ${e.type}</h5>
+                    <h5>${e.site} — <span style="color: var(--primary);">${e.type}</span></h5>
                     <p>${e.msg}</p>
                 </div>
             </div>

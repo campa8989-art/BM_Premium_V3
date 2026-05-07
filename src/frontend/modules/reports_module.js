@@ -487,7 +487,10 @@ Object.assign(BM_v2, {
             'btn-ai-import': () => this.triggerAIImport(),
             'btn-ai-autofill': () => this.handleAIAutoFill(),
             'btn-report-pdf': () => this.printReport(),
-            'btn-report-word': () => this.exportToWord(),
+            'btn-report-word': () => {
+                console.log("BM_v2: btn-report-word clicked");
+                this.exportToWord();
+            },
             'btn-report-save': () => this.saveReportProject(),
             'btn-report-archive': () => this.openSavedReportsList(),
             'btn-report-reset': () => this.resetReport(),
@@ -1000,11 +1003,47 @@ Object.assign(BM_v2, {
     },
 
     resetReport() {
-        if (confirm("Resettare la relazione corrente?")) {
-            this.report.selectedCodes.clear();
-            this.report.reportState = {};
-            this.renderReportStructure();
-            document.querySelectorAll('#service-picker input[type="checkbox"]').forEach(cb => cb.checked = false);
+        const modalHtml = `
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 40px; color: #ff922b; margin-bottom: 15px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3 style="color: var(--text-main); margin-bottom: 10px;">Conferma Reset</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">
+                    Sei sicuro di voler cancellare tutti i dati della relazione corrente?<br>
+                    L'operazione non può essere annullata.
+                </p>
+                <div style="display: flex; justify-content: center; gap: 12px;">
+                    <button class="v2-info-btn" onclick="BM_v2.closeAriaModal()" style="background: #666; padding: 10px 20px;">
+                        Annulla
+                    </button>
+                    <button class="v2-info-btn" id="confirm-reset-btn" style="background: #e03131; padding: 10px 20px;">
+                        Sì, Resetta Tutto
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        this.openAriaModal(modalHtml, "Attenzione");
+        
+        // Add listener for the confirm button inside the modal
+        const confirmBtn = document.getElementById('confirm-reset-btn');
+        if (confirmBtn) {
+            confirmBtn.onclick = () => {
+                this.report.selectedCodes.clear();
+                this.report.reportState = {};
+                this.renderReportStructure();
+                document.querySelectorAll('#service-picker input[type="checkbox"]').forEach(cb => cb.checked = false);
+                this.closeAriaModal();
+                
+                // Show success toast
+                const toast = document.createElement('div');
+                toast.className = 'save-toast visible';
+                toast.style.background = '#666';
+                toast.innerHTML = `<i class="fas fa-sync-alt"></i> Relazione resettata.`;
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 300); }, 2000);
+            };
         }
     },
 
@@ -1012,15 +1051,178 @@ Object.assign(BM_v2, {
         window.print();
     },
 
-    exportToWord() {
-        if (typeof window.exportToWord === 'function') {
-            // Chiama la funzione globale da word_export.js
-            window.exportToWord();
-        } else {
-            alert("Modulo di esportazione Word non caricato. Verificare che word_export.js sia incluso.");
-            console.error("[Reports] window.exportToWord non trovata. Script word_export.js caricato?");
+    async exportToWord() {
+        if (this._isExporting) return;
+        
+        console.log("BM_v2: Starting Word Export (Local v7.1.1 mode)...");
+        
+        const btn = document.getElementById('btn-report-word');
+        const originalHtml = btn ? btn.innerHTML : '<i class="fas fa-file-word"></i> Word';
+
+        // La libreria locale v7.1.1 espone 'docx' in window
+        let docxLib = window.docx;
+        
+        if (!docxLib) {
+            console.warn("BM_v2: window.docx not found, checking global scope...");
+            docxLib = typeof docx !== 'undefined' ? docx : null;
+        }
+
+        if (!docxLib) {
+            console.error("BM_v2: DOCX library not found locally.");
+            alert("Errore: La libreria Word non è stata caricata correttamente. Prova a premere CTRL+F5.");
+            return;
+        }
+
+        if (btn) {
+            this._isExporting = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Generazione...';
+            btn.disabled = true;
+        }
+
+
+        try {
+            console.log("BM_v2: docxLib detected:", docxLib);
+            
+            // In v7.1.1 i membri sono spesso diretti o sotto .default se caricato come modulo
+            const Document = docxLib.Document;
+            const Packer = docxLib.Packer;
+            const Paragraph = docxLib.Paragraph;
+            const TextRun = docxLib.TextRun;
+            const HeadingLevel = docxLib.HeadingLevel;
+            const ImageRun = docxLib.ImageRun;
+            const AlignmentType = docxLib.AlignmentType;
+
+            if (!Document || !Packer) {
+                console.error("BM_v2: Missing core members in v7.1.1:", docxLib);
+                throw new Error("I componenti della libreria Word (Document/Packer) non sono accessibili.");
+            }
+
+
+            const siteSelect = document.getElementById('presidio-select');
+            const siteName = siteSelect ? siteSelect.value : "Sito Non Specificato";
+            const dateInput = document.getElementById('report-date');
+            const dateVal = dateInput ? dateInput.value : new Date().toLocaleDateString();
+
+            console.log(`BM_v2: Exporting report for ${siteName}`);
+
+            const sections = [];
+
+            // Title and Site Info
+            sections.push(
+                new Paragraph({
+                    text: "RELAZIONE TECNICA DI MANUTENZIONE",
+                    heading: HeadingLevel.HEADING_1,
+                    alignment: AlignmentType.CENTER,
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: `SITO: ${siteName}`, bold: true }),
+                        new TextRun({ text: `\tDATA: ${dateVal}`, bold: true }),
+                    ],
+                    spacing: { before: 400, after: 400 },
+                })
+            );
+
+
+
+            // Iterate over selected activities
+            if (this.report.selectedCodes.size === 0) {
+                sections.push(new Paragraph({ text: "Nessun impianto selezionato per questa relazione.", italic: true }));
+            }
+
+            for (const id of this.report.selectedCodes) {
+                const state = this.report.reportState[id];
+                if (!state) continue;
+                const def = this.findReportItemDefinition(id);
+                if (!def) continue;
+
+                sections.push(
+                    new Paragraph({
+                        text: `${def.name} (${id})`,
+                        heading: HeadingLevel.HEADING_2,
+                        spacing: { before: 400, after: 200 },
+                    })
+                );
+
+                for (const photo of state.photos) {
+                    sections.push(
+                        new Paragraph({
+                            text: `Rilievo: ${photo.caption || 'Nessuna didascalia'}`,
+                            bold: true,
+                            spacing: { before: 200, after: 100 },
+                        })
+                    );
+
+                    // Add Image if present
+                    if (photo.src && photo.src.startsWith('data:image')) {
+                        try {
+                            const base64Data = photo.src.split(',')[1];
+                            const buffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
+                            
+                            sections.push(
+                                new Paragraph({
+                                    children: [
+                                        new ImageRun({
+                                            data: buffer,
+                                            transformation: { width: 400, height: 300 },
+                                        }),
+                                    ],
+                                    alignment: AlignmentType.CENTER,
+                                })
+                            );
+                        } catch (e) {
+                            console.warn("BM_v2: Failed to embed image in Word:", e);
+                        }
+                    }
+
+                    // Add Audit Text
+                    if (photo.audit) {
+                        sections.push(
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "Analisi Tecnica:", bold: true, color: "2b5797" }),
+                                    new TextRun({ text: `\n${photo.audit}` }),
+                                ],
+                                spacing: { after: 300 },
+                            })
+                        );
+                    }
+                }
+            }
+
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: sections,
+                }],
+            });
+
+            console.log("BM_v2: Packing document to blob...");
+            const blob = await Packer.toBlob(doc);
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            const safeSiteName = siteName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+            a.download = `Relazione_${safeSiteName}_${dateVal.replace(/\//g, '-')}.docx`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            console.log("BM_v2: Word Export Complete.");
+
+        } catch (err) {
+            console.error("BM_v2: Word Export Error:", err);
+            alert("❌ Errore durante l'esportazione Word: " + err.message);
+        } finally {
+            this._isExporting = false;
+            if (btn) {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+            }
         }
     },
+
 
     openAriaModal(html, title = "Dettaglio") {
         const modal = document.getElementById('aria-modal');

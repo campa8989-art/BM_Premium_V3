@@ -766,7 +766,16 @@ var BM_v2 = {
 
     toggleTheme() {
         this.state.isDarkMode = !this.state.isDarkMode;
-        document.body.classList.toggle('light-theme', !this.state.isDarkMode);
+        
+        console.log("[Theme] Switching to:", this.state.isDarkMode ? "DARK" : "LIGHT");
+        
+        if (this.state.isDarkMode) {
+            document.body.classList.add('clinical-nocturne');
+            document.body.classList.remove('light-theme');
+        } else {
+            document.body.classList.remove('clinical-nocturne');
+            document.body.classList.add('light-theme');
+        }
 
         // Salvataggio preferenza
         localStorage.setItem('bm-theme', this.state.isDarkMode ? 'dark' : 'light');
@@ -813,7 +822,13 @@ var BM_v2 = {
         }
 
         this.state.isDarkMode = shouldBeDark;
-        document.body.classList.toggle('light-theme', !shouldBeDark);
+        if (this.state.isDarkMode) {
+            document.body.classList.add('clinical-nocturne');
+            document.body.classList.remove('light-theme');
+        } else {
+            document.body.classList.remove('clinical-nocturne');
+            document.body.classList.add('light-theme');
+        }
 
         // Imposta stato iniziale bottone
         if (this.dom.themeBtn) {

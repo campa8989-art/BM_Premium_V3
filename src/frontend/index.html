@@ -25,8 +25,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="css/v2_style.css?v=11">
-    <link rel="stylesheet" href="css/premium_effects.css?v=11">
+    <link rel="stylesheet" href="css/v2_style.css?v=13">
+    <link rel="stylesheet" href="css/telemetry_scroll.css?v=13">
+    <link rel="stylesheet" href="css/premium_effects.css?v=13">
     <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
@@ -252,134 +253,132 @@
 
                 <!-- Telemetry / Charts View (Mission Control Edition) -->
                 <section id="view-charts" class="view-pane">
-                    <div class="telemetry-dashboard">
-                        <div class="telemetry-header">
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="telemetry-layout-v3">
+                        <div class="telemetry-header-v3">
+                            <div class="header-title-group">
                                 <h2 class="view-title">
                                     OSSERVATORIO CINETICO
-                                    <span
-                                        style="display: inline-block; padding: 4px 10px; margin-left: 15px; border-radius: 4px; background: rgba(0, 218, 243, 0.1); border: 1px solid rgba(0, 218, 243, 0.4); font-size: 0.4em; font-weight: 600; letter-spacing: 1px; color: #00daf3; vertical-align: middle; box-shadow: 0 0 10px rgba(0,218,243,0.2); -webkit-text-fill-color: initial;">V3.0
-                                         STITCH</span>
+                                    <span class="version-badge">V3.1 STITCH</span>
                                 </h2>
-                                <p class="view-subtitle"
-                                    style="margin: 0; font-size: 0.95rem; font-weight: 300; letter-spacing: 0.5px; border-left: 3px solid #00daf3; padding-left: 12px;">
-                                    Monitoraggio olistico della flotta e analisi predittiva sui vettori di efficienza
-                                    operativa.
+                                <p class="view-subtitle">
+                                    Monitoraggio olistico della flotta e analisi predittiva sui vettori di efficienza operativa.
                                 </p>
                             </div>
-                            <div class="header-status-badge glow-cyan">
-                                <span class="pulse-dot"></span>
-                                Live Mission Control
+                            
+                            <div class="telemetry-actions-v3">
+                                <button class="btn-sync-live-v3" onclick="BM_v2.syncTelemetry()">
+                                    <i class="fas fa-sync-alt"></i> Sincronizza Live
+                                </button>
+                                
+                                <div class="system-integrity-gauge-v3">
+                                    <div class="gauge-container">
+                                        <svg viewBox="0 0 36 36" class="circular-chart-v3">
+                                            <path class="circle-bg-v3" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <path class="circle-v3" stroke-dasharray="23, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                                            <text x="18" y="20.35" class="percentage-v3">23%</text>
+                                        </svg>
+                                    </div>
+                                    <div class="gauge-label">SYSTEM<br>INTEGRITY</div>
+                                </div>
+                                
+                                <button class="btn-verbali-v3">
+                                    <i class="fas fa-file-medical"></i> Verbali
+                                </button>
                             </div>
                         </div>
 
-                        <!-- KPI Row: Neon Edition -->
-                        <div class="telemetry-kpi-grid">
-                            <div class="kpi-card glass-panel glow-cyan">
-                                <div class="kpi-icon"><i class="fas fa-microchip"></i></div>
-                                <div class="kpi-info">
-                                    <span class="kpi-label">System Health</span>
-                                    <span class="kpi-value" id="kpi-health">94.2%</span>
+                        <!-- Compact KPI Row -->
+                        <div class="telemetry-kpi-grid-v3">
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3"><i class="fas fa-microchip"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">System Health</span>
+                                    <span class="value" id="kpi-health">--%</span>
                                 </div>
                             </div>
-                            <div class="kpi-card glass-panel glow-red">
-                                <div class="kpi-icon urgent"><i class="fas fa-bolt"></i></div>
-                                <div class="kpi-info">
-                                    <span class="kpi-label">Urgenze</span>
-                                    <span class="kpi-value" id="kpi-urgencies">0</span>
+                            <div class="kpi-card-v3" style="border-color: rgba(255, 61, 0, 0.3);">
+                                <div class="kpi-icon-v3" style="color: var(--urgent); background: rgba(255, 61, 0, 0.1);"><i class="fas fa-bolt"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Urgenze</span>
+                                    <span class="value" id="kpi-urgencies" style="color: var(--urgent);">0</span>
                                 </div>
                             </div>
-                            <div class="kpi-card glass-panel">
-                                <div class="kpi-icon"><i class="fas fa-check-double"></i></div>
-                                <div class="kpi-info">
-                                    <span class="kpi-label">Conformità</span>
-                                    <span class="kpi-value" id="kpi-compliance">--%</span>
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3" style="color: #00e676; background: rgba(0, 230, 118, 0.1);"><i class="fas fa-check-double"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Conformità</span>
+                                    <span class="value" id="kpi-compliance">--%</span>
                                 </div>
                             </div>
-                            <div class="kpi-card glass-panel">
-                                <div class="kpi-icon"><i class="fas fa-wave-square"></i></div>
-                                <div class="kpi-info">
-                                    <span class="kpi-label">Volume Operativo</span>
-                                    <span class="kpi-value" id="kpi-network-load">--</span>
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3" style="color: #ff9100; background: rgba(255, 145, 0, 0.1);"><i class="fas fa-wave-square"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Volume Operativo</span>
+                                    <span class="value" id="kpi-network-load">--</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Main Analytic Grid: Asymmetric -->
-                        <div class="telemetry-main-grid"
-                            style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-bottom: 40px;">
-                            <!-- Radar Distribution -->
-                            <div class="telemetry-chart-container glass-panel"
-                                style="display: flex; flex-direction: column;">
-                                <div class="chart-header">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <span
-                                            style="font-size: 9px; color: var(--primary); letter-spacing: 2px; font-weight: 800;">[SYS_01]</span>
-                                        <h4 style="margin:0;">ANALISI VETTORI SISTEMA</h4>
+                        <!-- Main Analytic Grid -->
+                        <div class="telemetry-main-grid-v3">
+                            <div class="chart-card-v3">
+                                <div class="chart-card-header-v3">
+                                    <div class="title-group">
+                                        <span class="id-tag">[SYS_01]</span>
+                                        <h4>Analisi Vettori Sistema</h4>
                                     </div>
                                     <i class="fas fa-compass"></i>
                                 </div>
-                                <div class="canvas-wrapper" style="flex-grow: 1; position: relative;">
+                                <div class="canvas-container-v3">
                                     <canvas id="sys-dist-chart"></canvas>
                                 </div>
                             </div>
 
-                            <!-- Operational Workload Trend -->
-                            <div class="telemetry-chart-container glass-panel"
-                                style="display: flex; flex-direction: column;">
-                                <div class="chart-header">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <span
-                                            style="font-size: 9px; color: var(--primary); letter-spacing: 2px; font-weight: 800;">[TREND_02]</span>
-                                        <h4 style="margin:0;">TRAIETTORIA LOGISTICA (4W)</h4>
+                            <div class="chart-card-v3">
+                                <div class="chart-card-header-v3">
+                                    <div class="title-group">
+                                        <span class="id-tag">[TREND_02]</span>
+                                        <h4>Traiettoria Logistica (4W)</h4>
                                     </div>
                                     <i class="fas fa-chart-line"></i>
                                 </div>
-                                <div class="canvas-wrapper" style="flex-grow: 1; position: relative;">
+                                <div class="canvas-container-v3">
                                     <canvas id="compliance-trend-chart"></canvas>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Bottom Grid: Pulse & Ranking -->
-                        <div class="telemetry-bottom-grid"
-                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-
-                            <!-- New Real-time Pulse Feed (Spostato a Sinistra) -->
-                            <div id="pulse-feed-container-parent" class="glass-panel">
-                                <div class="chart-header">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <span
-                                            style="font-size: 9px; color: var(--primary); letter-spacing: 2px; font-weight: 800;">[PULSE_03]</span>
-                                        <h4 style="margin:0;">STREAMING OPERATIVO LIVE</h4>
+                        <!-- Bottom Grid -->
+                        <div class="telemetry-bottom-grid-v3">
+                            <div class="chart-card-v3">
+                                <div class="chart-card-header-v3">
+                                    <div class="title-group">
+                                        <span class="id-tag">[PULSE_03]</span>
+                                        <h4>Streaming Operativo Live</h4>
                                     </div>
                                     <i class="fas fa-satellite-dish"></i>
                                 </div>
-                                <div id="pulse-feed" class="pulse-feed-container custom-scrollbar">
-                                    <!-- Populated by JS -->
-                                    <div class="placeholder-text" style="padding: 20px;">Sintonizzazione monitor...
-                                    </div>
+                                <div id="pulse-feed" class="pulse-feed-v3 custom-scrollbar">
+                                    <div class="placeholder-text">Sintonizzazione monitor...</div>
                                 </div>
                             </div>
 
-                            <!-- Ranking Criticità Presidi (Spostato a Destra) -->
-                            <div class="telemetry-ranking-container glass-panel">
-                                <div class="chart-header">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <span
-                                            style="font-size: 9px; color: var(--primary); letter-spacing: 2px; font-weight: 800;">[AUDIT_04]</span>
-                                        <h4 style="margin:0;">ANALISI INTEGRITÀ RETE</h4>
+                            <div class="chart-card-v3">
+                                <div class="chart-card-header-v3">
+                                    <div class="title-group">
+                                        <span class="id-tag">[AUDIT_04]</span>
+                                        <h4>Analisi Integrità Rete</h4>
                                     </div>
                                     <i class="fas fa-list-ol"></i>
                                 </div>
-                                <div id="top-urgency-list" class="ranking-list custom-scrollbar">
-                                    <!-- Dynamic Health Bars -->
+                                <div id="top-urgency-list" class="ranking-list-v3 custom-scrollbar">
+                                    <!-- Dynamic Ranking -->
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
+
 
                 <!-- Planning Matrix View -->
                 <section id="view-calendar" class="view-pane">
@@ -696,21 +695,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="lib/docx.js?v=1"></script>
     <script src="/data/aria_full_data.js"></script>
     <script src="/data/data.js"></script>
     <script src="/data/workspace_data.js"></script>
 
 
     <!-- BM Premium v2 Modules -->
-    <script src="app_v2.js?v=11"></script>
-    <script src="modules/home_module.js?v=11"></script>
-    <script src="modules/charts_module.js?v=11"></script>
-    <script src="modules/map_module.js?v=11"></script>
-    <script src="modules/workspace_module.js?v=11"></script>
-    <script src="modules/matrix_module.js?v=11"></script>
-    <script src="modules/reports_module.js?v=11"></script>
-    <script src="modules/ai_module.js?v=11"></script>
-    <script src="modules/verbali_sync_module.js?v=11"></script>
+    <script src="app_v2.js"></script>
+    <script src="modules/home_module.js?v=13"></script>
+    <script src="modules/charts_module.js?v=13"></script>
+    <script src="modules/map_module.js?v=13"></script>
+    <script src="modules/workspace_module.js?v=13"></script>
+    <script src="modules/matrix_module.js?v=13"></script>
+    <script src="modules/reports_module.js?v=13"></script>
+    <script src="modules/ai_module.js?v=13"></script>
+    <script src="modules/verbali_sync_module.js?v=13"></script>
 
 
     <!-- Events v2 (Integrated in app_v2.js) -->
