@@ -178,7 +178,7 @@ async function analyzeWithGemini(base64Data, apiKey, siteNames, systemTypes, ide
     }
     RISPONDI SOLO JSON. Se è un registro antincendio, tipologia è "Antincendio".`;
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     try {
         const response = await fetch(endpoint, {
@@ -437,7 +437,7 @@ async function saveDataFiles(data, apiKey) {
     await logAudit(`✅ data.js generato con ${data.length} righe.`);
 
     // 2. ai_config.js (Proxy URL per il browser)
-    const configContent = `window.AI_PROXY_URL = "http://localhost:3001/api/proxy-ai";\nconsole.log("🌐 Sistema AI configurato tramite Proxy locale Sicuro.");`;
+    const configContent = `window.AI_PROXY_URL = "http://localhost:3005/api/proxy-ai";\nconsole.log("🌐 Sistema AI configurato tramite Proxy locale Sicuro.");`;
     await safeWriteFile(AI_CONFIG_FILE, configContent);
     await logAudit(`🔐 ai_config.js generato (Secure Config).`);
 

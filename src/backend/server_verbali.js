@@ -9,6 +9,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleTimeString()}] ${req.method} ${req.url}`);
+    next();
+});
 
 app.get('/', (req, res) => res.json({ status: 'OK', service: 'Verbali API' }));
 
@@ -55,21 +59,43 @@ app.post('/api/proxy-ai', async (req, res) => {
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) throw new Error("API Key mancante nel server.");
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const response = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(req.body)
         });
 
         const data = await response.json();
+        if (!response.ok) {
+            console.error("❌ Gemini API Error:", data.error?.message || "Unknown Error");
+            
+            // Auto-diagnosi: Recupera la lista dei modelli disponibili
+            try {
+                const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+                const listData = await listRes.json();
+                console.log("\n--- 💡 MODELLI DISPONIBILI PER LA TUA KEY ---");
+                if (listData.models) {
+                    listData.models.forEach(m => console.log(`- ${m.name}`));
+                } else {
+                    console.log("Impossibile recuperare la lista dei modelli.");
+                }
+                console.log("-------------------------------------------\n");
+            } catch (e) {}
+        }
         res.status(response.status).json(data);
     } catch (error) {
-        console.error("Proxy AI Error:", error);
+        console.error("Proxy AI Server Error:", error);
         res.status(500).json({ error: error.message });
     }
 });
 
-const PORT = 3001;
-app.listen(PORT, '127.0.0.1', () => {
-    console.log(`📂 Verbali API ready on http://127.0.0.1:${PORT}`);
+app.use((req, res) => {
+    console.warn(`[404] ${req.method} ${req.url} - Route non trovata`);
+    res.status(404).json({ error: `Rotta ${req.url} non trovata in Verbali API` });
+});
+
+const PORT = 3005;
+app.listen(PORT, () => {
+    console.log(`📂 Verbali API ready on port ${PORT}`);
 });

@@ -40,7 +40,7 @@ try {
 
     # --- 3. Pulizia Chirugica Porte ---
     Write-Host "[2/5] Reset canali di comunicazione (3000, 3001)..." -ForegroundColor Yellow
-    $ports = @(3000, 3001)
+    $ports = @(3000, 3001, 3005)
     foreach ($port in $ports) {
         $conns = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
         if ($conns) {
@@ -71,8 +71,8 @@ try {
     # Avvio Backend (Server Verbali) in background (finestra nascosta)
     # Racchiudiamo il percorso tra virgolette per gestire gli spazi
     $BackendPath = Join-Path $ProjectRoot "src/backend/server_verbali.js"
-    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "`"$BackendPath`"" -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden
-    Write-Host "      - Backend API pronto su http://localhost:3001" -ForegroundColor Green
+    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "`"$BackendPath`"" -WorkingDirectory $ProjectRoot -PassThru
+    Write-Host "      - Backend API pronto su http://localhost:3005" -ForegroundColor Green
 
     # Avvio Frontend (Vite)
     Write-Host "      - Avvio Vite Dashboard (In background)..." -ForegroundColor Gray

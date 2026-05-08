@@ -9,111 +9,7 @@ Object.assign(BM_v2, {
         reportState: {},
         historyStack: [],
         
-        config: {
-            ALL_CONTRACT_CODES: [
-                "1.2", "1.1", "13.3", "3.1", "15.1", "17.1", "20.1", "2.1", "30.1", "40.1", 
-                "45.2", "45.1", "49.1", "50.1", "51.1", "52.1", "53.1", "61.1", "64.1", "62.1",
-                "59.1", "60.1", "66.1", "67.1", "72.1", "72.2", "73.1", "76.1", "80.1", "81.1"
-            ],
-            documentationMapping: {
-                "HVAC": [
-                    "Ultimi Rapporti di Controllo di Efficienza Energetica (Analisi fumi) effettuati sui moduli analizzati;",
-                    "Verifica dei parametri di combustione: in particolare i valori di rendimento, eccesso d'aria e concentrazione di CO (monossido di carbonio);",
-                    "Certificazione di avvenuta manutenzione del sistema di scarico condensa, per verificare se eventuali problemi di ossidazione siano stati già oggetto di intervento;",
-                    "Copia del Libretto d'Impianto aggiornato, completo di tutte le schede relative ai componenti analizzati (rampa gas, contatore e collettore idraulico)."
-                ],
-                "Elettrico": [
-                    "Certificato di conformità ai sensi del D.M. 37/08 per gli interventi di modifica/rifacimento;",
-                    "Verifica periodica dell'impianto di messa a terra ai sensi del D.P.R. 462/01;",
-                    "Registro di manutenzione dell'illuminazione di emergenza con esito prove di autonomia."
-                ],
-                "Idrico": [
-                    "Valutazione del Rischio Legionellosi aggiornata (Linee Guida 2015);",
-                    "Registro degli interventi effettuati e dei dosaggi dei prodotti chimici antilegionella;",
-                    "Esiti dei campionamenti microbiologici effettuati sulla rete idrico-sanitaria."
-                ],
-                "Antincendio": [
-                    "Registro delle verifiche periodiche semestrali idranti e splinker;",
-                    "Certificato di rinnovo periodico di conformità antincendio (CPI);",
-                    "Esito prove di portata e pressione della rete idrica antincendio."
-                ],
-                "Elevatori": [
-                    "Certificato di verifica periodica ai sensi del D.P.R. 162/99;",
-                    "Registro di manutenzione con annotazione delle prove di sicurezza paracadute;",
-                    "Copia dell'assegnazione del numero di matricola dell'impianto."
-                ]
-            },
-            sectionsDefinition: [
-                {
-                    title: "Impianti Climatizzazione e Produzione Energia (HVAC)",
-                    category: "Servizio energia - Manutenzione impianti di climatizzazione (B2)",
-                    docKey: "HVAC",
-                    items: [
-                        { id: "B.01- B.02 - B.12", name: "Caldaie da 36kW a 350 kW", alias: ["1.1", "1.2", "13.3"], figures: ["Caldaia", "Rampa Gas"] },
-                        { id: "B.01 - B.02 - B.12", name: "Caldaie da 350 kW a 1000kW", alias: ["2.1"], figures: ["Centrale Termica", "Generatore"] },
-                        { id: "B.04", name: "Gruppi frigoriferi a vite/centrifughi fino a 100 kW", alias: ["3.1", "15.1"], figures: ["Chiller", "Compressori"] },
-                        { id: "B.01-B.05-B.06-B.11", name: "Distribuzione impianti idronici e sottocentrali", alias: ["17.1", "20.1"], figures: ["Sottocentrale", "Pompe"] },
-                        { id: "B.08-B.13-B.15", name: "Unità di Trattamento Aria (UTA)", alias: ["30.1", "40.1"], figures: ["UTA", "Filtri/Motore"] },
-                        { id: "B.09-B.10", name: "Condizionatori Monosplit / VRF / Localizzati", alias: ["80.1", "81.1"], figures: ["Unità Esterna", "Split Interno"] }
-                    ]
-                },
-                {
-                    title: "Impianti Elettrici e Continuità",
-                    category: "Manutenzione Impianti elettrici (C)",
-                    docKey: "Elettrico",
-                    items: [
-                        { id: "C2-C6", name: "Distribuzione elettrica, quadri, ecc.", alias: ["45.1", "45.2"], figures: ["Quadro BT", "Termografia"] },
-                        { id: "C1", name: "Cabine MT / BT e Trasformatori", alias: ["49.1", "50.1"], figures: ["Trasformatore", "Cella MT"] },
-                        { id: "C4", name: "Gruppi Elettrogeni di Continuità", alias: ["53.1"], figures: ["Motore GE", "Pannello ATS"] }
-                    ]
-                },
-                {
-                    title: "Impianti Idrico-Sanitari",
-                    category: "Manutenzione Impianti idrici (D)",
-                    docKey: "Idrico",
-                    items: [
-                        { id: "D2.02", name: "Impianti addolcimento", alias: ["51.1"], figures: ["Addolcitore", "Resine"] },
-                        { id: "D2.03 – D2.04", name: "Distribuzione idrico sanitaria", alias: ["52.1"], figures: ["Collettore Idrico", "Valvolame"] },
-                        { id: "D3.01", name: "Apparecchiature controllo legionellosi", alias: ["51.1"], figures: ["Dosatore", "Campionamento"] },
-                        { id: "D3.01.06/07", name: "Prove della legionella della rete idrico-sanitaria", alias: ["51.1"], figures: ["Analisi Microbiologica"] }
-                    ]
-                },
-                {
-                    title: "Impianti e Apparecchiature Antincendio",
-                    category: "Manutenzione impianti e apparecchiature antincendio (E)",
-                    docKey: "Antincendio",
-                    items: [
-                        { id: "E1.03 - E1.06 - E3.04", name: "Compartimentazioni, serrande tagliafuoco", alias: ["72.1", "72.2"], figures: ["Serranda", "Compartimento"] },
-                        { id: "E2.01 - E2.04 - E2.05", name: "Impianti rivelazione e segnalazione incendi", alias: ["76.1"], figures: ["Sensore", "Centrale"] },
-                        { id: "E1.04 - E1.05 - E2.02", name: "Illuminazione di emergenza, segnaletica antincendio e vie di esodo", alias: ["45.1"], figures: ["Lampada Emergenza", "Segnaletica"] },
-                        { id: "E1.01", name: "Porte Tagliafuoco", alias: ["72.1"], figures: ["Porta", "Maniglione"] },
-                        { id: "E1.02", name: "Estintori", alias: ["73.1"], figures: ["Estintore", "Manometro"] },
-                        { id: "E3.01 - E3.08", name: "Centrale di pressurizzazione", alias: ["72.1"], figures: ["Motopompa", "Quadro Antincendio"] },
-                        { id: "E3.02 - E3.08", name: "Rete idrica e terminali", alias: ["72.1"], figures: ["Idrante UNI 45", "Rete Soffitto"] }
-                    ]
-                },
-                {
-                    title: "Impianti Elevatori e Sistemi di Trasporto",
-                    category: "Manutenzione Impianti elevatori (F)",
-                    docKey: "Elevatori",
-                    items: [
-                        { id: "F1.01", name: "Elevatori 1-5 piani (fino a 6 fermate)", alias: ["61.1"], figures: ["Locale Macchine", "Cabina"] },
-                        { id: "F1.01", name: "Elevatori 6-10 piani (fino a 11 fermate)", alias: ["62.1"], figures: ["Locale Macchine", "Vano"] },
-                        { id: "F1.02", name: "Servoscala", alias: ["64.1"], figures: ["Piattaforma", "Guida"] }
-                    ]
-                },
-                {
-                    title: "Manutenzione Edile e Sistemi Speciali",
-                    category: "Manutenzione edile (G)",
-                    docKey: "Edile",
-                    items: [
-                        { id: "G1", name: "Pompe di sollevamento acque nere e chiare", alias: ["60.1"], figures: ["Vano Raccolta", "Stazione Sollevamento"] },
-                        { id: "G2.01.01", name: "Cancelli e sbarre motorizzati", alias: ["59.1"], figures: ["Motore Cancello", "Sbarra"] },
-                        { id: "G2.01.02", name: "Porte automatiche e portoni sezionali", alias: ["66.1", "67.1"], figures: ["Fotocellula", "Portone"] }
-                    ]
-                }
-            ]
-        }
+        config: (typeof REPORT_CONFIG !== 'undefined') ? REPORT_CONFIG : { ALL_CONTRACT_CODES: [], documentationMapping: {}, sectionsDefinition: [] }
     },
 
     initReportsModule() {
@@ -428,7 +324,7 @@ Object.assign(BM_v2, {
     },
 
     async callGeminiVision(base64Image, prompt) {
-        const endpoint = `http://127.0.0.1:3001/api/proxy-ai`;
+        const endpoint = `http://127.0.0.1:3005/api/proxy-ai`;
         
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -443,7 +339,17 @@ Object.assign(BM_v2, {
             })
         });
 
-        if (!response.ok) throw new Error("Errore API Gemini");
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            // Extract message from various possible formats
+            const msg = (errorData.error && typeof errorData.error === 'object' ? errorData.error.message : null) || 
+                        (typeof errorData.error === 'string' ? errorData.error : null) || 
+                        errorData.message || 
+                        "Errore API Gemini";
+            
+            console.error("BM_v2: Gemini API Error details:", errorData);
+            throw new Error(msg);
+        }
         const res = await response.json();
         return res.candidates[0].content.parts[0].text.trim();
     },
@@ -546,7 +452,7 @@ Object.assign(BM_v2, {
             4. Rispondi SOLO col JSON.`;
 
             // Use the proxy endpoint via callGeminiText (we need to define it or use fetch directly)
-            const response = await fetch(`http://localhost:3001/api/proxy-ai`, {
+            const response = await fetch(`http://127.0.0.1:3005/api/proxy-ai`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -681,7 +587,7 @@ Object.assign(BM_v2, {
         3. Il campo "technical_summary" deve essere professionale e pronto per la relazione.
         4. Rispondi SOLO con il JSON puro.`;
 
-        const endpoint = `http://127.0.0.1:3001/api/proxy-ai`;
+        const endpoint = `http://127.0.0.1:3005/api/proxy-ai`;
         
         try {
             const response = await fetch(endpoint, {
@@ -1042,7 +948,10 @@ Object.assign(BM_v2, {
                 toast.style.background = '#666';
                 toast.innerHTML = `<i class="fas fa-sync-alt"></i> Relazione resettata.`;
                 document.body.appendChild(toast);
-                setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 300); }, 2000);
+                setTimeout(() => { 
+                    toast.classList.remove('visible'); 
+                    setTimeout(() => toast.remove(), 300); 
+                }, 2000);
             };
         }
     },
@@ -1054,24 +963,27 @@ Object.assign(BM_v2, {
     async exportToWord() {
         if (this._isExporting) return;
         
-        console.log("BM_v2: Starting Word Export (Local v7.1.1 mode)...");
+        console.log("BM_v2: Starting High-Fidelity Word Export (Running Headers & Footers)...");
         
         const btn = document.getElementById('btn-report-word');
         const originalHtml = btn ? btn.innerHTML : '<i class="fas fa-file-word"></i> Word';
 
-        // La libreria locale v7.1.1 espone 'docx' in window
-        let docxLib = window.docx;
-        
+        const docxLib = window.docx || (typeof docx !== 'undefined' ? docx : null);
         if (!docxLib) {
-            console.warn("BM_v2: window.docx not found, checking global scope...");
-            docxLib = typeof docx !== 'undefined' ? docx : null;
-        }
-
-        if (!docxLib) {
-            console.error("BM_v2: DOCX library not found locally.");
-            alert("Errore: La libreria Word non è stata caricata correttamente. Prova a premere CTRL+F5.");
+            alert("Errore: Libreria Word (docx.js) non trovata.");
             return;
         }
+
+        const { 
+            Document, Packer, Paragraph, Table, TableRow, TableCell, TextRun, 
+            ImageRun, AlignmentType, WidthType, BorderStyle, HeadingLevel, 
+            VerticalAlign, Header, Footer, PageNumber
+        } = docxLib;
+
+        const siteName = document.getElementById('display-presidio-name').innerText;
+        const siteId = document.getElementById('display-presidio-id').innerText;
+        const siteAddress = document.getElementById('display-presidio-address').innerText;
+        const reportDate = document.getElementById('display-date').innerText;
 
         if (btn) {
             this._isExporting = true;
@@ -1079,137 +991,302 @@ Object.assign(BM_v2, {
             btn.disabled = true;
         }
 
+        // --- Helper: Fetch Logo Data (as ArrayBuffer for docx.js) ---
+        const getLogoData = async () => {
+            try {
+                const resp = await fetch('assets/cmf_logo.png');
+                if (!resp.ok) return null;
+                return await resp.arrayBuffer();
+            } catch (e) { 
+                console.error("BM_v2: Logo fetch error:", e);
+                return null; 
+            }
+        };
+
+        const createCell = (content, options = {}) => {
+            let children = [];
+            if (typeof content === 'string') {
+                children = [new Paragraph({
+                    children: [new TextRun({ text: content, bold: options.bold || false, size: 20, font: "Aptos" })],
+                    alignment: options.align || AlignmentType.LEFT
+                })];
+            } else {
+                children = content;
+            }
+
+            return new TableCell({
+                children: children,
+                shading: options.bg ? { fill: options.bg } : undefined,
+                width: options.width ? { size: options.width, type: WidthType.PERCENTAGE } : undefined,
+                verticalAlign: VerticalAlign.CENTER,
+                margins: { top: 80, bottom: 80, left: 120, right: 120 },
+                borders: {
+                    top: { style: BorderStyle.SINGLE, size: 4, color: "000000" },
+                    bottom: { style: BorderStyle.SINGLE, size: 4, color: "000000" },
+                    left: { style: BorderStyle.SINGLE, size: 4, color: "000000" },
+                    right: { style: BorderStyle.SINGLE, size: 4, color: "000000" },
+                }
+            });
+        };
+
+        const mapHtmlToTextRuns = (html) => {
+            if (!html) return [];
+            const runs = [];
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html.replace(/<br>/g, '\n').replace(/&bull;/g, '•').replace(/&nbsp;/g, ' ');
+            tempDiv.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    runs.push(new TextRun({ text: node.textContent, size: 21, font: "Aptos" }));
+                } else if (node.nodeName === 'STRONG' || node.nodeName === 'B') {
+                    runs.push(new TextRun({ text: node.textContent, bold: true, size: 21, font: "Aptos" }));
+                }
+            });
+            return runs;
+        };
 
         try {
-            console.log("BM_v2: docxLib detected:", docxLib);
-            
-            // In v7.1.1 i membri sono spesso diretti o sotto .default se caricato come modulo
-            const Document = docxLib.Document;
-            const Packer = docxLib.Packer;
-            const Paragraph = docxLib.Paragraph;
-            const TextRun = docxLib.TextRun;
-            const HeadingLevel = docxLib.HeadingLevel;
-            const ImageRun = docxLib.ImageRun;
-            const AlignmentType = docxLib.AlignmentType;
+            const logoData = await getLogoData();
 
-            if (!Document || !Packer) {
-                console.error("BM_v2: Missing core members in v7.1.1:", docxLib);
-                throw new Error("I componenti della libreria Word (Document/Packer) non sono accessibili.");
+            // --- 1. RUNNING HEADER ---
+            const headerLogoChildren = [];
+            if (logoData) {
+                headerLogoChildren.push(new Paragraph({
+                    children: [new ImageRun({ 
+                        data: logoData, 
+                        transformation: { width: 100, height: 35 },
+                        type: "png"
+                    })]
+                }));
             }
 
-
-            const siteSelect = document.getElementById('presidio-select');
-            const siteName = siteSelect ? siteSelect.value : "Sito Non Specificato";
-            const dateInput = document.getElementById('report-date');
-            const dateVal = dateInput ? dateInput.value : new Date().toLocaleDateString();
-
-            console.log(`BM_v2: Exporting report for ${siteName}`);
-
-            const sections = [];
-
-            // Title and Site Info
-            sections.push(
-                new Paragraph({
-                    text: "RELAZIONE TECNICA DI MANUTENZIONE",
-                    heading: HeadingLevel.HEADING_1,
-                    alignment: AlignmentType.CENTER,
-                }),
-                new Paragraph({
-                    children: [
-                        new TextRun({ text: `SITO: ${siteName}`, bold: true }),
-                        new TextRun({ text: `\tDATA: ${dateVal}`, bold: true }),
-                    ],
-                    spacing: { before: 400, after: 400 },
-                })
-            );
-
-
-
-            // Iterate over selected activities
-            if (this.report.selectedCodes.size === 0) {
-                sections.push(new Paragraph({ text: "Nessun impianto selezionato per questa relazione.", italic: true }));
-            }
-
-            for (const id of this.report.selectedCodes) {
-                const state = this.report.reportState[id];
-                if (!state) continue;
-                const def = this.findReportItemDefinition(id);
-                if (!def) continue;
-
-                sections.push(
-                    new Paragraph({
-                        text: `${def.name} (${id})`,
-                        heading: HeadingLevel.HEADING_2,
-                        spacing: { before: 400, after: 200 },
-                    })
-                );
-
-                for (const photo of state.photos) {
-                    sections.push(
-                        new Paragraph({
-                            text: `Rilievo: ${photo.caption || 'Nessuna didascalia'}`,
-                            bold: true,
-                            spacing: { before: 200, after: 100 },
-                        })
-                    );
-
-                    // Add Image if present
-                    if (photo.src && photo.src.startsWith('data:image')) {
-                        try {
-                            const base64Data = photo.src.split(',')[1];
-                            const buffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-                            
-                            sections.push(
-                                new Paragraph({
-                                    children: [
-                                        new ImageRun({
-                                            data: buffer,
-                                            transformation: { width: 400, height: 300 },
-                                        }),
-                                    ],
-                                    alignment: AlignmentType.CENTER,
-                                })
-                            );
-                        } catch (e) {
-                            console.warn("BM_v2: Failed to embed image in Word:", e);
-                        }
-                    }
-
-                    // Add Audit Text
-                    if (photo.audit) {
-                        sections.push(
-                            new Paragraph({
+            const runningHeader = new Header({
+                children: [
+                    new Table({
+                        width: { size: 100, type: WidthType.PERCENTAGE },
+                        borders: {
+                            top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.SINGLE, size: 12, color: "000000" },
+                            left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE },
+                            insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE },
+                        },
+                        rows: [
+                            new TableRow({
                                 children: [
-                                    new TextRun({ text: "Analisi Tecnica:", bold: true, color: "2b5797" }),
-                                    new TextRun({ text: `\n${photo.audit}` }),
-                                ],
-                                spacing: { after: 300 },
+                                    new TableCell({
+                                        children: headerLogoChildren,
+                                        width: { size: 40, type: WidthType.PERCENTAGE },
+                                        verticalAlign: VerticalAlign.BOTTOM,
+                                        margins: { bottom: 100 }
+                                    }),
+                                    new TableCell({
+                                        children: [
+                                            new Paragraph({
+                                                children: [new TextRun({ text: "RELAZIONE TECNICA DI SOPRALLUOGO", bold: true, size: 22, font: "Aptos" })],
+                                                alignment: AlignmentType.RIGHT
+                                            }),
+                                             new Paragraph({
+                                                children: [new TextRun({ text: "Building Manager Intelligence System", size: 18, font: "Aptos" })],
+                                                alignment: AlignmentType.RIGHT
+                                            })
+                                        ],
+                                        width: { size: 60, type: WidthType.PERCENTAGE },
+                                        verticalAlign: VerticalAlign.BOTTOM,
+                                        margins: { bottom: 100 }
+                                    })
+                                ]
                             })
-                        );
-                    }
-                }
-            }
+                        ]
+                    })
+                ]
+            });
 
+            // --- 2. RUNNING FOOTER ---
+            const runningFooter = new Footer({
+                children: [
+                    new Paragraph({
+                        children: [
+                            new TextRun({ text: `CMF Consorzio Stabile - Relazione Tecnica Manutentiva - Presidio: ${siteName}`, size: 16, font: "Aptos" }),
+                            new TextRun({ text: "\t\t", size: 16 }), 
+                            new TextRun({ text: "Pag. ", size: 16, font: "Aptos" }),
+                            new TextRun({ children: [PageNumber.CURRENT], size: 16, font: "Aptos" }),
+                            new TextRun({ text: " di ", size: 16, font: "Aptos" }),
+                            new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, font: "Aptos" }),
+                        ],
+                        alignment: AlignmentType.CENTER,
+                        borders: { top: { style: BorderStyle.SINGLE, size: 2, color: "EEEEEE" } },
+                        spacing: { before: 200 }
+                    })
+                ]
+            });
+
+            // --- 3. MAIN PAGE CONTENT ---
+            const docContent = [
+                new Table({
+                    width: { size: 100, type: WidthType.PERCENTAGE },
+                    rows: [
+                        new TableRow({ children: [createCell("ID Presidio", { bold: true, bg: "F2F2F2", width: 25 }), createCell(siteId || "")] }),
+                        new TableRow({ children: [createCell("Indirizzo", { bold: true, bg: "F2F2F2" }), createCell(siteAddress || "")] }),
+                        new TableRow({ children: [createCell("ID servizio (Codici)", { bold: true, bg: "F2F2F2" }), createCell(siteName || "", { bold: true })] }),
+                        new TableRow({ children: [createCell("Data", { bold: true, bg: "F2F2F2" }), createCell(reportDate || "")] }),
+                    ]
+                }),
+                new Paragraph({ text: "", spacing: { after: 300 } })
+            ];
+
+            // --- 4. CHECKBOX GRID ---
+            const gridRows = [];
+            const allCodes = this.report.config.ALL_CONTRACT_CODES;
+            for (let i = 0; i < allCodes.length; i += 10) {
+                const rowCells = [];
+                for (let j = 0; j < 10; j++) {
+                    const code = allCodes[i + j];
+                    if (!code) break;
+                    const isSelected = Array.from(this.report.selectedCodes).some(id => {
+                        const def = this.findReportItemDefinition(id);
+                        return def && def.alias.includes(code);
+                    });
+                    rowCells.push(new TableCell({
+                        children: [new Paragraph({
+                            children: [new TextRun({ text: `${isSelected ? "☒" : "☐"} ${code}`, size: 16, font: "Aptos" })],
+                            alignment: AlignmentType.CENTER
+                        })],
+                        width: { size: 10, type: WidthType.PERCENTAGE },
+                        borders: {
+                            top: { style: BorderStyle.SINGLE, size: 2 },
+                            bottom: { style: BorderStyle.SINGLE, size: 2 },
+                            left: { style: BorderStyle.SINGLE, size: 2 },
+                            right: { style: BorderStyle.SINGLE, size: 2 },
+                        }
+                    }));
+                }
+                gridRows.push(new TableRow({ children: rowCells }));
+            }
+            docContent.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: gridRows }));
+            docContent.push(new Paragraph({ text: "", spacing: { after: 400 } }));
+
+            // --- 5. SECTIONS LOOP ---
+            this.report.config.sectionsDefinition.forEach(section => {
+                const activeItems = section.items.filter(item => this.report.selectedCodes.has(item.id));
+                if (activeItems.length === 0) return;
+
+                activeItems.forEach(item => {
+                    const state = this.report.reportState[item.id];
+                    if (!state) return;
+
+                    docContent.push(new Table({
+                        width: { size: 100, type: WidthType.PERCENTAGE },
+                        rows: [
+                            new TableRow({ children: [createCell("Codice:", { bold: true, bg: "F2F2F2", width: 30 }), createCell(item.id, { bold: true })] }),
+                            new TableRow({ children: [createCell("Tipologia di servizio:", { bold: true, bg: "F2F2F2" }), createCell(section.category)] }),
+                            new TableRow({ children: [createCell("Servizio:", { bold: true, bg: "F2F2F2" }), createCell(item.name, { bold: true })] }),
+                        ]
+                    }));
+
+                    // Photos Grid
+                    const photosRows = [];
+                    for (let i = 0; i < state.photos.length; i += 2) {
+                        const cells = [];
+                        [i, i + 1].forEach(idx => {
+                            const photo = state.photos[idx];
+                            if (!photo) {
+                                cells.push(new TableCell({ children: [], width: { size: 50, type: WidthType.PERCENTAGE }, borders: { top: { style: BorderStyle.NONE }, bottom: { style: BorderStyle.NONE }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE } } }));
+                                return;
+                            }
+                            const cellChildren = [];
+                            if (photo.src && photo.src.includes('base64,')) {
+                                try {
+                                    // Extract pure base64 and remove any potential whitespace/newlines
+                                    const base64Data = photo.src.split(',')[1].replace(/\s/g, '');
+                                    const img = new ImageRun({ 
+                                        data: base64Data, 
+                                        transformation: { width: 300, height: 225 } 
+                                    });
+                                    cellChildren.push(new Paragraph({ children: [img], alignment: AlignmentType.CENTER }));
+                                } catch (e) { 
+                                    console.error("BM_v2: Image processing error:", e);
+                                    cellChildren.push(new Paragraph({ text: "[Errore Foto]" })); 
+                                }
+                            }
+                            cellChildren.push(new Paragraph({
+                                children: [new TextRun({ text: `Figura ${idx + 1}: ${photo.caption}`, bold: true, size: 20, font: "Aptos" })],
+                                alignment: AlignmentType.CENTER, spacing: { before: 100 }
+                            }));
+                            cells.push(new TableCell({
+                                children: cellChildren,
+                                width: { size: 50, type: WidthType.PERCENTAGE },
+                                margins: { top: 100, bottom: 100, left: 100, right: 100 },
+                                borders: {
+                                    top: { style: BorderStyle.SINGLE, size: 4 }, bottom: { style: BorderStyle.SINGLE, size: 4 },
+                                    left: { style: BorderStyle.SINGLE, size: 4 }, right: { style: BorderStyle.SINGLE, size: 4 }
+                                }
+                            }));
+                        });
+                        photosRows.push(new TableRow({ children: cells }));
+                    }
+                    if (photosRows.length > 0) {
+                        docContent.push(new Paragraph({ text: "", spacing: { after: 200 } }));
+                        docContent.push(new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: photosRows, borders: { insideHorizontal: { style: BorderStyle.NONE }, insideVertical: { style: BorderStyle.NONE } } }));
+                    }
+
+                    // Audits
+                    state.photos.forEach((photo, idx) => {
+                        if (!photo.audit) return;
+                        docContent.push(new Paragraph({
+                            children: [new TextRun({ text: `Analisi Tecnica Figura ${idx + 1}: ${photo.caption}`, bold: true, size: 21, font: "Aptos" })],
+                            spacing: { before: 400, after: 150 }
+                        }));
+                        const auditLines = photo.audit.split(/<br\s*\/?>/i);
+                        auditLines.forEach(line => {
+                            const runs = mapHtmlToTextRuns(line);
+                            if (runs.length > 0) docContent.push(new Paragraph({ children: runs, alignment: AlignmentType.JUSTIFIED, spacing: { after: 100 } }));
+                        });
+                    });
+                });
+
+                // Documentation
+                if (this.report.config.documentationMapping[section.docKey]) {
+                    docContent.push(new Paragraph({
+                        children: [new TextRun({ text: "Documentazione Tecnica e Rapporti di Controllo da richiedere:", bold: true, size: 22, underline: {}, font: "Aptos" })],
+                        spacing: { before: 600, after: 200 }
+                    }));
+                    this.report.config.documentationMapping[section.docKey].forEach(doc => {
+                        docContent.push(new Paragraph({
+                            children: [new TextRun({ text: `• ${doc}`, size: 20, font: "Aptos" })],
+                            indent: { left: 720 }, spacing: { after: 100 }
+                        }));
+                    });
+                }
+            });
+
+            // --- 6. COMPILE DOCUMENT ---
             const doc = new Document({
+                styles: {
+                    default: {
+                        document: { run: { size: 20, font: "Aptos" } }
+                    }
+                },
                 sections: [{
-                    properties: {},
-                    children: sections,
+                    properties: {
+                        page: {
+                            size: { width: 11906, height: 16838 }, // A4
+                            margin: { top: 850, bottom: 850, left: 1020, right: 1020 }
+                        }
+                    },
+                    headers: { default: runningHeader },
+                    footers: { default: runningFooter },
+                    children: docContent,
                 }],
             });
 
-            console.log("BM_v2: Packing document to blob...");
             const blob = await Packer.toBlob(doc);
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
             a.href = url;
-            const safeSiteName = siteName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-            a.download = `Relazione_${safeSiteName}_${dateVal.replace(/\//g, '-')}.docx`;
+            const fn = (siteName || "Relazione").replace(/[^a-z0-9]/gi, '_');
+            a.download = `${fn}_Sopralluogo.docx`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            console.log("BM_v2: Word Export Complete.");
+            URL.revokeObjectURL(url);
 
         } catch (err) {
             console.error("BM_v2: Word Export Error:", err);
