@@ -199,19 +199,7 @@
                         <div id="map-canvas"></div>
 
                         <!-- Floating Detail Panel for Map -->
-                        <div id="map-site-panel" class="map-overlay-panel">
-                            <div class="panel-header">
-                                <h4 id="map-panel-title">Seleziona un presidio</h4>
-                                <button><i class="fas fa-times"></i></button>
-                            </div>
-                            <div id="map-panel-body">
-                                <p class="placeholder-text">Operatività rete 33 presidi attiva. Clicca su un marker per
-                                    i dettagli.</p>
-                            </div>
-                            <div class="panel-actions" id="map-panel-actions">
-                                <!-- Dynamic actions -->
-                            </div>
-                        </div>
+                        <div id="map-site-panel" class="map-overlay-panel"></div>
                     </div>
                 </section>
 
@@ -387,26 +375,59 @@
                         <aside class="matrix-sidebar glass-panel">
                             <div class="panel-header">
                                 <h3><i class="fas fa-filter"></i> Filtri Presidio</h3>
-                                <button id="btn-matrix-all-sites" class="v2-info-btn" style="font-size: 8px;">ALL</button>
+                                <button id="btn-matrix-all-sites" class="v2-info-btn" style="display: none;">ALL</button>
                             </div>
 
-                            <div class="filter-search-container">
-                                <input type="text" id="matrix-site-search" name="matrix-site-search"
-                                    class="matrix-search-premium" placeholder="Cerca presidio..."
-                                    aria-label="Cerca presidio nel filtro">
+                            <div class="matrix-dropdown-container" id="matrix-site-dropdown-container">
+                                <div id="matrix-site-dropdown-header" class="matrix-dropdown-header" onclick="BM_v2.toggleMatrixDropdown('matrix-site-dropdown-container')">
+                                    <div class="header-info">
+                                        <i class="fas fa-building"></i>
+                                        <span id="selected-sites-label">Tutti i Presidi</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down arrow"></i>
+                                </div>
+                                <div id="matrix-site-dropdown-content" class="matrix-dropdown-content">
+                                    <div class="dropdown-search">
+                                        <input type="text" id="matrix-site-search" placeholder="Cerca presidio...">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="dropdown-actions">
+                                        <button id="btn-matrix-toggle-sites" class="dropdown-action-btn" onclick="BM_v2.toggleAllMatrixFilters('sites')">
+                                            <i class="fas fa-check-double"></i> Toggle Tutti
+                                        </button>
+                                    </div>
+                                    <div id="matrix-filter-sites" class="dropdown-list custom-scrollbar">
+                                        <!-- Populated dynamically by JS -->
+                                    </div>
+                                </div>
                             </div>
 
-                            <div id="matrix-filter-sites" class="filter-card-grid custom-scrollbar">
-                                <!-- Populated dynamically by JS -->
+                            <div class="filter-divider">Filtra Sistemi</div>
+                            
+                            <div class="matrix-dropdown-container" id="matrix-system-dropdown-container">
+                                <div id="matrix-system-dropdown-header" class="matrix-dropdown-header" onclick="BM_v2.toggleMatrixDropdown('matrix-system-dropdown-container')">
+                                    <div class="header-info">
+                                        <i class="fas fa-microchip"></i>
+                                        <span id="selected-systems-label">Tutti i Sistemi</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down arrow"></i>
+                                </div>
+                                <div id="matrix-system-dropdown-content" class="matrix-dropdown-content">
+                                    <div class="dropdown-search">
+                                        <input type="text" id="matrix-system-search" placeholder="Cerca sistema...">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="dropdown-actions">
+                                        <button id="btn-matrix-toggle-systems" class="dropdown-action-btn" onclick="BM_v2.toggleAllMatrixFilters('systems')">
+                                            <i class="fas fa-check-double"></i> Toggle Tutti
+                                        </button>
+                                    </div>
+                                    <div id="matrix-filter-systems" class="dropdown-list custom-scrollbar">
+                                        <!-- Populated dynamically by JS -->
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="filter-divider">Sistemi</div>
-                            <div class="panel-header" style="margin-top: -10px; margin-bottom: 5px;">
-                                <button id="btn-matrix-all-systems" class="v2-info-btn" style="font-size: 8px;">TOGGLE ALL</button>
-                            </div>
-                            <div id="matrix-filter-systems" class="filter-check-group custom-scrollbar">
-                                <!-- Populated dynamically by JS -->
-                            </div>
 
                             <div class="upcoming-deadlines">
                                 <h4>Scadenze Imminenti</h4>
@@ -678,7 +699,7 @@
                         style="margin: 0; color: var(--primary); display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-file-excel"></i> Visualizzatore Excel
                     </h3>
-                    <button class="close-modal"><i class="fas fa-times"></i></button>
+                    <button class="close-modal" onclick="BM_v2.closeExcelModal()"><i class="fas fa-times"></i></button>
                 </div>
                 <div id="excel-modal-body" class="custom-scrollbar"
                     style="overflow: auto; max-height: calc(90vh - 100px); background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px;">
@@ -721,7 +742,7 @@
         <div class="aria-modal-container">
             <header class="aria-modal-header">
                 <h3 id="aria-modal-title">Dettaglio</h3>
-                <button class="aria-modal-close" aria-label="Chiudi">&times;</button>
+                <button class="aria-modal-close" onclick="BM_v2.closeAriaModal()" aria-label="Chiudi">&times;</button>
             </header>
             <div id="aria-modal-body" class="aria-modal-body custom-scrollbar">
                 <!-- Dinamicamente popolato -->

@@ -23,6 +23,24 @@ Object.assign(BM_v2, {
         }
     },
 
+    toggleMatrixDropdown(containerId) {
+        const container = containerId ? document.getElementById(containerId) : document.querySelector('.matrix-dropdown-container');
+        if (container) {
+            container.classList.toggle('open');
+            
+            // Chiudi se si clicca fuori
+            if (container.classList.contains('open')) {
+                const closeHandler = (e) => {
+                    if (!container.contains(e.target)) {
+                        container.classList.remove('open');
+                        document.removeEventListener('click', closeHandler);
+                    }
+                };
+                setTimeout(() => document.addEventListener('click', closeHandler), 10);
+            }
+        }
+    },
+
     handleUpcomingClick(el) {
         const jsonStr = el.getAttribute('data-task');
         this.showTaskDetail(jsonStr);
@@ -126,43 +144,85 @@ Object.assign(BM_v2, {
 
         if (filteredSites.length === 0) {
             siteContainer.innerHTML = `<div style="padding:20px; font-size:11px; opacity:0.6; text-align:center;">
-                <i class="fas fa-exclamation-circle"></i> Nessun presidio trovato.<br>
-                <small>(Dati in memoria: ${this.state.filters.sites.length})</small>
+                <i class="fas fa-exclamation-circle"></i> Nessun presidio trovato.
             </div>`;
         } else {
-            console.log("Matrix - Rendering", filteredSites.length, "sites");
-            siteContainer.style.minHeight = "200px";
+            console.log("Matrix - Rendering", filteredSites.length, "sites in dropdown");
             siteContainer.innerHTML = filteredSites.map(s => {
                 const nameToDisplay = s.nome || `SITO ID: ${s.id}`;
                 return `
-                    <div class="filter-card ${s.enabled ? 'active' : ''}" 
+                    <div class="dropdown-item ${s.enabled ? 'active' : ''}" 
                          onclick="BM_v2.updateMatrixFilter('sites', '${s.id}', ${!s.enabled})">
-                        <div class="card-switch"></div>
-                        <div class="filter-card-info">
-                            <span class="site-name">${nameToDisplay}</span>
-                            <span class="site-id">ID: ${s.id}</span>
+                        <div class="item-checkbox">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="item-info">
+                            <span class="item-name">${nameToDisplay}</span>
+                            <span class="item-id">ID: ${s.id}</span>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
+        // Aggiorna Label Header Dropdown
+        const selectedCount = this.state.filters.sites.filter(s => s.enabled).length;
+        const totalCount = this.state.filters.sites.length;
+        const label = document.getElementById('selected-sites-label');
+        if (label) {
+            if (selectedCount === totalCount) {
+                label.textContent = "Tutti i Presidi";
+            } else if (selectedCount === 0) {
+                label.textContent = "Nessun Presidio";
+            } else if (selectedCount === 1) {
+                const first = this.state.filters.sites.find(s => s.enabled);
+                label.textContent = first.nome;
+            } else {
+                label.textContent = `${selectedCount} Presidi selezionati`;
+            }
+        }
+
         // Render HTML Sistemi
         if (this.state.filters.systems.length > 0) {
-            systemContainer.className = "filter-systems-grid";
-            systemContainer.innerHTML = this.state.filters.systems.map(sys => {
+            const systemQuery = (document.getElementById('matrix-system-search')?.value || "").toLowerCase();
+            const filteredSystems = this.state.filters.systems.filter(sys => 
+                sys.id.toLowerCase().includes(systemQuery)
+            );
+
+            systemContainer.innerHTML = filteredSystems.map(sys => {
                 let icon = 'fa-wrench';
                 if (sys.id.includes('HVAC')) icon = 'fa-fan';
                 if (sys.id.includes('ELETTR')) icon = 'fa-bolt';
                 if (sys.id.includes('IDRIC')) icon = 'fa-faucet';
                 return `
-                    <div class="filter-card ${sys.enabled ? 'active' : ''}" onclick="BM_v2.updateMatrixFilter('systems', '${sys.id}', ${!sys.enabled})">
-                        <div class="card-switch"></div>
-                        <i class="fas ${icon}" style="color: var(--primary);"></i>
-                        <span style="font-size: 11px; font-weight: 800; text-transform: uppercase;">${sys.id}</span>
+                    <div class="dropdown-item ${sys.enabled ? 'active' : ''}" onclick="BM_v2.updateMatrixFilter('systems', '${sys.id}', ${!sys.enabled})">
+                        <div class="item-checkbox">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="item-info">
+                            <span class="item-name">${sys.id}</span>
+                            <span class="item-id"><i class="fas ${icon}"></i> Sistema Tecnico</span>
+                        </div>
                     </div>
                 `;
             }).join('');
+
+            // Aggiorna Label Header Sistemi
+            const selSysCount = this.state.filters.systems.filter(s => s.enabled).length;
+            const totSysCount = this.state.filters.systems.length;
+            const sysLabel = document.getElementById('selected-systems-label');
+            if (sysLabel) {
+                if (selSysCount === totSysCount) {
+                    sysLabel.textContent = "Tutti i Sistemi";
+                } else if (selSysCount === 0) {
+                    sysLabel.textContent = "Nessun Sistema";
+                } else if (selSysCount === 1) {
+                    const first = this.state.filters.systems.find(s => s.enabled);
+                    sysLabel.textContent = first.id;
+                } else {
+                    sysLabel.textContent = `${selSysCount} Sistemi selezionati`;
+                }
+            }
         }
     },
 

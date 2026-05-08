@@ -118,69 +118,64 @@ Object.assign(BM_v2, {
     showMapSiteInfo(siteId) {
         const site = this.state.sites.find(s => s.id == siteId);
         const panel = document.getElementById('map-site-panel');
-        const title = document.getElementById('map-panel-title');
-        const body = document.getElementById('map-panel-body');
-        const actions = document.getElementById('map-panel-actions');
-
-        if (!site || !panel) return;
-
-        title.innerText = ""; 
-
         const compliance = Math.max(30, 100 - (site.urgentCount * 10));
         let statusClass = 'status-ok';
         if (compliance < 80) statusClass = 'status-warning';
         if (compliance < 60) statusClass = 'status-critical';
 
-        body.innerHTML = `
-            <div class="map-hero">
-                <i class="fas fa-hospital-alt map-hero-icon"></i>
-                <div style="font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Presidio Operativo</div>
-                <h4 style="margin: 0; font-size: 1.6rem;">${site.nome}</h4>
+        panel.innerHTML = `
+            <div id="map-panel-body" style="flex: 1; overflow-y: auto;">
+                <div class="map-hero">
+                    <button class="close-map-panel" onclick="BM_v2.closeMapPanel()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <i class="fas fa-hospital-alt map-hero-icon"></i>
+                    <div style="font-size: 11px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Presidio Operativo</div>
+                    <h4 style="margin: 0; font-size: 1.6rem; color: #fff;">${site.nome}</h4>
+                    <div style="color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> 
+                        <span>${site.indirizzo}</span>
+                    </div>
+                </div>
+
+                <div class="map-site-content">
+                    <div class="stat-grid-premium">
+                        <div class="stat-card-premium">
+                            <span class="label">Pianificate</span>
+                            <span class="value">${site.total}</span>
+                            <i class="fas fa-calendar-check" style="position: absolute; bottom: 10px; right: 10px; opacity: 0.1;"></i>
+                        </div>
+                        <div class="stat-card-premium urgent-card">
+                            <span class="label">Urgenze</span>
+                            <span class="value">${site.urgentCount}</span>
+                            <i class="fas fa-exclamation-triangle" style="position: absolute; bottom: 10px; right: 10px; opacity: 0.1;"></i>
+                        </div>
+                    </div>
+
+                    <div class="compliance-sector">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
+                            <label style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Salute Presidio</label>
+                            <span style="font-size: 18px; font-weight: 700; color: #fff;">${compliance}%</span>
+                        </div>
+                        <div class="glow-bar-container">
+                            <div class="glow-bar-fill ${statusClass}" style="width: ${compliance}%"></div>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 11px; color: var(--text-muted); font-style: italic; display: flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-info-circle" style="color: var(--primary);"></i> 
+                            Analisi telemetrica basata sulle segnalazioni 24h.
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="panel-header" style="padding-top: 20px;">
-                <div style="color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: flex-start; gap: 8px;">
-                    <i class="fas fa-map-marker-alt" style="margin-top: 3px; color: var(--primary);"></i> 
-                    <span>${site.indirizzo}</span>
-                </div>
-                <button onclick="BM_v2.closeMapPanel()"><i class="fas fa-times"></i></button>
+            <div id="map-panel-actions" class="panel-actions-premium">
+                <button class="map-action-btn primary" onclick="BM_v2.selectSite('${site.id}')">
+                    <i class="fas fa-external-link-alt"></i> Dashboard Analitica
+                </button>
+                <button class="map-action-btn" onclick="BM_v2.switchView('workspace')">
+                    <i class="fas fa-folder-open"></i> Archivio Tecnico
+                </button>
             </div>
-
-            <div class="stat-grid-premium">
-                <div class="stat-card-premium">
-                    <span class="label">Pianificate</span>
-                    <span class="value">${site.total}</span>
-                    <i class="fas fa-calendar-check" style="position: absolute; bottom: 10px; right: 10px; opacity: 0.1;"></i>
-                </div>
-                <div class="stat-card-premium urgent-card">
-                    <span class="label">Urgenze</span>
-                    <span class="value">${site.urgentCount}</span>
-                    <i class="fas fa-exclamation-triangle" style="position: absolute; bottom: 10px; right: 10px; opacity: 0.1;"></i>
-                </div>
-            </div>
-
-            <div class="compliance-sector">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                    <label style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Salute Presidio</label>
-                    <span style="font-size: 18px; font-weight: 700; color: #fff;">${compliance}%</span>
-                </div>
-                <div class="glow-bar-container">
-                    <div class="glow-bar-fill ${statusClass}" style="width: ${compliance}%"></div>
-                </div>
-                <div style="margin-top: 12px; font-size: 11px; color: var(--text-muted); font-style: italic;">
-                    <i class="fas fa-info-circle"></i> Analisi telemetrica basata sulle segnalazioni 24h.
-                </div>
-            </div>
-        `;
-
-        actions.className = "panel-actions-premium";
-        actions.innerHTML = `
-            <button class="map-action-btn primary" onclick="BM_v2.selectSite('${site.id}')">
-                <i class="fas fa-external-link-alt"></i> Dashboard Analitica
-            </button>
-            <button class="map-action-btn" onclick="BM_v2.switchView('workspace')">
-                <i class="fas fa-folder-open"></i> Archivio Tecnico
-            </button>
         `;
 
         panel.classList.add('open');
