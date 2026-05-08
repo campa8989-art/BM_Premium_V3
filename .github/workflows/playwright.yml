@@ -36,7 +36,7 @@ jobs:
         npm run dev:verbali &
         npm run dev:vite &
         # Wait for servers to be ready
-        npx wait-on http://127.0.0.1:3000 http://127.0.0.1:3001 -t 60000
+        npx wait-on http://127.0.0.1:3000 http://127.0.0.1:3005 -t 60000
         # Run tests
         npx playwright test
       env:
