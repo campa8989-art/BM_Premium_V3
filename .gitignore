@@ -37,3 +37,4 @@ tempmedia/
 *.tmp
 *.log
 tools/Template_Relazione/
+data/salvataggi/*
