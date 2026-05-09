@@ -57,12 +57,16 @@ test.describe('Pianificazione Matrix (Calendar)', () => {
     expect(realErrors).toHaveLength(0);
   });
 
-  test('site filter sidebar renders', async ({ page }) => {
-    // Matrix has site filter sidebar
+  test('site filter sidebar renders and expands', async ({ page }) => {
+    // Matrix has site filter sidebar with collapsed dropdowns
+    const dropdownHeader = page.locator('#matrix-site-dropdown-header');
+    await expect(dropdownHeader).toBeVisible();
+    
+    // Click header to reveal the site search input
+    await dropdownHeader.click();
+    
     const matrixSearch = page.locator('#matrix-site-search');
-    if (await matrixSearch.count() > 0) {
-      await expect(matrixSearch).toBeVisible();
-    }
+    await expect(matrixSearch).toBeVisible();
   });
 
 });
