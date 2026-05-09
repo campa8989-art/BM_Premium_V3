@@ -306,5 +306,38 @@ Object.assign(BM_v2, {
         const sizes = ['Bytes', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    },
+
+    populateRecentDocs(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container || !window.workspaceDataLocal) return;
+
+        // Flatten file structure to find all files
+        const allFiles = [];
+        const flatten = (items) => {
+            items.forEach(item => {
+                if (item.isDir && item.children) flatten(item.children);
+                else if (!item.isDir) allFiles.push(item);
+            });
+        };
+        flatten(window.workspaceDataLocal);
+
+        // Take first 5 files for the demo/beta
+        const recent = allFiles.slice(0, 5);
+
+        container.innerHTML = recent.map(file => {
+            const iconClass = this.getFileIconClass(file);
+            const date = new Date().toLocaleDateString();
+            return `
+                <div class="doc-item-v3" onclick="BM_v2.handleWsClick('${file.name.replace(/'/g, "\\'")}')">
+                    <div class="doc-icon-v3"><i class="${iconClass}"></i></div>
+                    <div class="doc-info-v3">
+                        <h5>${file.name}</h5>
+                        <span>Modificato ${date} · ${this.formatFileSize(file.size)}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 });
+

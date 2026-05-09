@@ -55,8 +55,8 @@ test.describe('App Initialization', () => {
     await page.waitForSelector('.nav-item[data-view="dashboard"]', { timeout: 10000 });
     await page.locator('.nav-item[data-view="dashboard"]').click();
     
-    await page.waitForSelector('#presidi-list .site-item', { timeout: 15000 });
-    const count = await page.locator('#presidi-list .site-item').count();
+    await page.waitForSelector('#presidi-list-v3 .site-item-v3', { timeout: 15000 });
+    const count = await page.locator('#presidi-list-v3 .site-item-v3').count();
     expect(count).toBeGreaterThan(0);
   });
 

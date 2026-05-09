@@ -57,8 +57,8 @@ test.describe('Smoke Tests — Zero Crash Guarantee', () => {
 
     const criticalElements = [
       '#sidebar',
-      '#presidi-list',
-      '#site-search',
+      '#presidi-list-v3',
+      '#site-search-v3',
       '#profile-drawer',
       '#drawer-backdrop',
       '#theme-btn',
@@ -88,6 +88,34 @@ test.describe('Smoke Tests — Zero Crash Guarantee', () => {
 
     console.log(`⏱ App load time: ${elapsed}ms`);
     expect(elapsed).toBeLessThan(10000);
+  });
+
+  test('telemetry chart should be operational with real data', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.nav-item[data-view="dashboard"]').click();
+    
+    // Wait for chart canvas
+    await page.waitForSelector('#v2-main-chart-v3', { timeout: 10000 });
+    
+    // Check if Chart.js has initialized and has data
+    const chartData = await page.evaluate(() => {
+      const chart = Chart.getChart('v2-main-chart-v3');
+      if (!chart) return null;
+      return {
+        labels: chart.data.labels,
+        datasets: chart.data.datasets.map(d => ({
+          label: d.label,
+          data: d.data
+        }))
+      };
+    });
+
+    expect(chartData).not.toBeNull();
+    expect(chartData.labels).toHaveLength(12); // Gen-Dic
+    
+    // Verify that it's not all zeros (operational check)
+    const hasData = chartData.datasets[0].data.some(val => val > 0);
+    expect(hasData, 'Telemetry chart should have non-zero compliance data').toBe(true);
   });
 
 });

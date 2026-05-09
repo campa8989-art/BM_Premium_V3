@@ -33,9 +33,9 @@ var BM_v2 = {
             this.charts = {};
             this.bindEvents();
             console.log("✅ Events Bound");
-            this.renderSiteList();
-            this.updateGlobalStats();
-            this.initMainChart();
+            this.renderDashboardV3();
+            this.updateDashboardV3KPIs();
+            this.initDashboardV3Chart();
             this.initTheme();
             console.log("✅ Modules Initialized. Switching to Home...");
 
@@ -265,6 +265,12 @@ var BM_v2 = {
             });
         });
 
+        // Search logic V3
+        const siteSearchV3 = document.getElementById('site-search-v3');
+        if (siteSearchV3) {
+            siteSearchV3.addEventListener('input', (e) => this.filterSitesV3(e.target.value));
+        }
+
         // Search logic
         if (this.dom.siteSearch) {
             this.dom.siteSearch.addEventListener('input', (e) => this.filterSites(e.target.value));
@@ -353,33 +359,160 @@ var BM_v2 = {
         }
 
         // Live Sync Binding
-        if (this.dom.syncBtn) {
+            if (this.dom.syncBtn) {
             this.dom.syncBtn.addEventListener('click', () => this.triggerSync());
         }
     },
 
-    renderSiteList() {
-        if (!this.dom.siteList || !this.state.sites) return;
+    // --- DASHBOARD V3 BETA LOGIC ---
+    renderDashboardV3() {
+        const list = document.getElementById('presidi-list-v3');
+        if (!list || !this.state.sites) return;
 
-        this.dom.siteList.innerHTML = this.state.sites.map(site => {
+        list.innerHTML = this.state.sites.map(site => {
             const urgencyClass = site.urgentCount > 3 ? 'urgent-critical' : (site.urgentCount > 0 ? 'urgent-warning' : '');
             return `
-                <div class="site-item ${urgencyClass}" data-id="${site.id}" onclick="BM_v2.selectSite('${site.id}')">
-                    <div class="site-id">${site.id}</div>
-                    <div class="site-details">
-                        <span class="site-name">${site.nome}</span>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span class="site-urgency">${site.total} Attività</span>
-                            <canvas id="sparkline-${site.id}" width="50" height="15" style="opacity:0.6;"></canvas>
-                        </div>
+                <div class="site-item-v3 glass-panel ${urgencyClass}" data-id="${site.id}" onclick="BM_v2.selectSite('${site.id}')" style="padding: 14px; border-radius: 12px; border: 1px solid var(--border); transition: all 0.3s ease; cursor: pointer; display: flex; flex-direction: column;">
+                    <div style="margin-bottom: 6px;">
+                        <span class="site-id-v3" style="font-size: 9px; font-weight: 800; color: var(--primary); letter-spacing: 0.1em; opacity: 0.7;">SITO ${site.id}</span>
                     </div>
-                    ${site.urgentCount > 0 ? `<div class="urgent-badge-v3">${site.urgentCount}</div>` : '<div class="pulse-badge"></div>'}
+                    <h4 class="site-name-v3" style="margin: 0 0 10px 0; font-size: 14px; color: var(--text-main); line-height: 1.3; flex-grow: 1;">${site.nome}</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">${site.total} Attività</span>
+                        ${site.urgentCount > 0 ? `
+                            <div style="display: flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.1); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                                <span style="font-size: 10px; color: #ef4444; font-weight: 800; letter-spacing: 0.05em;">ALERTS</span>
+                                <div class="urgent-badge-v3" style="position: static; transform: none; width: 18px; height: 18px; font-size: 10px; background: #ef4444; color: white;">${site.urgentCount}</div>
+                            </div>
+                        ` : '<div class="pulse-dot" style="opacity: 0.5;"></div>'}
+                    </div>
                 </div>
             `;
         }).join('');
-
-        setTimeout(() => this.drawAllSparklines(), 100);
     },
+
+    updateDashboardV3KPIs() {
+        const sitesEl = document.getElementById('kpi-sites-v3');
+        const tasksEl = document.getElementById('kpi-tasks-v3');
+        const alertsEl = document.getElementById('kpi-alerts-v3');
+        const complianceEl = document.getElementById('kpi-compliance-v3');
+
+        if (!this.state.sites) return;
+
+        const totalSites = this.state.sites.length;
+        const totalTasks = maintenanceData.length;
+        const totalAlerts = maintenanceData.filter(t => t.Urgency === 'Urgent' || t.Urgency === 'Overdue').length;
+        const compliance = Math.round(((totalTasks - totalAlerts) / totalTasks) * 100);
+
+        if (sitesEl) sitesEl.innerText = totalSites;
+        if (tasksEl) tasksEl.innerText = totalTasks;
+        if (alertsEl) alertsEl.innerText = totalAlerts;
+        if (complianceEl) complianceEl.innerText = compliance + '%';
+    },
+
+    initDashboardV3Chart() {
+        const ctx = document.getElementById('v2-main-chart-v3');
+        if (!ctx) return;
+
+        // Calcolo dati reali da maintenanceData
+        const monthlyStats = Array(12).fill(0).map(() => ({ total: 0, ok: 0 }));
+        
+        if (typeof maintenanceData !== 'undefined') {
+            maintenanceData.forEach(task => {
+                if (task.Next_Date) {
+                    const d = new Date(task.Next_Date);
+                    if (d.getFullYear() === 2026) {
+                        const m = d.getMonth();
+                        monthlyStats[m].total++;
+                        if (task.Stato_Documentale === 'OK') {
+                            monthlyStats[m].ok++;
+                        }
+                    }
+                }
+            });
+        }
+
+        const labels = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
+        const dataValues = monthlyStats.map(s => s.total > 0 ? Math.round((s.ok / s.total) * 100) : 0);
+
+        if (this.charts.dashboardV3) this.charts.dashboardV3.destroy();
+
+        this.charts.dashboardV3 = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Compliance Real-Time',
+                    data: dataValues,
+                    borderColor: '#00daf3',
+                    backgroundColor: 'rgba(0, 218, 243, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#00daf3',
+                    pointBorderColor: '#fff',
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(10, 10, 30, 0.9)',
+                        titleColor: '#00daf3',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(0, 218, 243, 0.2)',
+                        borderWidth: 1,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `Compliance: ${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { 
+                        display: true,
+                        grid: { display: false },
+                        ticks: { color: 'rgba(255,255,255,0.3)', font: { size: 9 } }
+                    },
+                    y: { 
+                        display: true,
+                        min: 0,
+                        max: 100,
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { 
+                            color: 'rgba(255,255,255,0.3)', 
+                            font: { size: 10 },
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+    },
+
+    filterSitesV3(query) {
+        const normalizedQuery = query.toLowerCase();
+        const items = document.querySelectorAll('.site-item-v3');
+
+        items.forEach(item => {
+            const nameEl = item.querySelector('.site-name-v3');
+            const name = nameEl ? nameEl.textContent.toLowerCase() : "";
+            const id = item.getAttribute('data-id').toLowerCase();
+            if (name.includes(normalizedQuery) || id.includes(normalizedQuery)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    },
+
+
 
     drawAllSparklines() {
         this.state.sites.forEach(site => {
@@ -727,6 +860,7 @@ var BM_v2 = {
             const viewNames = {
                 'home': 'Home Dashboard',
                 'dashboard': 'Mission Control',
+                'dashboard-v3': 'Osservatorio Digitale Beta',
                 'workspace': 'Archivio Documentale',
                 'map': 'Mappa Hub',
                 'charts': 'Osservatorio Cinetico',
@@ -738,8 +872,10 @@ var BM_v2 = {
 
         // Conditional view init (manteniamo i ritardi per caricamento moduli pesanti)
         if (viewId === 'dashboard') {
-            this.updateGlobalStats();
-            this.initMainChart();
+            this.renderDashboardV3();
+            this.updateDashboardV3KPIs();
+            this.initDashboardV3Chart();
+            this.populateRecentDocs('recent-docs-v3');
         } else if (viewId === 'home') {
             this.renderHome();
         } else if (viewId === 'workspace') {
@@ -809,6 +945,40 @@ var BM_v2 = {
             // Re-render markers with new theme colors
             this.renderMapMarkers();
         }
+    },
+
+    renderSiteList() {
+        if (!this.dom.siteList || !this.state.sites) return;
+
+        this.dom.siteList.innerHTML = this.state.sites.map(site => {
+            const urgencyClass = site.urgentCount > 3 ? 'urgent-critical' : (site.urgentCount > 0 ? 'urgent-warning' : '');
+            return `
+                <div class="site-item ${urgencyClass}" data-id="${site.id}" onclick="BM_v2.selectSite('${site.id}')">
+                    <div class="site-id">${site.id}</div>
+                    <div class="site-details">
+                        <span class="site-name">${site.nome}</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span class="site-urgency">${site.total} Attività</span>
+                            <canvas id="sparkline-${site.id}" width="50" height="15" style="opacity:0.6;"></canvas>
+                        </div>
+                    </div>
+                    ${site.urgentCount > 0 ? `<div class="urgent-badge-v3">${site.urgentCount}</div>` : '<div class="pulse-badge"></div>'}
+                </div>
+            `;
+        }).join('');
+
+        setTimeout(() => this.drawAllSparklines(), 100);
+    },
+
+    drawAllSparklines() {
+        this.state.sites.forEach(site => {
+            const canvas = document.getElementById(`sparkline-${site.id}`);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const base = 80 + Math.random() * 20;
+            const trend = [base, base - 5, base + 2, base - 10, 100 - (site.urgentCount * 10)];
+            this.drawMiniChart(ctx, trend, site.urgentCount > 0 ? '#ff4d4d' : '#00daf3');
+        });
     },
 
     initTheme() {

@@ -12,19 +12,19 @@ test.describe('Site List (Presidi)', () => {
     await page.waitForTimeout(500);
     // Navigate to dashboard where site list is visible
     await page.locator('.nav-item[data-view="dashboard"]').click();
-    await page.waitForSelector('#presidi-list .site-item', { timeout: 15000 });
+    await page.waitForSelector('#presidi-list-v3 .site-item-v3', { timeout: 15000 });
   });
 
   test('renders multiple site items', async ({ page }) => {
-    const items = page.locator('#presidi-list .site-item');
+    const items = page.locator('#presidi-list-v3 .site-item-v3');
     const count = await items.count();
     expect(count).toBeGreaterThan(5); // Should have meaningful number of sites
   });
 
   test('each site item shows name and ID', async ({ page }) => {
-    const firstItem = page.locator('#presidi-list .site-item').first();
-    const idEl = firstItem.locator('.site-id');
-    const nameEl = firstItem.locator('.site-name');
+    const firstItem = page.locator('#presidi-list-v3 .site-item-v3').first();
+    const idEl = firstItem.locator('.site-id-v3');
+    const nameEl = firstItem.locator('.site-name-v3');
 
     await expect(idEl).toBeVisible();
     await expect(nameEl).toBeVisible();
@@ -37,32 +37,32 @@ test.describe('Site List (Presidi)', () => {
   });
 
   test('search/filter reduces visible items', async ({ page }) => {
-    const allItems = await page.locator('#presidi-list .site-item').count();
+    const allItems = await page.locator('#presidi-list-v3 .site-item-v3').count();
 
     // Type a very specific query that should match fewer sites
-    await page.fill('#site-search', 'zxzxzxzxzx_nomatch_zxzx');
+    await page.fill('#site-search-v3', 'zxzxzxzxzx_nomatch_zxzx');
     await page.waitForTimeout(200);
 
-    const visibleItems = await page.locator('#presidi-list .site-item:visible').count();
+    const visibleItems = await page.locator('#presidi-list-v3 .site-item-v3:visible').count();
     expect(visibleItems).toBeLessThan(allItems);
   });
 
   test('clearing search restores all items', async ({ page }) => {
-    const allItems = await page.locator('#presidi-list .site-item').count();
+    const allItems = await page.locator('#presidi-list-v3 .site-item-v3').count();
 
-    await page.fill('#site-search', 'some text');
+    await page.fill('#site-search-v3', 'some text');
     await page.waitForTimeout(200);
 
-    await page.fill('#site-search', '');
+    await page.fill('#site-search-v3', '');
     await page.waitForTimeout(200);
 
-    const visibleItems = await page.locator('#presidi-list .site-item:visible').count();
+    const visibleItems = await page.locator('#presidi-list-v3 .site-item-v3:visible').count();
     expect(visibleItems).toBe(allItems);
   });
 
   test('global stats are displayed', async ({ page }) => {
-    const totalEl = page.locator('#stat-total');
-    const complianceEl = page.locator('#stat-compliance');
+    const totalEl = page.locator('#kpi-tasks-v3');
+    const complianceEl = page.locator('#kpi-compliance-v3');
 
     if (await totalEl.count() > 0) {
       const total = await totalEl.textContent();

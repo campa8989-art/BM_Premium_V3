@@ -65,7 +65,7 @@
                     <i class="fas fa-home"></i>
                     <span class="nav-label">Home</span>
                 </div>
-                <div class="nav-item" data-view="dashboard" title="Dashboard Home">
+                <div class="nav-item" data-view="dashboard" title="Command Center">
                     <i class="fas fa-th-large"></i>
                     <span class="nav-label">Command Center</span>
                 </div>
@@ -128,66 +128,81 @@
                     <!-- Populated by home_module.js -->
                 </section>
 
-                <!-- Dashboard View -->
+                <!-- VIEW: DASHBOARD (OFFICIAL V3) -->
                 <section id="view-dashboard" class="view-pane">
-                    <div class="kinetic-grid">
-                        <!-- Left: Site Directory -->
-                        <div class="glass-panel site-directory">
-                            <div class="panel-header">
-                                <h3><i class="fas fa-list-ul"></i> Presidi Gestiti <small id="site-count">(33)</small>
-                                </h3>
-                                <div class="panel-search">
-                                    <input type="text" id="site-search" name="site-search"
-                                        placeholder="Cerca presidio..." aria-label="Cerca presidio">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                            </div>
-                            <div class="site-list custom-scrollbar" id="presidi-list">
-                                <!-- Populated by JS -->
-                            </div>
-                        </div>
+                    <div class="home-layout chief-manager">
+                        <!-- Hero Section -->
+                        <header class="home-hero-v3">
+                            <div class="glass-badge mb-3">COMMAND CENTER</div>
+                            <h1>Osservatorio <small>Digitale</small></h1>
+                            <p>Panoramica premium dei presidi gestiti. Monitoraggio proattivo della compliance e della manutenzione.</p>
+                        </header>
 
-                        <!-- Right: Metrics & Charts -->
-                        <div class="metrics-stack">
-                            <div class="stats-row">
-                                <div class="stat-card-v2 glass-effect">
-                                    <span class="stat-label">Attività Pendenti</span>
-                                    <span class="stat-value" id="stat-total">--</span>
-                                    <div class="stat-trend neutral">System Online</div>
+                        <!-- KPI Ribbon -->
+                        <section class="kpi-grid-v3">
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3"><i class="fas fa-building"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Siti Monitorati</span>
+                                    <span class="value" id="kpi-sites-v3">--</span>
                                 </div>
-                                <div class="stat-card-v2 glass-effect highlight">
-                                    <span class="stat-label">Conformità Critica</span>
-                                    <span class="stat-value" id="stat-compliance">--%</span>
-                                    <div class="stat-progress-bar">
-                                        <div id="compliance-fill"></div>
+                            </div>
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3"><i class="fas fa-tasks"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Attività Totali</span>
+                                    <span class="value" id="kpi-tasks-v3">--</span>
+                                </div>
+                            </div>
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Urgenze</span>
+                                    <span class="value" id="kpi-alerts-v3" style="color: var(--urgent);">--</span>
+                                </div>
+                            </div>
+                            <div class="kpi-card-v3">
+                                <div class="kpi-icon-v3"><i class="fas fa-chart-line"></i></div>
+                                <div class="kpi-info-v3">
+                                    <span class="label">Compliance</span>
+                                    <span class="value" id="kpi-compliance-v3">--%</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="home-main-v3">
+                            <!-- Central Panel: Site Directory -->
+                            <section class="panel-v3">
+                                <div class="panel-header-v3" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                                    <h3 style="margin: 0;"><i class="fas fa-list-ul"></i> Directory Presidi Gestiti</h3>
+                                    <div class="search-v3" style="position: relative; width: 300px;">
+                                        <input type="text" id="site-search-v3" placeholder="Filtra presidi..." style="width: 100%; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-low); color: var(--text-main);">
+                                        <i class="fas fa-search" style="position: absolute; right: 15px; top: 15px; color: var(--text-muted);"></i>
                                     </div>
                                 </div>
-                                <div class="stat-card-v2 glass-effect">
-                                    <span class="stat-label">Urgenze 24h</span>
-                                    <span class="stat-value text-urgent" id="stat-urgent">--</span>
-                                    <div class="stat-trend negative"><i class="fas fa-arrow-up"></i> Attention Required
+                                <div id="presidi-list-v3" class="site-list-v3 custom-scrollbar" style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; max-height: 850px; overflow-y: auto; padding: 10px;">
+                                    <!-- Populated via JS -->
+                                    <div class="loading-placeholder">Caricamento presidi...</div>
+                                </div>
+                            </section>
+
+                            <!-- Sidebar: Telemetry & Docs -->
+                            <aside class="aside-v3">
+                                <div class="panel-v3" style="margin-bottom: 25px;">
+                                    <h3 style="margin-bottom: 25px;"><i class="fas fa-microchip"></i> Telemetria</h3>
+                                    <div style="height: 400px; width: 100%; position: relative;">
+                                        <canvas id="v2-main-chart-v3"></canvas>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="glass-panel chart-hub">
-                                <div class="panel-header">
-                                    <h3><i class="fas fa-chart-area"></i> Telemetria Operativa Mensile</h3>
+                                <div class="panel-v3">
+                                    <h3 style="margin-bottom: 20px;"><i class="fas fa-file-alt"></i> Documenti Recenti</h3>
+                                    <div id="recent-docs-v3" class="mini-docs-v3">
+                                        <!-- Populated via JS -->
+                                        <div class="empty-state">Nessun documento recente.</div>
+                                    </div>
                                 </div>
-                                <div class="chart-container">
-                                    <canvas id="v2-main-chart"></canvas>
-                                </div>
-                            </div>
-
-                            <div class="glass-panel quick-docs">
-                                <div class="panel-header">
-                                    <h3><i class="fas fa-folder-open"></i> Documenti Recenti</h3>
-                                </div>
-                                <div class="docs-feed" id="recent-docs">
-                                    <!-- Populated by JS -->
-                                    <div class="empty-state">Monitoraggio in tempo reale attivo...</div>
-                                </div>
-                            </div>
+                            </aside>
                         </div>
                     </div>
                 </section>

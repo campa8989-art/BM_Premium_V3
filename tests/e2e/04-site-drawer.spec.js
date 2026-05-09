@@ -12,11 +12,11 @@ test.describe('Site Detail Drawer', () => {
     await page.waitForTimeout(500);
     // Navigate to dashboard where site list is visible
     await page.locator('.nav-item[data-view="dashboard"]').click();
-    await page.waitForSelector('#presidi-list .site-item', { timeout: 15000 });
+    await page.waitForSelector('#presidi-list-v3 .site-item-v3', { timeout: 15000 });
   });
 
   test('clicking a site item opens the drawer', async ({ page }) => {
-    const firstSite = page.locator('#presidi-list .site-item').first();
+    const firstSite = page.locator('#presidi-list-v3 .site-item-v3').first();
     await firstSite.click();
 
     const drawer = page.locator('#profile-drawer');
@@ -24,7 +24,7 @@ test.describe('Site Detail Drawer', () => {
   });
 
   test('drawer shows site name and tasks', async ({ page }) => {
-    await page.locator('#presidi-list .site-item').first().click();
+    await page.locator('#presidi-list-v3 .site-item-v3').first().click();
 
     const drawer = page.locator('#profile-drawer');
     await expect(drawer).toHaveClass(/open/, { timeout: 5000 });
@@ -39,7 +39,7 @@ test.describe('Site Detail Drawer', () => {
   });
 
   test('drawer contains task status indicators', async ({ page }) => {
-    await page.locator('#presidi-list .site-item').first().click();
+    await page.locator('#presidi-list-v3 .site-item-v3').first().click();
 
     const drawer = page.locator('#profile-drawer');
     await expect(drawer).toHaveClass(/open/, { timeout: 5000 });
@@ -49,7 +49,7 @@ test.describe('Site Detail Drawer', () => {
   });
 
   test('clicking backdrop closes the drawer', async ({ page }) => {
-    await page.locator('#presidi-list .site-item').first().click();
+    await page.locator('#presidi-list-v3 .site-item-v3').first().click();
 
     const drawer = page.locator('#profile-drawer');
     await expect(drawer).toHaveClass(/open/, { timeout: 5000 });
@@ -62,7 +62,7 @@ test.describe('Site Detail Drawer', () => {
   });
 
   test('close button in drawer closes it', async ({ page }) => {
-    await page.locator('#presidi-list .site-item').first().click();
+    await page.locator('#presidi-list-v3 .site-item-v3').first().click();
 
     const drawer = page.locator('#profile-drawer');
     await expect(drawer).toHaveClass(/open/, { timeout: 5000 });
@@ -76,7 +76,7 @@ test.describe('Site Detail Drawer', () => {
   });
 
   test('ARIA info button is present in task rows', async ({ page }) => {
-    await page.locator('#presidi-list .site-item').first().click();
+    await page.locator('#presidi-list-v3 .site-item-v3').first().click();
 
     const drawer = page.locator('#profile-drawer');
     await expect(drawer).toHaveClass(/open/, { timeout: 5000 });
