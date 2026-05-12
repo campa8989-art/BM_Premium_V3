@@ -130,6 +130,12 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false,
+    proxy: {
+      '/api/verbali': {
+        target: 'http://localhost:3005',
+        changeOrigin: true
+      }
+    },
     fs: {
       allow: ['..', '../../data', '../../src/01-Operation']
     }

@@ -13,7 +13,7 @@ const INSIGHTS_FILE = path.join(__dirname, 'ai_insights_data.js'); // Output in 
 const LOG_FILE = path.join(__dirname, 'smart_sync_audit_v2.log');
 const DATA_FILE = path.join(PROJECT_ROOT, 'data.js'); // Output in Root for both V1 and V2
 const WORKSPACE_DATA_FILE = path.join(__dirname, 'workspace_data.js'); // Output in V2
-const AI_CONFIG_FILE = path.join(__dirname, 'ai_config.js'); // Output in V2
+const AI_CONFIG_FILE = path.join(SRC_DIR, 'frontend', 'modules', 'ai_config.js');
 const OPERATION_DIR = path.join(SRC_DIR, '01-Operation');
 const ARIA_XLSX = path.join(OPERATION_DIR, '01_Operations_Standard', 'aria_sacco_final.xlsx');
 const ARIA_DATA_FILE = path.join(__dirname, 'aria_full_data.js'); // Output in V2
@@ -178,7 +178,7 @@ async function analyzeWithGemini(base64Data, apiKey, siteNames, systemTypes, ide
     }
     RISPONDI SOLO JSON. Se è un registro antincendio, tipologia è "Antincendio".`;
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
 
     try {
         const response = await fetch(endpoint, {

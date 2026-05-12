@@ -197,7 +197,7 @@
 
                                 <div class="panel-v3">
                                     <h3 style="margin-bottom: 20px;"><i class="fas fa-file-alt"></i> Documenti Recenti</h3>
-                                    <div id="recent-docs-v3" class="mini-docs-v3">
+                                    <div id="recent-docs-v3" class="docs-list-v3 custom-scrollbar">
                                         <!-- Populated via JS -->
                                         <div class="empty-state">Nessun documento recente.</div>
                                     </div>
@@ -224,18 +224,14 @@
                         <div class="workspace-header-actions">
                             <div class="ws-navigation-controls">
                                 <div class="ws-toolbar">
-                                    <button id="ws-btn-back" class="ws-nav-btn" title="Indietro">
+                                    <button id="ws-btn-back" class="ws-nav-btn-v3" title="Indietro">
                                         <i class="fas fa-arrow-left"></i>
                                     </button>
-                                    <button id="ws-btn-home" class="ws-nav-btn" title="Home">
+                                    <button id="ws-btn-home" class="ws-nav-btn-v3" title="Home">
                                         <i class="fas fa-home"></i>
                                     </button>
                                 </div>
                                 <div class="ws-title-group">
-                                    <div class="vault-status" style="margin-bottom: 8px;">
-                                        <span class="pulse-dot"></span>
-                                        DATABASE_VAULT: DECRYPTED
-                                    </div>
                                     <div class="workspace-breadcrumbs" id="ws-breadcrumbs">
                                         <span class="crumb active">Home</span>
                                     </div>
@@ -576,14 +572,20 @@
                                 </label>
                                 <button id="btn-ai-import" class="v2-info-btn"
                                     style="width: 100%; background: #ae3ec9; font-size: 11px; margin-bottom: 5px;">
-                                    <i class="fas fa-file-import"></i> Importa da PDF/Foto
+                                    <i class="fas fa-robot"></i> Importa con AI (PDF/Foto/Word)
+                                </button>
+                                <button id="btn-direct-import" class="v2-info-btn"
+                                    style="width: 100%; background: #2b8a3e; font-size: 11px; margin-bottom: 5px;">
+                                    <i class="fas fa-file-import"></i> Importazione Diretta (No AI)
                                 </button>
                                 <button id="btn-ai-autofill" class="v2-info-btn"
                                     style="width: 100%; background: #6741d9; font-size: 11px;">
                                     <i class="fas fa-magic"></i> AI Auto-Fill
                                 </button>
                                 <input type="file" id="ai-import-input" name="ai-import-input" style="display: none;"
-                                    accept="application/pdf,image/*">
+                                    accept="application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.macroEnabled.12,image/*">
+                                <input type="file" id="direct-import-input" style="display: none;"
+                                    accept=".docx,.docm">
                             </div>
 
                             <div class="control-group-v2">
@@ -600,9 +602,18 @@
                                         style="background: var(--text-main); color: var(--surface);">
                                         <i class="fas fa-print"></i> PDF
                                     </button>
-                                    <button id="btn-report-word" class="v2-info-btn" style="background: #2b5797;">
+                                    <button id="btn-report-word" class="v2-info-btn"
+                                        style="background: #2b5797; color: white;">
                                         <i class="fas fa-file-word"></i> Word
                                     </button>
+                                    <button class="btn-premium btn-action-v2" onclick="document.getElementById('style-migration-input').click()">
+                    <i class="fas fa-magic"></i> Converti in Stile V3
+                </button>
+                <input type="file" id="style-migration-input" hidden accept=".docx,.docm" onchange="BM_v2.handleStyleMigration(event)">
+                
+                <button class="btn-premium btn-action-v2" onclick="document.getElementById('direct-import-input').click()" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);">
+                    <i class="fas fa-file-import"></i> Importazione Diretta
+                </button>
                                 </div>
 
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
@@ -728,9 +739,12 @@
 
     <!-- Core Logic v2 -->
     <!-- Core Logic v2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
     <script src="lib/docx.js?v=1"></script>
     <script src="/data/aria_full_data.js"></script>
     <script src="/data/data.js"></script>
@@ -745,8 +759,9 @@
     <script src="modules/workspace_module.js?v=13"></script>
     <script src="modules/matrix_module.js?v=13"></script>
     <script src="modules/report_config.js?v=15"></script>
-    <script src="modules/reports_module.js?v=15"></script>
-    <script src="modules/ai_module.js?v=15"></script>
+    <script src="modules/reports_module.js?v=18"></script>
+    <script src="modules/ai_config.js"></script>
+    <script src="modules/ai_module.js?v=16"></script>
     <script src="modules/verbali_sync_module.js?v=15"></script>
 
 

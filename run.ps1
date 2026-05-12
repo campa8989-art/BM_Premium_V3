@@ -39,7 +39,11 @@ try {
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     # --- 3. Pulizia Chirugica Porte ---
-    Write-Host "[2/5] Reset canali di comunicazione (3000, 3001)..." -ForegroundColor Yellow
+    Write-Host "[2/5] Reset canali di comunicazione (3000, 3001, 3005)..." -ForegroundColor Yellow
+    # Pulizia drastica di eventuali residui Node
+    Write-Host "      - Pulizia processi Node orfani..." -ForegroundColor Gray
+    Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+    
     $ports = @(3000, 3001, 3005)
     foreach ($port in $ports) {
         $conns = Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue
@@ -48,8 +52,15 @@ try {
                 Write-Host "      - Liberando porta $port (Processo: $($conn.OwningProcess))..." -ForegroundColor Gray
                 Stop-Process -Id $conn.OwningProcess -Force -ErrorAction SilentlyContinue
             }
-            Start-Sleep -Seconds 1
+            Start-Sleep -Milliseconds 500
         }
+    }
+    
+    # Pulizia orfani (Node.exe che potrebbero non essere associati a porte visibili ma bloccare file)
+    $orphanNodes = Get-Process node -ErrorAction SilentlyContinue | Where-Object { $_.Id -ne $PID -and $_.StartTime -lt (Get-Date).AddMinutes(-1) }
+    if ($orphanNodes) {
+        Write-Host "      - Pulizia processi Node.exe orfani..." -ForegroundColor Gray
+        $orphanNodes | Stop-Process -Force -ErrorAction SilentlyContinue
     }
 
     # --- 4. Sincronizzazione AI Brain ---
@@ -68,16 +79,24 @@ try {
     # Percorso Vite (usando separatori Windows per sicurezza)
     $ViteJs = Join-Path $ProjectRoot "node_modules\vite\bin\vite.js"
     
-    # Avvio Backend (Server Verbali) in background (finestra nascosta)
-    # Racchiudiamo il percorso tra virgolette per gestire gli spazi
+    # Avvio Backend (Server Verbali) in background
+    # Reindirizziamo output per diagnostica
     $BackendPath = Join-Path $ProjectRoot "src/backend/server_verbali.js"
-    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "`"$BackendPath`"" -WorkingDirectory $ProjectRoot -PassThru
-    Write-Host "      - Backend API pronto su http://localhost:3005" -ForegroundColor Green
+    $backendProc = Start-Process -FilePath $NodeExe -ArgumentList "`"$BackendPath`"" -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden -RedirectStandardOutput "backend_output.log" -RedirectStandardError "backend_error.log"
+    
+    # Attesa che il Backend sia pronto (porta 3005)
+    $backAttempts = 0
+    while ($backAttempts -lt 15) {
+        if (Get-NetTCPConnection -LocalPort 3005 -ErrorAction SilentlyContinue) {
+            Write-Host "      - Backend API pronto su http://localhost:3005" -ForegroundColor Green
+            break
+        }
+        $backAttempts++
+        Start-Sleep -Seconds 1
+    }
 
     # Avvio Frontend (Vite)
     Write-Host "      - Avvio Vite Dashboard (In background)..." -ForegroundColor Gray
-    # Usiamo virgolette doppie per proteggere i percorsi con spazi
-    # WindowStyle Hidden per mantenere pulito il desktop
     $ViteArgsString = "`"$ViteJs`" dev --port 3000 --host 0.0.0.0 --force"
     $frontendProc = Start-Process -FilePath $NodeExe -ArgumentList $ViteArgsString -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden -RedirectStandardOutput "vite_output.log" -RedirectStandardError "vite_error.log"
 
@@ -106,10 +125,18 @@ try {
     # Mantieni il processo attivo per monitorare i server
     while ($true) {
         if ($backendProc -and $backendProc.HasExited) {
-            Write-Host "[AVVISO] Il processo Backend non e' piu' attivo." -ForegroundColor Yellow
+            Write-Host "[AVVISO] Il processo Backend e' terminato inaspettatamente!" -ForegroundColor Red
+            if (Test-Path "backend_error.log") {
+                Write-Host "Ultimi errori rilevati:" -ForegroundColor Yellow
+                Get-Content "backend_error.log" -Tail 5
+            }
         }
-        if ($frontendProc.HasExited) {
-            Write-Host "[AVVISO] Il processo Frontend non e' piu' attivo. Controlla la finestra di Vite." -ForegroundColor Yellow
+        if ($frontendProc -and $frontendProc.HasExited) {
+            Write-Host "[AVVISO] Il processo Frontend e' terminato!" -ForegroundColor Red
+            if (Test-Path "vite_error.log") {
+                Write-Host "Ultimi errori rilevati:" -ForegroundColor Yellow
+                Get-Content "vite_error.log" -Tail 5
+            }
             Start-Sleep -Seconds 10
         }
         Start-Sleep -Seconds 5
@@ -119,6 +146,17 @@ catch {
     Write-Host ""
     Write-Host "ERRORE CRITICO:" -ForegroundColor Red
     Write-Host $_.Exception.Message -ForegroundColor Red
+    
+    # Diagnostica log
+    if (Test-Path "backend_error.log") {
+        Write-Host "`n--- Dettagli Errore Backend ---" -ForegroundColor Yellow
+        Get-Content "backend_error.log" -Tail 10
+    }
+    if (Test-Path "vite_error.log") {
+        Write-Host "`n--- Dettagli Errore Frontend ---" -ForegroundColor Yellow
+        Get-Content "vite_error.log" -Tail 10
+    }
+
     Write-Host ""
     Write-Host "Premi un tasto per uscire..." -ForegroundColor Yellow
     $null = [Console]::ReadKey()

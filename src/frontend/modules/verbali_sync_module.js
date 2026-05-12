@@ -55,7 +55,7 @@ Object.assign(BM_v2, {
         if (btn) btn.classList.add('processing');
 
         try {
-            const response = await fetch('http://127.0.0.1:3001/api/verbali');
+            const response = await fetch('http://localhost:3005/api/verbali');
             const { files } = await response.json();
 
             const newFiles = files.filter(f => 
@@ -93,7 +93,7 @@ Object.assign(BM_v2, {
 
             try {
                 // Read file
-                const readRes = await fetch(`http://127.0.0.1:3001/api/verbali/read/${file.relativePath}`);
+                const readRes = await fetch(`http://localhost:3005/api/verbali/read/${file.relativePath}`);
                 const { data: base64, name } = await readRes.json();
 
                 // Analyze with AI
@@ -150,7 +150,7 @@ Object.assign(BM_v2, {
         3. Rispondi SOLO JSON`;
 
         try {
-            const response = await fetch(`http://127.0.0.1:3001/api/proxy-ai`, {
+            const response = await fetch(`http://localhost:3005/api/proxy-ai`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

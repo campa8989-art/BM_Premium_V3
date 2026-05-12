@@ -182,7 +182,7 @@ Object.assign(BM_v2, {
 
                         <div class="panel-v3">
                             <h3>Documenti Recenti</h3>
-                            <div id="recent-docs-home" class="mini-docs-list custom-scrollbar" style="max-height: 180px; overflow-y: auto;">
+                            <div id="recent-docs-home" class="docs-list-v3 custom-scrollbar" style="max-height: 250px;">
                                 <div class="empty-state" style="padding:10px; font-size:11px; opacity:0.5;">Ricerca asset...</div>
                             </div>
                         </div>

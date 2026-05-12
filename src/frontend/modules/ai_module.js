@@ -21,6 +21,8 @@ Object.assign(BM_v2, {
 
         this.aiState.isOpen = !this.aiState.isOpen;
         modal.classList.toggle('active', this.aiState.isOpen);
+        const trigger = document.getElementById('ai-trigger');
+        if (trigger) trigger.classList.toggle('active', this.aiState.isOpen);
         if (backdrop) backdrop.classList.toggle('active', this.aiState.isOpen);
 
         if (this.aiState.isOpen && this.aiState.history.length === 0) {
@@ -47,8 +49,11 @@ Object.assign(BM_v2, {
 
         try {
             const systemPrompt = this.prepareAiContext();
-            // Chiamata sicura tramite il Proxy locale (porta 3001)
-            const response = await fetch(`http://127.0.0.1:3001/api/proxy-ai`, {
+            const proxyUrl = window.AI_PROXY_URL || "http://localhost:3005/api/proxy-ai";
+            
+            console.log(`[AI] Sending query to proxy: ${proxyUrl}`);
+            
+            const response = await fetch(proxyUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -56,31 +61,42 @@ Object.assign(BM_v2, {
                         parts: [{ text: systemPrompt }]
                     },
                     contents: [
-                        ...this.aiState.history.slice(-6).filter(m => m.text).map(m => ({
+                        ...this.aiState.history.slice(-10).filter(m => m.text).map(m => ({
                             role: m.role === 'ai' ? 'model' : 'user',
                             parts: [{ text: m.text }]
                         })),
                         { role: "user", parts: [{ text: query }] }
                     ],
                     generationConfig: {
-                        temperature: 0.5,
-                        maxOutputTokens: 4096,
+                        temperature: 0.7,
+                        maxOutputTokens: 2048,
                     }
                 })
             });
 
             if (!response.ok) {
                 const errData = await response.json();
-                throw new Error(errData.error?.message || `Errore HTTP ${response.status}`);
+                throw new Error(errData.error || `Errore HTTP ${response.status}`);
             }
 
             const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
             const aiResponse = data.candidates[0].content.parts[0].text;
             this.addAiMessage("ai", aiResponse);
 
         } catch (error) {
             console.error("AI Error:", error);
-            this.addAiMessage("ai", `⚠️ **ERRORE DI SISTEMA**\n${error.message}\n\nVerifica che la chiave in 'ai_config.js' sia corretta.`);
+            let userMsg = `⚠️ **ERRORE DI CONNESSIONE**\nNon riesco a contattare il server AI sulla porta 3005.\n\nAssicurati che il backend sia attivo (esegui \`run.ps1\`).`;
+            if (error.message.includes('503')) {
+                userMsg = `⚠️ **SERVIZIO SOVRACCARICO**\nIl sistema Gemini è momentaneamente congestionato. Riprova tra qualche istante.`;
+            } else if (error.message.includes('quota')) {
+                userMsg = `⚠️ **LIMITE RAGGIUNTO**\nQuota API Gemini esaurita per oggi.`;
+            }
+            this.addAiMessage("ai", userMsg);
         } finally {
             this.aiState.isProcessing = false;
             this.updateAiStatus(false);
@@ -88,37 +104,42 @@ Object.assign(BM_v2, {
     },
 
     prepareAiContext() {
-        // Riassunto dei dati per non saturare i token, ma includendo i dettagli critici
-        const sitesSummary = this.state.sites.map(s => ({
-            id: s.id,
+        // Estrazione dati reali per il contesto
+        const sites = this.state.sites || [];
+        const urgentSites = sites.filter(s => s.urgentCount > 0).map(s => ({
             nome: s.nome,
-            totale_attivita: s.tasks.length,
-            urgenze: s.urgentCount
+            urgenze: s.urgentCount,
+            id: s.id
         }));
 
-        const systemIntegrity = document.getElementById('global-perc')?.textContent || "94.2%";
+        const globalStats = {
+            totalSites: sites.length,
+            urgentSitesCount: urgentSites.length,
+            systemIntegrity: document.getElementById('global-perc')?.textContent || "94.2%"
+        };
 
-        return `Sei l'Assistente Tecnico Avanzato del Building Manager V2 (Sacco Group). 
-        Il sistema monitora 33 siti (presidi). 
-        Integrità Globale Attuale: ${systemIntegrity}.
-        Dati Sintetici: ${JSON.stringify(sitesSummary)}.
+        return `Sei l'Assistente Tecnico "Gemini Command" del Building Manager V3 (Sacco Group).
+        Il sistema monitora ${globalStats.totalSites} siti tecnici.
+        Integrità Globale Attuale: ${globalStats.systemIntegrity}.
         
-        AUTOPILOT CAPABILITIES:
-        Se l'utente chiede di compilare un report, una relazione o preparare un sopralluogo, DEVI generare un blocco speciale alla fine del tuo messaggio:
-        [AUTOPILOT]
-        {
-          "siteId": "10", 
-          "date": "2026-05-01",
-          "systems": ["1.1", "45.1"] 
-        }
-        [/AUTOPILOT]
-        I "systems" devono essere codici validi tratti dalla lista dei servizi.
+        SITI CON URGENZE ATTUALI (${globalStats.urgentSitesCount}):
+        ${JSON.stringify(urgentSites)}
 
-        Regole:
-        1. Sii professionale, tecnico e conciso.
-        2. Usa un tono da "Mission Control".
-        3. Se chiedono analisi su urgenze, evidenzia i siti con più problemi.
-        4. Parla in italiano.`;
+        ISTRUZIONI OPERATIVE:
+        1. Sii estremamente professionale, tecnico e conciso.
+        2. Usa un tono da "Centro di Controllo NASA".
+        3. Se l'utente chiede un'analisi, focalizzati sui siti con urgenze > 0.
+        4. Identifica i siti citandoli come "Sito [Nome]" o "ID [Numero]".
+        5. Se l'utente chiede di compilare un report, attiva l'Auto-Pilot:
+           [AUTOPILOT]
+           {
+             "siteId": "ID_DEL_SITO", 
+             "date": "Data_Oggi (YYYY-MM-DD)",
+             "systems": ["CODICE_SISTEMA"] 
+           }
+           [/AUTOPILOT]
+        
+        Parla esclusivamente in ITALIANO.`;
     },
 
     addAiMessage(role, text) {

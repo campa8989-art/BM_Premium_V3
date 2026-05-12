@@ -29,7 +29,7 @@ var BM_v2 = {
             console.log("✅ DOM Cached");
             this.prepareData();
             console.log("✅ Data Prepared");
-            this.populateRecentDocs();
+            this.populateRecentDocs('recent-docs-v3');
             this.charts = {};
             this.bindEvents();
             console.log("✅ Events Bound");
@@ -76,6 +76,7 @@ var BM_v2 = {
         top.forEach(file => {
             const dateObj = new Date(file.mtime);
             const dateStr = dateObj.toLocaleDateString('it-IT') + ' ' + dateObj.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+            
             let icon = 'fa-file';
             let color = '#8b90a0';
             if (file.ext === '.pdf') { icon = 'fa-file-pdf'; color = '#ef4444'; }
@@ -85,18 +86,15 @@ var BM_v2 = {
             let safePath = file.path.startsWith('../') ? file.path.substring(2) : file.path;
             if (!safePath.startsWith('/')) safePath = '/' + safePath;
 
-            const isHome = targetId === 'recent-docs-home';
-
             html += `
-            <div class="doc-item" style="display: flex; justify-content: space-between; align-items: center; padding: ${isHome ? '6px 8px' : '10px'}; border-bottom: 1px solid rgba(255,255,255,0.05); cursor:pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 218, 243, 0.05)'" onmouseout="this.style.background='transparent'" onclick="BM_v2.openFile('${safePath}', '${file.ext}', '${file.name}')">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas ${icon}" style="color: ${color}; font-size: ${isHome ? '13px' : '16px'};"></i>
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="font-size: ${isHome ? '11px' : '13px'}; color: var(--text-main); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: ${isHome ? '120px' : '150px'};">${file.name}</span>
-                        <span style="font-size: 9px; color: var(--text-muted);">${dateStr}</span>
-                    </div>
+            <div class="doc-item-v3" onclick="BM_v2.openFile('${safePath}', '${file.ext}', '${file.name}')">
+                <div class="doc-icon-v3">
+                    <i class="fas ${icon}" style="color: ${color};"></i>
                 </div>
-                <i class="fas fa-external-link-alt" style="font-size: 9px; color: #00daf3; opacity: 0.5;"></i>
+                <div class="doc-info-v3">
+                    <h5 title="${file.name}">${file.name}</h5>
+                    <span>${dateStr}</span>
+                </div>
             </div>`;
         });
 
@@ -106,17 +104,80 @@ var BM_v2 = {
         if (!this.openFile) {
             this.openFile = function (path, ext, name) {
                 console.log('[OpenFile] path:', path, 'ext:', ext);
-                if (ext && ext.toLowerCase() === '.xlsx') {
-                    this.openExcel(path, name);
-                } else if (ext && ext.toLowerCase() === '.pdf') {
-                    // Per PDF, usa l'URL assoluta con encoding
-                    const encodedPath = encodeURI(path);
-                    window.open(encodedPath, '_blank');
+                
+                const extension = (ext || '').toLowerCase();
+                
+                // Pulizia percorso per l'API (gestione robusta dei percorsi relativi)
+                let apiPath = path || '';
+                
+                // Rimuoviamo prefissi comuni se presenti
+                const prefixes = ['/01-Operation/', '01-Operation/', '../01-Operation/', './01-Operation/'];
+                for (const p of prefixes) {
+                    if (apiPath.startsWith(p)) {
+                        apiPath = apiPath.substring(p.length);
+                        break;
+                    }
+                }
+                
+                console.log('[OpenFile] Resolved API Path:', apiPath, 'Extension:', extension);
+
+                if (extension === '.xlsx' || extension === '.xls') {
+                    // Gestione Excel in-app via modal
+                    this.openExcel(apiPath, name);
                 } else {
-                    window.open(path, '_blank');
+                    // Per tutti gli altri file (PDF, immagini, etc), usiamo la rotta API diretta
+                    window.open(`/api/verbali/read/${encodeURIComponent(apiPath)}`, '_blank');
                 }
             }.bind(this);
         }
+    },
+
+    async openExcel(apiPath, name) {
+        const modal = document.getElementById('excel-modal');
+        const body = document.getElementById('excel-modal-body');
+        const title = document.getElementById('excel-modal-title');
+        
+        if (!modal || !body) return;
+
+        title.innerHTML = `<i class="fas fa-file-excel"></i> ${name || 'Visualizzatore Excel'}`;
+        body.innerHTML = '<div class="loading-v3"><i class="fas fa-spinner fa-spin"></i> Decriptazione dati in corso...</div>';
+        modal.classList.add('active');
+
+        try {
+            const response = await fetch(`/api/verbali/read/${encodeURIComponent(apiPath)}`);
+            if (!response.ok) throw new Error("Errore nel caricamento del file");
+            
+            const arrayBuffer = await response.arrayBuffer();
+            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+            
+            // Prendiamo il primo foglio
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            
+            // Convertiamo in HTML
+            const htmlTable = XLSX.utils.sheet_to_html(worksheet, { 
+                id: 'excel-table', 
+                editable: false,
+                tableClass: 'excel-viewer-table' // Usiamo la classe CSS esistente
+            });
+            
+            body.innerHTML = `
+                <div class="excel-info-bar" style="margin-bottom: 10px; font-size: 12px; color: var(--text-muted);">
+                    Foglio: <strong>${firstSheetName}</strong> | Sola Lettura
+                </div>
+                <div class="excel-table-container">
+                    ${htmlTable}
+                </div>
+            `;
+        } catch (err) {
+            console.error("Errore Excel Viewer:", err);
+            body.innerHTML = `<div class="error-v3"><i class="fas fa-exclamation-triangle"></i> Impossibile visualizzare il file: ${err.message}</div>`;
+        }
+    },
+
+    closeExcelModal() {
+        const modal = document.getElementById('excel-modal');
+        if (modal) modal.classList.remove('active');
     },
 
     populateRecentDocsHome() {
@@ -880,7 +941,7 @@ var BM_v2 = {
             this.renderHome();
         } else if (viewId === 'workspace') {
             this.state.currentWsPath = [];
-            this.renderWorkspace(this.state.currentWsPath);
+            this.renderWorkspace([]);
         } else if (viewId === 'map') {
             setTimeout(() => {
                 this.initMap();
@@ -1222,6 +1283,52 @@ window.showAriaDetails = function (rawCodes) {
 
 window.closeAriaModal = function () {
     BM_v2.closeAriaModal();
+};
+
+/**
+ * Sistema di Notifiche Premium (Toast)
+ */
+window.showToast = function(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = 'save-toast visible';
+    
+    // Icone in base al tipo
+    let icon = 'fa-info-circle';
+    let bgColor = 'var(--surface-glass)';
+    let border = '1px solid var(--primary)';
+    
+    if (type === 'success') {
+        icon = 'fa-check-circle';
+        bgColor = 'rgba(16, 185, 129, 0.2)';
+        border = '1px solid #10b981';
+    } else if (type === 'error') {
+        icon = 'fa-exclamation-triangle';
+        bgColor = 'rgba(239, 68, 68, 0.2)';
+        border = '1px solid #ef4444';
+    } else if (type === 'warning') {
+        icon = 'fa-exclamation-circle';
+        bgColor = 'rgba(245, 158, 11, 0.2)';
+        border = '1px solid #f59e0b';
+    }
+    
+    toast.style.background = bgColor;
+    toast.style.backdropFilter = 'blur(10px)';
+    toast.style.border = border;
+    toast.style.color = '#fff';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '12px';
+    toast.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+    toast.style.zIndex = '9999';
+    
+    toast.innerHTML = `<i class="fas ${icon}" style="margin-right: 10px;"></i> ${message}`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+        toast.style.transition = 'all 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+    }, 4000);
 };
 
 document.addEventListener('DOMContentLoaded', () => BM_v2.init());

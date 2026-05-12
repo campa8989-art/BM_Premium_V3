@@ -391,6 +391,7 @@ Object.assign(BM_v2, {
         // Click Listeners for Sidebar Buttons
         const bindings = {
             'btn-ai-import': () => this.triggerAIImport(),
+            'btn-direct-import': () => this.triggerDirectImport(),
             'btn-ai-autofill': () => this.handleAIAutoFill(),
             'btn-report-pdf': () => this.printReport(),
             'btn-report-word': () => {
@@ -412,12 +413,23 @@ Object.assign(BM_v2, {
         const aiInput = document.getElementById('ai-import-input');
         if (aiInput) aiInput.addEventListener('change', (e) => this.handleAIReportImport(e));
 
+        const directInput = document.getElementById('direct-import-input');
+        if (directInput) directInput.addEventListener('change', (e) => this.handleDirectImport(e));
+
         const loadInput = document.getElementById('load-project-input');
         if (loadInput) loadInput.addEventListener('change', (e) => this.loadReportProject(e));
+
+        const styleInput = document.getElementById('style-migration-input');
+        if (styleInput) styleInput.addEventListener('change', (e) => this.handleStyleMigration(e));
     },
 
     triggerAIImport() {
         const input = document.getElementById('ai-import-input');
+        if (input) input.click();
+    },
+
+    triggerDirectImport() {
+        const input = document.getElementById('direct-import-input');
         if (input) input.click();
     },
 
@@ -522,13 +534,35 @@ Object.assign(BM_v2, {
         btn.disabled = true;
 
         try {
-            const base64Data = await this.fileToReportBase64(file);
+            let aiResult;
+            let extractedImages = [];
             const mimeType = file.type;
+            const isWord = mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+                           mimeType === 'application/vnd.ms-word.document.macroEnabled.12' ||
+                           file.name.endsWith('.docx') || 
+                           file.name.endsWith('.docm');
 
-            const aiResult = await this.analyzeOldReport(base64Data, mimeType);
+            if (isWord) {
+                // 1. Gestione Word via Mammoth (HTML per preservare la struttura)
+                const arrayBuffer = await file.arrayBuffer();
+                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+                const htmlContent = result.value;
+                console.log("[AI Import] Struttura HTML estratta da Word.");
+                
+                // 2. Estrazione Immagini via JSZip
+                extractedImages = await this.extractImagesFromWord(arrayBuffer);
+                console.log(`[AI Import] Estratte ${extractedImages.length} immagini dal documento.`);
+
+                aiResult = await this.analyzeOldReport(htmlContent, 'text/html');
+            } else {
+                // Gestione PDF/Foto
+                const base64Data = await this.fileToReportBase64(file);
+                aiResult = await this.analyzeOldReport(base64Data, mimeType);
+            }
+
             if (aiResult) {
-                this.applyAIReportResult(aiResult);
-                // Success feedback is handled by applyAIReportResult
+                // Passiamo anche le immagini estratte alla funzione di applicazione
+                this.applyAIReportResult(aiResult, extractedImages);
             } else {
                 alert("❌ Non è stato possibile estrarre dati validi dal documento.");
             }
@@ -542,6 +576,97 @@ Object.assign(BM_v2, {
         }
     },
 
+    async handleStyleMigration(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        showToast("🪄 Migrazione Stile Premium in corso...", "info");
+        const btn = event.target.previousElementSibling;
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Conversione...';
+        btn.disabled = true;
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            
+            // 1. Estrazione Integrale (Disabilitiamo immagini inline per risparmiare token)
+            const resultHtml = await mammoth.convertToHtml({ 
+                arrayBuffer,
+                convertImage: mammoth.images.inline(() => ({})) 
+            });
+            const photos = await this.extractImagesFromWord(arrayBuffer);
+
+            // 2. Chiediamo all'AI di mappare i testi (Zero-Loss)
+            const availableActivities = this.report.config.sectionsDefinition.flatMap(s => 
+                s.items.map(i => `ID: "${i.id}" - Nome: "${i.name}"`)
+            ).join('\n');
+
+            const prompt = `
+                MIGRAZIONE INTEGRALE - STILE PREMIUM V3
+                Hai il compito di trasformare una vecchia relazione nel formato V3 "High-Fidelity".
+                
+                OBIETTIVO: 
+                Estrarre SOLAMENTE i testi inerenti all'analisi tecnica degli impianti e delle foto. 
+                Escludi dati anagrafici, indirizzi, numeri di telefono e intestazioni generali.
+
+                REGOLE DI FERRO:
+                1. FEDELTÀ ASSOLUTA: Copia LETTERALMENTE ogni singola parola dell'analisi tecnica originale. NON riassumere.
+                2. FOCUS FOTO: Il testo deve essere associato alle attività tecniche che verranno visualizzate sotto le foto.
+                3. MAPPATURA: Distribuisci i testi negli ID attività forniti sotto. Se un testo riguarda più impianti, dividilo o associalo all'attività più pertinente.
+                
+                ATTIVITÀ DISPONIBILI (ID):
+                ${availableActivities}
+                
+                FORMATO OUTPUT (JSON PURO):
+                {
+                   "site_name": "...",
+                   "date": "...",
+                   "found_activities": [
+                      { 
+                        "activity_id": "ID_SCELTO", 
+                        "technical_summary": "TESTO ORIGINALE INTEGRALE E DETTAGLIATO", 
+                        "is_conforming": true 
+                      }
+                   ]
+                }
+
+                TESTO ORIGINALE DA ANALIZZARE (HTML):
+                ${resultHtml.value.replace(/`/g, "'")}
+            `;
+
+            const body = {
+                contents: [{
+                    parts: [
+                        { text: prompt }
+                    ]
+                }]
+            };
+
+            const response = await fetch('http://localhost:3005/api/proxy-ai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            if (!response.ok) throw new Error("Errore AI Proxy");
+            const aiData = await response.json();
+            
+            // 3. Applichiamo tutto al template V3
+            if (aiData && aiData.found_activities) {
+                this.applyAIReportResult(aiData, photos, true); // true = append/fidelity
+                showToast("✨ Relazione convertita nello stile V3!", "success");
+            }
+
+        } catch (error) {
+            console.error("Errore migrazione stile:", error);
+            showToast("❌ Impossibile completare la conversione", "error");
+        } finally {
+            btn.innerHTML = originalHtml;
+            btn.disabled = false;
+            event.target.value = "";
+        }
+    },
+
     fileToReportBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -551,7 +676,108 @@ Object.assign(BM_v2, {
         });
     },
 
-    async analyzeOldReport(base64Data, mimeType) {
+    async handleDirectImport(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const btn = document.getElementById('btn-direct-import');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Importazione...";
+        btn.disabled = true;
+
+        try {
+            const arrayBuffer = await file.arrayBuffer();
+            
+            // 1. Estrazione HTML (per preservare la struttura)
+            const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+            let content = result.value;
+            
+            // 2. Estrazione Immagini
+            const extractedImages = await this.extractImagesFromWord(arrayBuffer);
+
+            // 3. Mapping Strutturale Avanzato (Analisi Elementi)
+            const activitiesMap = new Map(); // id -> text[]
+            const allItems = this.report.config.sectionsDefinition.flatMap(s => s.items);
+            
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            
+            let currentActivityId = null;
+
+            // Iteriamo su tutti gli elementi figli dell'HTML estratto
+            Array.from(tempDiv.children).forEach(el => {
+                const text = el.innerText.trim();
+                if (!text) return;
+
+                // Verifichiamo se questo elemento è un "Titolo" di un'attività
+                let foundItem = allItems.find(item => 
+                    text.toLowerCase() === item.name.toLowerCase() || 
+                    text.toLowerCase().includes(`attività: ${item.name.toLowerCase()}`) ||
+                    item.alias.some(a => text.toLowerCase() === a.toLowerCase())
+                );
+
+                // Se non è un match esatto, proviamo a vedere se il testo "contiene" un'attività (es. "1. Caldaia")
+                if (!foundItem && (el.tagName.startsWith('H') || el.querySelector('strong'))) {
+                    foundItem = allItems.find(item => 
+                        text.toLowerCase().includes(item.name.toLowerCase()) ||
+                        item.alias.some(a => text.toLowerCase().includes(a.toLowerCase()))
+                    );
+                }
+
+                if (foundItem) {
+                    currentActivityId = foundItem.id;
+                    if (!activitiesMap.has(currentActivityId)) {
+                        activitiesMap.set(currentActivityId, []);
+                    }
+                } else if (currentActivityId) {
+                    // FILTRO SELETTIVO: Accettiamo solo testo che sembra un'analisi tecnica
+                    // Scartiamo righe troppo corte, dati anagrafici o intestazioni ripetitive
+                    const isTechnical = 
+                        text.length > 20 && // Analisi dignitosa
+                        !text.toLowerCase().includes("via ") && // No indirizzi
+                        !text.toLowerCase().includes("tel:") && // No contatti
+                        !text.toLowerCase().includes("pag.") && // No numeri pagina
+                        (el.tagName === 'P' || el.tagName === 'LI' || el.querySelector('strong'));
+
+                    if (isTechnical) {
+                        activitiesMap.get(currentActivityId).push(text); // Prendiamo solo il testo pulito
+                    }
+                }
+            });
+
+            // Trasformiamo la mappa in array per l'applicazione
+            const activities = [];
+            activitiesMap.forEach((parts, id) => {
+                if (parts.length > 0) {
+                    activities.push({
+                        activity_id: id,
+                        technical_summary: parts.join('\n\n'), // Uniamo i vari paragrafi di analisi
+                        is_conforming: true
+                    });
+                }
+            });
+
+            if (activities.length === 0) {
+                alert("⚠️ Nessuna sezione riconosciuta. Assicurati che nel Word i titoli delle attività (es. 'Caldaia') siano ben visibili o in grassetto.");
+            }
+
+            // 4. Applicazione con APPEND
+            this.applyAIReportResult({
+                found_activities: activities,
+                site_name: file.name.split('_')[0], // Ipotesi: NomeSito_Data.docx
+                date: new Date().toISOString().split('T')[0]
+            }, extractedImages, true); // Flag true per APPEND
+
+        } catch (err) {
+            console.error("[Direct Import Error]:", err);
+            alert("❌ Errore durante l'importazione: " + err.message);
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            event.target.value = "";
+        }
+    },
+    async analyzeOldReport(data, mimeType) {
         // Normalize MIME type
         let safeMimeType = mimeType;
         if (safeMimeType.includes('pdf')) safeMimeType = 'application/pdf';
@@ -560,52 +786,71 @@ Object.assign(BM_v2, {
             s.items.map(i => `ID: "${i.id}" - Descrizione: "${i.name}"`)
         ).join('\n');
 
-        const prompt = `Analizza questo vecchio verbale/relazione di manutenzione tecnica.
+        const prompt = `Analizza questo documento tecnico (formato: ${mimeType}). 
         
+        REQUISITO FONDAMENTALE: FEDELTÀ ASSOLUTA
+        Devi copiare LETTERALMENTE i testi tecnici presenti nel file originale. NON riassumere, NON parafrasare. 
+        Se trovi una descrizione di un'attività o di un guasto, copiala integralmente nel campo "technical_summary".
+
         COMPITO:
-        Converti il contenuto nel formato strutturato del nostro nuovo template.
+        Mappa ogni sezione del file originale sull'ID attività più pertinente tra quelli forniti.
         
-        ATTIVITÀ DISPONIBILI NEL NUOVO TEMPLATE (Usa solo questi ID):
+        ATTIVITÀ DISPONIBILI NEL NUOVO TEMPLATE:
         ${availableActivities}
 
         DATI DA ESTRARRE (JSON):
         {
-            "site_name": "Nome del presidio/sito",
-            "date": "YYYY-MM-DD",
+            "site_name": "Nome esatto del sito",
+            "date": "Data in formato YYYY-MM-DD",
             "found_activities": [
                 {
-                    "activity_id": "L'ID esatto scelto dalla lista sopra",
-                    "technical_summary": "Sintesi tecnica dei rilievi trovati per questa attività",
-                    "is_conforming": true
+                    "activity_id": "L'ID esatto della lista",
+                    "technical_summary": "TESTO ORIGINALE INTEGRALE COPIATO DAL FILE",
+                    "is_conforming": true/false
                 }
             ]
         }
 
         REGOLE:
-        1. Mappa le descrizioni del vecchio report agli ID attività più pertinenti.
-        2. Se un'attività non è presente nel vecchio report, non includerla.
-        3. Il campo "technical_summary" deve essere professionale e pronto per la relazione.
+        1. Se il file originale è diviso in sezioni (es. Intestazioni h1, h2 o paragrafi separati), tratta ogni sezione come un'attività distinta.
+        2. NON tralasciare alcuna informazione tecnica.
+        3. Assicurati che l'ID scelto corrisponda realmente al contenuto del testo.
         4. Rispondi SOLO con il JSON puro.`;
 
         const endpoint = `http://127.0.0.1:3005/api/proxy-ai`;
         
         try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
+            let body;
+            if (mimeType === 'text/plain' || mimeType === 'text/html') {
+                // Invia testo puro o HTML
+                body = {
+                    contents: [{
+                        parts: [
+                            { text: prompt + "\n\nCONTENUTO DOCUMENTO:\n" + data }
+                        ]
+                    }]
+                };
+            } else {
+                // Invia file (PDF/Immagine)
+                body = {
                     contents: [{
                         parts: [
                             { text: prompt },
-                            { inline_data: { mime_type: safeMimeType, data: base64Data } }
+                            { inline_data: { mime_type: safeMimeType, data: data } }
                         ]
                     }]
-                })
+                };
+            }
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
             });
 
             if (!response.ok) {
-                const errorBody = await response.json();
-                throw new Error(`API Error ${response.status}: ${errorBody.error?.message || 'Errore sconosciuto'}`);
+                const errorBody = await response.json().catch(() => ({}));
+                throw new Error(`API Error ${response.status}: ${errorBody.error?.message || errorBody.error || 'Errore di connessione al proxy AI'}`);
             }
 
             const res = await response.json();
@@ -629,11 +874,38 @@ Object.assign(BM_v2, {
         }
     },
 
-    applyAIReportResult(data) {
+    async extractImagesFromWord(arrayBuffer) {
+        const images = [];
+        try {
+            const zip = await JSZip.loadAsync(arrayBuffer);
+            const mediaFolder = zip.folder("word/media");
+            if (!mediaFolder) return [];
+
+            const imageFiles = [];
+            mediaFolder.forEach((relativePath, file) => {
+                if (!file.dir) imageFiles.push(file);
+            });
+
+            // Ordiniamo i file per nome (image1, image2...) per mantenere l'ordine logico
+            imageFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
+
+            for (const file of imageFiles) {
+                const content = await file.async("base64");
+                const ext = file.name.split('.').pop().toLowerCase();
+                const mimeType = `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+                images.push(`data:${mimeType};base64,${content}`);
+            }
+        } catch (e) {
+            console.error("Errore estrazione immagini Word:", e);
+        }
+        return images;
+    },
+
+    applyAIReportResult(data, extractedImages = [], append = false) {
         this.saveReportToHistory();
         
         // 1. Set Date
-        if (data.date) {
+        if (data.date && !append) { // Solo se non è append aggiorniamo la data
             const dateInput = document.getElementById('report-date');
             if (dateInput) {
                 dateInput.value = data.date;
@@ -641,8 +913,8 @@ Object.assign(BM_v2, {
             }
         }
 
-        // 2. Set Site (try to find best match)
-        if (data.site_name) {
+        // 2. Set Site
+        if (data.site_name && !append) {
             const select = document.getElementById('presidio-select');
             let bestMatch = "";
             let maxScore = 0;
@@ -664,6 +936,8 @@ Object.assign(BM_v2, {
 
         // 3. Select Activities and Fill State
         if (data.found_activities) {
+            let globalImgIdx = 0;
+
             data.found_activities.forEach(act => {
                 const def = this.findReportItemDefinition(act.activity_id);
                 if (def) {
@@ -673,18 +947,40 @@ Object.assign(BM_v2, {
                     const cb = document.querySelector(`#service-picker input[data-id="${act.activity_id}"]`);
                     if (cb) cb.checked = true;
 
-                    // Create or update state
+                    // Gestione Testo (APPEND o SOVRASCRITTURA)
+                    const newSummary = act.technical_summary || "";
+
                     if (!this.report.reportState[act.activity_id]) {
                         this.report.reportState[act.activity_id] = { 
-                            photos: def.figures.map((f, i) => ({ 
-                                caption: f, 
-                                src: null, 
-                                audit: i === 0 ? act.technical_summary : "" 
-                            })) 
+                            photos: def.figures.map((f, i) => {
+                                const photoObj = { 
+                                    caption: f, 
+                                    src: null, 
+                                    audit: i === 0 ? newSummary : "" 
+                                };
+                                if (globalImgIdx < extractedImages.length) {
+                                    photoObj.src = extractedImages[globalImgIdx];
+                                    globalImgIdx++;
+                                }
+                                return photoObj;
+                            }) 
                         };
                     } else {
-                        if (this.report.reportState[act.activity_id].photos.length > 0) {
-                            this.report.reportState[act.activity_id].photos[0].audit = act.technical_summary;
+                        const state = this.report.reportState[act.activity_id];
+                        if (state.photos.length > 0) {
+                            if (append) {
+                                state.photos[0].audit = (state.photos[0].audit ? state.photos[0].audit + "\n\n" : "") + newSummary;
+                            } else {
+                                state.photos[0].audit = newSummary;
+                            }
+                            
+                            // Riempimento foto vuote
+                            state.photos.forEach(p => {
+                                if (!p.src && globalImgIdx < extractedImages.length) {
+                                    p.src = extractedImages[globalImgIdx];
+                                    globalImgIdx++;
+                                }
+                            });
                         }
                     }
                 }
@@ -696,8 +992,8 @@ Object.assign(BM_v2, {
         // Final Success Toast
         const toast = document.createElement('div');
         toast.className = 'save-toast visible';
-        toast.style.background = '#ae3ec9';
-        toast.innerHTML = `<i class="fas fa-magic"></i> Conversione AI completata con successo!`;
+        toast.style.background = append ? '#2b8a3e' : '#ae3ec9';
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> Importazione ${append ? 'Diretta' : 'AI'} completata! ${extractedImages.length > 0 ? `(${extractedImages.length} foto)` : ''}`;
         document.body.appendChild(toast);
         setTimeout(() => { toast.classList.remove('visible'); setTimeout(() => toast.remove(), 300); }, 3000);
     },

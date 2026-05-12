@@ -115,6 +115,7 @@ body {
 .view-pane.active .glass-panel,
 .view-pane.active .stat-card-v2,
 .view-pane.active .doc-item,
+.view-pane.active .doc-item-v3,
 .view-pane.active .site-item {
     animation: slide-up-fade 0.5s var(--transition-curve) forwards;
     opacity: 0;
@@ -270,3 +271,14 @@ body {
 
 
 
+
+/* AI Button Specific Pulse */
+@keyframes ai-premium-pulse {
+    0% { box-shadow: 0 0 10px rgba(174, 62, 201, 0.4), inset 0 0 5px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 25px rgba(174, 62, 201, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 10px rgba(174, 62, 201, 0.4), inset 0 0 5px rgba(255, 255, 255, 0.1); }
+}
+
+.ai-glow-btn.active {
+    animation: ai-premium-pulse 2s infinite ease-in-out;
+}
