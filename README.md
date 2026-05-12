@@ -1,14 +1,20 @@
 # 🏢 Building Manager V3 | Premium Dashboard
 
-![Version](https://img.shields.io/badge/version-3.0.0--beta-00daf3?style=for-the-badge)
-![Tech](https://img.shields.io/badge/stack-JS--Vite--Chart.js-white?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-3.1.0--stable-00daf3?style=for-the-badge)
+![Tech](https://img.shields.io/badge/stack-JS--Vite--Node.js--Gemini-white?style=for-the-badge)
 ![Theme](https://img.shields.io/badge/theme-Clinical--Nocturne-131314?style=for-the-badge)
 
-**Building Manager V3** è una piattaforma avanzata per la gestione e il monitoraggio di presidi immobiliari e facility management. Progettata con un'estetica premium "Clinical Nocturne", offre una suite di strumenti analitici per garantire la conformità normativa e l'efficienza operativa.
+**Building Manager V3** è una piattaforma avanzata per la gestione e il monitoraggio di presidi immobiliari e facility management. Progettata con un'estetica premium "Clinical Nocturne", offre una suite di strumenti analitici potenziati dall'intelligenza artificiale per garantire la conformità normativa e l'efficienza operativa.
 
 ---
 
 ## 🚀 Key Features
+
+### 🤖 AI Mission Control (Gemini 2.0)
+Il cuore pulsante della versione V3. Un assistente AI integrato che funge da copilota per l'operatore:
+- **Analisi Dinamica**: L'IA ha accesso in tempo reale allo stato dei siti e alle urgenze.
+- **Supporto Decisionale**: Suggerisce azioni correttive basate sui dati di manutenzione.
+- **Interfaccia Premium**: Pulsante con effetto "Orbital Glow" e feedback visivo pulsante.
 
 ### 📊 Osservatorio Cinetico (Telemetry)
 Monitoraggio olistico della flotta con analisi predittiva sui vettori di efficienza. Visualizzazione dinamica di:
@@ -18,11 +24,8 @@ Monitoraggio olistico della flotta con analisi predittiva sui vettori di efficie
 
 ### 📑 Archivio Documentale (Vault)
 Sistema di gestione documentale crittografato per l'archiviazione di verbali, certificazioni e specifiche tecniche (ARIA).
-- Struttura a cartelle intelligente.
+- Struttura a cartelle intelligente gestita da `GeminiManager`.
 - Ricerca rapida e filtraggio per categoria.
-
-### 🗺️ Mappa Hub
-Visualizzazione geografica dei presidi con indicatori di urgenza e stato di salute per ogni sito gestito.
 
 ### 📅 Pianificazione Matrix
 Timeline interattiva per la gestione delle attività di manutenzione programmata e scadenze imminenti.
@@ -32,28 +35,35 @@ Timeline interattiva per la gestione delle attività di manutenzione programmata
 ## 🛠️ Technology Stack
 
 - **Frontend**: Vanilla JS (ES6+), HTML5, CSS3 (Custom Glassmorphism).
-- **Bundler**: Vite.js per performance ultra-rapide.
-- **Charts**: Chart.js con estensioni per gradienti dinamici.
+- **Backend**: Node.js / Express (Proxy AI Sicuro).
+- **AI Engine**: Google Gemini 2.0 Flash.
+- **Bundler**: Vite.js.
 - **Design System**: "Stitch Command Center" - Dark Mode Premium.
 
 ---
 
 ## 📦 Installazione e Avvio
 
-1. **Clona il repository**:
-   ```bash
-   git clone https://github.com/campa8989-art/BM_Premium_V3.git
-   ```
+### 1. Prerequisiti
+- Node.js installato.
+- Una chiave API di Google Gemini (generabile su [Google AI Studio](https://aistudio.google.com/)).
 
-2. **Installa le dipendenze**:
-   ```bash
-   npm install
-   ```
+### 2. Configurazione
+Crea un file `.env` nella root del progetto:
+```env
+GEMINI_API_KEY=La_Tua_Chiave_Qui
+```
 
-3. **Avvia il server di sviluppo**:
-   ```bash
-   npm run dev
-   ```
+### 3. Avvio Unificato (Windows)
+Il modo più semplice per avviare l'intera suite (Frontend + Backend + AI Sync) è usare lo script PowerShell dedicato:
+```powershell
+.\run.ps1
+```
+Questo script si occuperà di:
+- Pulire le porte di comunicazione (3000, 3005).
+- Sincronizzare il database locale tramite `GeminiManager`.
+- Avviare il server backend sulla porta 3005.
+- Avviare la dashboard Vite sulla porta 3000.
 
 ---
 
@@ -62,7 +72,7 @@ Timeline interattiva per la gestione delle attività di manutenzione programmata
 Il progetto segue rigorosi standard estetici:
 - **Glassmorphism**: Trasparenze sfuocate e bordi luminosi.
 - **Aurora Effects**: Animazioni fluide per background e indicatori.
-- **Typography**: Space Grotesk & Inter per la massima leggibilità tecnica.
+- **Orbital AI**: Pulsante AI con animazione di rotazione bagliore e pulsazione premium.
 
 ---
 
