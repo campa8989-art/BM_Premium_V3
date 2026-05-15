@@ -128,7 +128,7 @@ export default defineConfig({
     saveReportsApi
   ],
   server: {
-    port: 3000,
+    port: 3006,
     open: false,
     proxy: {
       '/api/verbali': {

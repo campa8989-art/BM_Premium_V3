@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* 
    BM PREMIUM v2 | THE KINETIC OBSERVATORY 
    Designed with Stitch Strategy
@@ -89,7 +89,7 @@ body.light-theme {
     height: 150%;
     top: -25%;
     left: -25%;
-    background: 
+    background:
         radial-gradient(circle at 20% 30%, rgba(0, 218, 243, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 80% 70%, rgba(147, 51, 234, 0.05) 0%, transparent 40%);
     z-index: 0;
@@ -270,14 +270,28 @@ main.main-content .observatory-header {
 }
 
 /* --- MAP HUB SPECIFIC --- */
+.map-viewport-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 40px;
+    box-sizing: border-box;
+}
+
 .map-container {
     flex: 1;
     width: 100%;
     height: 100%;
+    max-width: 2500px;
+    max-height: 1650px;
     position: relative;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: var(--radius-premium);
     background: var(--bg-main);
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
 #map-canvas {
@@ -300,7 +314,7 @@ main.main-content .observatory-header {
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transform: translateX(400px);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: all;
@@ -330,7 +344,7 @@ main.main-content .observatory-header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .map-action-btn {
@@ -413,7 +427,7 @@ main.main-content .observatory-header {
 
 .glow-bar-container {
     height: 6px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     margin-top: 10px;
     overflow: hidden;
@@ -427,14 +441,25 @@ main.main-content .observatory-header {
     box-shadow: 0 0 10px currentColor;
 }
 
-.glow-bar-fill.status-ok { background: #4ade80; color: rgba(74, 222, 128, 0.5); }
-.glow-bar-fill.status-warning { background: #fbbf24; color: rgba(251, 191, 36, 0.5); }
-.glow-bar-fill.status-critical { background: #f87171; color: rgba(248, 113, 113, 0.5); }
+.glow-bar-fill.status-ok {
+    background: #4ade80;
+    color: rgba(74, 222, 128, 0.5);
+}
+
+.glow-bar-fill.status-warning {
+    background: #fbbf24;
+    color: rgba(251, 191, 36, 0.5);
+}
+
+.glow-bar-fill.status-critical {
+    background: #f87171;
+    color: rgba(248, 113, 113, 0.5);
+}
 
 
 body.light-theme .stat-card-premium {
     background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(0,0,0,0.05);
+    border-color: rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .stat-card-premium .value {
@@ -446,14 +471,14 @@ body.light-theme .stat-card-premium.urgent-card .value {
 }
 
 body.light-theme .glow-bar-container {
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .map-action-btn:not(.primary) {
     background: #fff;
     color: var(--text-main);
-    border-color: rgba(0,0,0,0.1);
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .map-action-btn.primary {
@@ -462,9 +487,9 @@ body.light-theme .map-action-btn.primary {
 
 body.light-theme .close-map-panel {
     background: #fff;
-    border-color: rgba(0,0,0,0.1);
+    border-color: rgba(0, 0, 0, 0.1);
     color: var(--text-main);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .close-map-panel:hover {
@@ -479,7 +504,7 @@ body.light-theme .close-map-panel:hover {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     color: var(--text-muted);
     display: flex;
@@ -513,7 +538,9 @@ body.light-theme .close-map-panel:hover {
 }
 
 /* Force hide any grid leaking from tile containers */
-.leaflet-tile-pane, .leaflet-objects-pane, .leaflet-overlay-pane {
+.leaflet-tile-pane,
+.leaflet-objects-pane,
+.leaflet-overlay-pane {
     mix-blend-mode: normal !important;
 }
 
@@ -534,7 +561,7 @@ body.light-theme .close-map-panel:hover {
     height: 14px;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     position: relative;
     z-index: 2;
 }
@@ -558,6 +585,7 @@ body.light-theme .close-map-panel:hover {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.8;
     }
+
     100% {
         transform: translate(-50%, -50%) scale(3.5);
         opacity: 0;
@@ -586,7 +614,8 @@ body.light-theme .close-map-panel:hover {
     position: relative;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover,
+.nav-item.active {
     color: var(--primary);
     background: rgba(0, 218, 243, 0.05);
 }
@@ -720,9 +749,20 @@ body.light-theme .close-map-panel:hover {
     transition: 0.3s;
 }
 
-.ws-card-v3.glow-folder .ws-icon-wrapper-v3 i { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
-.ws-card-v3.glow-pdf .ws-icon-wrapper-v3 i { color: #ff3366; text-shadow: 0 0 15px rgba(255, 51, 102, 0.5); }
-.ws-card-v3.glow-excel .ws-icon-wrapper-v3 i { color: #00ff88; text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
+.ws-card-v3.glow-folder .ws-icon-wrapper-v3 i {
+    color: var(--primary);
+    text-shadow: 0 0 15px var(--primary-glow);
+}
+
+.ws-card-v3.glow-pdf .ws-icon-wrapper-v3 i {
+    color: #ff3366;
+    text-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+}
+
+.ws-card-v3.glow-excel .ws-icon-wrapper-v3 i {
+    color: #00ff88;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
 
 .ws-content-v3 {
     flex: 1;
@@ -767,8 +807,8 @@ body.light-theme .close-map-panel:hover {
 /* Light Theme Overrides */
 body.light-theme .ws-card-v3 {
     background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     opacity: 1;
 }
 
@@ -1496,7 +1536,7 @@ body.light-theme .close-modal:hover {
 .matrix-layout {
     display: grid;
     grid-template-columns: 380px 1fr;
-    /* Aumentato da 320px per nomi piÃ¹ lunghi */
+    /* Aumentato da 320px per nomi piÃƒÂ¹ lunghi */
     gap: 24px;
     height: calc(100vh - 160px);
 }
@@ -1631,14 +1671,21 @@ body.light-theme .matrix-search-premium {
     z-index: 100;
     display: none;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     animation: dropdownFadeIn 0.3s ease;
 }
 
 @keyframes dropdownFadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .matrix-dropdown-container.open .matrix-dropdown-content {
@@ -1653,7 +1700,7 @@ body.light-theme .matrix-search-premium {
 
 .dropdown-search input {
     width: 100%;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--border);
     padding: 8px 12px 8px 34px;
     border-radius: 8px;
@@ -1780,7 +1827,7 @@ body.light-theme .matrix-dropdown-header {
 
 body.light-theme .matrix-dropdown-content {
     background: var(--surface);
-    box-shadow: 20px 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .dropdown-item:hover {
@@ -1803,7 +1850,7 @@ body.light-theme .dropdown-item.active {
     margin-top: 10px;
 }
 
-/* Griglia specifica per i Sistemi per renderli piÃ¹ visibili */
+/* Griglia specifica per i Sistemi per renderli piÃƒÂ¹ visibili */
 .filter-systems-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1821,7 +1868,7 @@ body.light-theme .dropdown-item.active {
     /* Aumentato da 10px 14px */
     background: #334155;
     border-radius: 14px;
-    /* Leggermente piÃ¹ arrotondato */
+    /* Leggermente piÃƒÂ¹ arrotondato */
     display: flex;
     align-items: center;
     gap: 12px;
@@ -1875,7 +1922,7 @@ body.light-theme .filter-card.active {
     font-weight: 700;
     display: block;
     color: #fff;
-    /* Bianco pieno per massima visibilitÃ  in Dark Mode */
+    /* Bianco pieno per massima visibilitÃƒÂ  in Dark Mode */
     letter-spacing: 0.3px;
     margin-bottom: 2px;
 }
@@ -1945,7 +1992,7 @@ body.light-theme .card-switch {
     /* Adattato alla nuova larghezza */
 }
 
-/* Card Sistemi piÃ¹ prominenti in griglia */
+/* Card Sistemi piÃƒÂ¹ prominenti in griglia */
 .filter-systems-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2392,7 +2439,7 @@ body.light-theme .matrix-cell {
     border-color: rgba(0, 0, 0, 0.05);
 }
 
-/* ModalitÃ  Mese: Compatta la griglia */
+/* ModalitÃƒÂ  Mese: Compatta la griglia */
 .matrix-cell.month-mode {
     min-height: 60px;
     padding: 4px;
@@ -3519,7 +3566,9 @@ body:not(.light-theme) .tag-v3 {
 }
 
 @keyframes progress {
-    0% { stroke-dasharray: 0 100; }
+    0% {
+        stroke-dasharray: 0 100;
+    }
 }
 
 .percentage-v3 {
@@ -3634,10 +3683,11 @@ body:not(.light-theme) .tag-v3 {
 }
 
 /* Main Analytic Grids */
-.telemetry-main-grid-v3, 
+.telemetry-main-grid-v3,
 .telemetry-bottom-grid-v3 {
     display: grid;
-    grid-template-columns: 1fr 1.6fr; /* Aligned with original asymmetrical look */
+    grid-template-columns: 1fr 1.6fr;
+    /* Aligned with original asymmetrical look */
     gap: 20px;
 }
 
@@ -4059,7 +4109,7 @@ body.light-theme .ai-message.ai .msg-bubble {
 }
 
 /* Error highlights */
-.ai-message.ai .msg-text:contains("âš ï¸ ") {
+.ai-message.ai .msg-text:contains("Ã¢Å¡Â Ã¯Â¸ ") {
     color: var(--urgent);
 }
 
@@ -5173,7 +5223,7 @@ body.light-theme .aria-modal-container {
     }
 }
 
-/* --- FIX STABILIT� REPORT PREMIUM (MIGRAZIONE) --- */
+/* --- FIX STABILITÀ REPORT PREMIUM (MIGRAZIONE) --- */
 .audit-para-text {
     overflow-wrap: break-word !important;
     word-break: break-word !important;
@@ -5194,7 +5244,7 @@ body.light-theme .aria-modal-container {
     max-width: 100% !important;
     height: auto !important;
     border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .word-table {
@@ -5268,6 +5318,11 @@ body.light-theme .aria-modal-container {
 }
 
 @keyframes rotate-glow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

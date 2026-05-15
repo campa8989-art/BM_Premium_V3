@@ -97,7 +97,7 @@ try {
 
     # Avvio Frontend (Vite)
     Write-Host "      - Avvio Vite Dashboard (In background)..." -ForegroundColor Gray
-    $ViteArgsString = "`"$ViteJs`" dev --port 3000 --host 0.0.0.0 --force"
+    $ViteArgsString = "`"$ViteJs`" dev --port 3006 --host 0.0.0.0 --force"
     $frontendProc = Start-Process -FilePath $NodeExe -ArgumentList $ViteArgsString -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden -RedirectStandardOutput "vite_output.log" -RedirectStandardError "vite_error.log"
 
     # --- 6. Apertura Browser ---
@@ -106,7 +106,7 @@ try {
     # Attesa che Vite sia pronto (massimo 30 secondi)
     $attempts = 0
     while ($attempts -lt 30) {
-        $check = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue
+        $check = Get-NetTCPConnection -LocalPort 3006 -ErrorAction SilentlyContinue
         if ($check) { 
             Write-Host "      - Frontend pronto!" -ForegroundColor Green
             break 
@@ -116,7 +116,7 @@ try {
     }
 
     # Apertura browser (usiamo localhost per risoluzione automatica OS)
-    Start-Process "http://localhost:3000/"
+    Start-Process "http://localhost:3006/"
     
     Write-Host ""
     Write-Host "DASHBOARD PRONTA!" -ForegroundColor Green
