@@ -9,11 +9,11 @@ const saveReportsApi = {
     server.middlewares.use('/api/save-report', async (req, res) => {
       // Usiamo una cartella interna al progetto per i salvataggi
       const reportsDir = path.join(process.cwd(), 'data', 'salvataggi');
-      
+
       if (!fs.existsSync(reportsDir)) {
         fs.mkdirSync(reportsDir, { recursive: true });
       }
-      
+
       if (req.method === 'GET') {
         try {
           const files = fs.readdirSync(reportsDir)
@@ -22,7 +22,7 @@ const saveReportsApi = {
               name: f,
               modified: fs.statSync(path.join(reportsDir, f)).mtime
             }));
-          
+
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify(files));
         } catch (err) {
@@ -38,9 +38,9 @@ const saveReportsApi = {
             const fileName = req.headers['x-file-name'] || 'report.json';
             const safeName = decodeURIComponent(fileName);
             const filePath = path.join(reportsDir, safeName);
-            
+
             fs.writeFileSync(filePath, body, 'utf8');
-            
+
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ ok: true, path: filePath, name: safeName }));
           } catch (err) {
@@ -60,17 +60,17 @@ const saveReportsApi = {
           res.end('Missing filename');
           return;
         }
-        
+
         const reportsDir = path.join(process.cwd(), 'data', 'salvataggi');
         const filePath = path.join(reportsDir, decodeURIComponent(fileName));
-        
+
         try {
           if (!fs.existsSync(filePath)) {
             res.statusCode = 404;
             res.end('File not found');
             return;
           }
-          
+
           const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify(data));
@@ -86,7 +86,7 @@ const saveReportsApi = {
       if (req.method === 'POST') {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ success: true, message: 'Sincronizzazione avviata' }));
-        
+
         setImmediate(() => {
           try {
             const rootDir = process.cwd();
@@ -103,7 +103,7 @@ const saveReportsApi = {
       const dataDir = path.join(process.cwd(), 'data');
       const urlPath = req.url.split('?')[0];
       const filePath = path.join(dataDir, urlPath);
-      
+
       if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
         res.setHeader('Content-Type', 'application/javascript');
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -122,13 +122,13 @@ export default defineConfig({
     {
       name: 'silence-source-map-warnings',
       configureServer(server) {
-        server.config.logger.warn = () => {};
+        server.config.logger.warn = () => { };
       }
     },
     saveReportsApi
   ],
   server: {
-    port: 3006,
+    port: 3000,
     open: false,
     proxy: {
       '/api/verbali': {
