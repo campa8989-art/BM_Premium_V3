@@ -13,7 +13,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'http://127.0.0.1:3006',
+    baseURL: 'http://localhost:3006',
     headless: true,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
